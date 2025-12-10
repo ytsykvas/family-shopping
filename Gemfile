@@ -21,6 +21,7 @@ gem "jbuilder"
 
 # Authentication
 gem "devise"
+gem "devise-jwt"
 gem "pundit"
 
 # Frontend

@@ -1,4 +1,17 @@
 Rails.application.routes.draw do
+  devise_for :users, controllers: {
+                       sessions: "users/sessions",
+                       registrations: "users/registrations"
+                     }
+
+  # API namespace for future Grape API or Rails API endpoints
+  namespace :api do
+    namespace :v1 do
+      # Add your API endpoints here
+      # Example: resources :posts, only: [:index, :show, :create, :update, :destroy]
+    end
+  end
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -11,4 +24,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  root "home#index"
 end

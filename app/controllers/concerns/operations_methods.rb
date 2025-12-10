@@ -6,36 +6,43 @@ module OperationsMethods
 
   protected
 
-  def endpoint(operation, component = nil)
-    result = operation.call(params:, current_user:)
+  def endpoint(operation_or_component, component = nil)
+    # Check if first argument is a component (has no 'call' method)
+    if component.nil? && !operation_or_component.respond_to?(:call)
+      # Direct component rendering without operation
+      render_component_only(operation_or_component)
+    else
+      # Operation + Component flow
+      operation = operation_or_component
+      result = operation.call(params:, current_user:)
 
-    check_authorization_is_called result
+      check_authorization_is_called result
 
-    respond_to do |format|
-      format.html do
-        if action_name == "create" || action_name == "update" || action_name.include?("destroy")
-          path = result.redirect_path || public_send("#{controller_name}_path")
-          redirect_to path, notice: result.message, alert: result.error_message
-        elsif action_name == "index"
-          params = if result.model.is_a?(OpenStruct)
-                     result.model.to_h
-          else
-                     key = operation.to_s.split("::").first.underscore.pluralize
-                     { "#{key}": result.model }
+      respond_to do |format|
+        format.html do
+          if action_name == "create" || action_name == "update" || action_name.include?("destroy")
+            path = result.redirect_path || public_send("#{controller_name}_path")
+            redirect_to path, notice: result.message, alert: result.error_message
+          elsif action_name == "index"
+            params = if result.model.is_a?(OpenStruct)
+                       result.model.to_h
+            else
+                       key = operation.to_s.split("::").first.underscore.pluralize
+                       { "#{key}": result.model }
+            end
+
+            render component.new(**params)
+          elsif action_name == "edit" || action_name == "new"
+            params = if result.model.is_a?(OpenStruct)
+                       result.model.to_h
+            else
+                       key = operation.to_s.split("::").first.underscore
+                       { "#{key}": result.model }
+            end
+
+            render component.new(**params)
           end
-
-          render component.new(**params)
-        elsif action_name == "edit" || action_name == "new"
-          params = if result.model.is_a?(OpenStruct)
-                     result.model.to_h
-          else
-                     key = operation.to_s.split("::").first.underscore
-                     { "#{key}": result.model }
-          end
-
-          render component.new(**params)
         end
-      end
 
       # We use it for Rendering new/edit modals
       format.js do
@@ -91,17 +98,23 @@ module OperationsMethods
         end
       end
 
-      # TODO: auto-submit controller sends null request that could be handled only with format.any
-      format.any do
-        params = if result.model.is_a?(OpenStruct)
-                   result.model.to_h
-        else
-                   key = operation.to_s.split("::").first.underscore.pluralize
-                   { "#{key}": result.model }
+        # TODO: auto-submit controller sends null request that could be handled only with format.any
+        format.any do
+          params = if result.model.is_a?(OpenStruct)
+                     result.model.to_h
+          else
+                     key = operation.to_s.split("::").first.underscore.pluralize
+                     { "#{key}": result.model }
+          end
+          render component.new(**params)
         end
-        render component.new(**params)
       end
     end
+  end
+
+  # Render component without operation
+  def render_component_only(component)
+    render component.new
   end
 
   def check_authorization_is_called(result)
