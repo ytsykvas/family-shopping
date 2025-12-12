@@ -1,0 +1,73 @@
+@use 'sass:color';
+@use 'variables' as *;
+
+.alert {
+  border: 3px solid $border-black;
+  border-radius: 4px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 1rem 1.5rem;
+  box-shadow: 6px 6px 0 $border-black;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  position: relative;
+
+  .alert-icon {
+    font-size: 2rem;
+    font-weight: 900;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .alert-content {
+    flex: 1;
+  }
+
+  strong {
+    font-weight: 900;
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+
+  &.alert-info {
+    background-color: $info-color;
+    border-color: $info-color;
+    color: $text-black;
+
+    .alert-icon::before {
+      content: "ℹ";
+    }
+  }
+
+  &.alert-warning {
+    background-color: $warning-color;
+    border-color: $warning-color;
+    color: $text-black;
+
+    .alert-icon::before {
+      content: "⚠";
+    }
+  }
+
+  &.alert-danger {
+    background-color: $danger-color;
+    border-color: $danger-color;
+    color: $text-black;
+
+    .alert-icon::before {
+      content: "✕";
+    }
+  }
+
+  &.alert-success {
+    background-color: $success-color;
+    border-color: $success-color;
+    color: $text-black;
+
+    .alert-icon::before {
+      content: "✓";
+    }
+  }
+}

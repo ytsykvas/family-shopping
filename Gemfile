@@ -67,6 +67,9 @@ group :development, :test do
   gem "dotenv-rails"
 
   gem "rspec-rails"
+
+  # Find and manage missing and unused translations [https://github.com/glebm/i18n-tasks]
+  gem "i18n-tasks", require: false
 end
 
 group :development do

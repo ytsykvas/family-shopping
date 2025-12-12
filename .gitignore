@@ -30,6 +30,9 @@
 
 /public/assets
 
+# Ignore compiled CSS from dartsass-rails
+/app/assets/builds/*
+
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 

@@ -1,0 +1,171 @@
+@use 'sass:color';
+@use 'variables' as *;
+
+@mixin solid-button($bg-color) {
+  background-color: $bg-color;
+  color: $text-white;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+  padding: 0.85rem 2.2rem;
+  border: 3px solid $border-black;
+  border-radius: 4px;
+  box-shadow: 6px 6px 0 $border-black;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+  text-decoration: none;
+
+  &:hover {
+    background-color: color.scale($bg-color, $lightness: -10%);
+    border-color: $border-black;
+    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 0 $border-black;
+    color: $text-white;
+  }
+
+  &:active {
+    border-color: $border-black;
+    transform: translate(0, 0);
+    box-shadow: 3px 3px 0 $border-black;
+  }
+}
+
+@mixin outline-button($border-color) {
+  background-color: transparent;
+  color: $border-color;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+  padding: 0.85rem 2.2rem;
+  border: 3px solid $border-color;
+  border-radius: 4px;
+  box-shadow: 6px 6px 0 $shadow-gray;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+  text-decoration: none;
+
+  &:hover {
+    background-color: $border-color;
+    color: $text-white;
+    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 0 $shadow-gray;
+  }
+
+  &:active {
+    transform: translate(0, 0);
+    box-shadow: 3px 3px 0 $shadow-gray;
+  }
+}
+
+.btn-primary {
+  @include solid-button(#0d6efd);
+}
+
+.btn-secondary {
+  @include solid-button(#6c757d);
+}
+
+.btn-success {
+  @include solid-button($success-color);
+  color: $text-black !important;
+
+  &:hover {
+    color: $text-black !important;
+  }
+}
+
+.btn-danger {
+  @include solid-button($danger-color);
+}
+
+.btn-warning {
+  @include solid-button($warning-color);
+  color: $text-black !important;
+
+  &:hover {
+    color: $text-black !important;
+  }
+}
+
+.btn-info {
+  @include solid-button($info-color);
+  color: $text-black !important;
+
+  &:hover {
+    color: $text-black !important;
+  }
+}
+
+.btn-light {
+  @include solid-button($bg-light-gray);
+  color: $text-black !important;
+
+  &:hover {
+    color: $text-black !important;
+  }
+}
+
+.btn-dark {
+  @include solid-button($text-black);
+  box-shadow: 6px 6px 0 $shadow-gray;
+
+  &:hover {
+    box-shadow: 8px 8px 0 $shadow-gray;
+  }
+
+  &:active {
+    box-shadow: 3px 3px 0 $shadow-gray;
+  }
+}
+
+.btn-outline-primary {
+  @include outline-button(#0d6efd);
+}
+
+.btn-outline-secondary {
+  @include outline-button(#6c757d);
+}
+
+.btn-outline-success {
+  @include outline-button($success-color);
+  color: $text-black !important;
+
+  &:hover {
+    color: $text-white !important;
+  }
+}
+
+.btn-outline-danger {
+  @include outline-button($danger-color);
+}
+
+.btn-outline-warning {
+  @include outline-button($warning-color);
+  color: $warning-color !important;
+
+  &:hover {
+    color: $text-black !important;
+  }
+}
+
+.btn-outline-info {
+  @include outline-button($info-color);
+  color: $info-color !important;
+
+  &:hover {
+    color: $text-black !important;
+  }
+}
+
+.btn-outline-light {
+  @include outline-button($bg-light-gray);
+  color: $text-black !important;
+
+  &:hover {
+    color: $text-black !important;
+  }
+}
+
+.btn-outline-dark {
+  @include outline-button($text-black);
+}

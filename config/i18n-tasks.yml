@@ -1,0 +1,37 @@
+# i18n-tasks configuration
+# https://github.com/glebm/i18n-tasks
+
+# Find missing and unused translations
+base_locale: en
+locales: [en, uk]
+
+# Where to look for translations
+data:
+  read:
+    - config/locales/**/*.yml
+  write:
+    - config/locales/%{locale}.yml
+
+# Where to look for keys in code
+search:
+  paths:
+    - app/
+    - config/
+  exclude:
+    - app/assets
+    - app/javascript
+    - node_modules
+    - vendor
+
+# Ignore certain keys
+ignore_missing:
+  - 'errors.messages.*'
+  - 'activerecord.errors.*'
+  - 'devise.*'
+
+# Ignore unused keys
+ignore_unused:
+  - 'errors.messages.*'
+  - 'activerecord.errors.*'
+  - 'devise.*'
+  - 'simple_form.*'

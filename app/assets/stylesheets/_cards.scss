@@ -1,0 +1,17 @@
+@use 'variables' as *;
+
+.card {
+  border-radius: 0 !important;
+  border: 3px solid $border-black !important;
+  box-shadow: 6px 6px 0 $border-black !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  .card-body {
+    padding: 2rem !important;
+  }
+
+  &:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 9px 9px 0 $border-black !important;
+  }
+}
