@@ -195,7 +195,7 @@ GEM
     jbuilder (2.14.1)
       actionview (>= 7.0.0)
       activesupport (>= 7.0.0)
-    json (2.17.1)
+    json (2.18.0)
     jwt (3.1.2)
       base64
     kamal (2.9.0)
@@ -224,7 +224,7 @@ GEM
     marcel (1.1.0)
     matrix (0.4.3)
     mini_mime (1.1.5)
-    minitest (5.26.2)
+    minitest (5.27.0)
     msgpack (1.8.0)
     net-imap (0.5.12)
       date
@@ -415,7 +415,7 @@ GEM
     slim (5.2.1)
       temple (~> 0.10.0)
       tilt (>= 2.1.0)
-    slim-rails (3.7.0)
+    slim-rails (4.0.0)
       actionpack (>= 3.1)
       railties (>= 3.1)
       slim (>= 3.0, < 6.0, != 5.0.0)
@@ -527,7 +527,7 @@ DEPENDENCIES
   selenium-webdriver
   shoulda-matchers
   simple_form
-  slim-rails
+  slim-rails (~> 4.0)
   solid_cable
   solid_cache
   solid_queue

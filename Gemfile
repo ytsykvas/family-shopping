@@ -25,7 +25,7 @@ gem "devise-jwt"
 gem "pundit"
 
 # Frontend
-gem "slim-rails"
+gem "slim-rails", "~> 4.0"
 gem "view_component"
 gem "dartsass-rails"
 gem "simple_form"
