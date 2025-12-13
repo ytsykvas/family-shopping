@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       # Add your API endpoints here
       # Example: resources :posts, only: [:index, :show, :create, :update, :destroy]
+      get "users/check_nickname", to: "users#check_nickname"
+      get "users/check_email", to: "users#check_email"
     end
   end
 

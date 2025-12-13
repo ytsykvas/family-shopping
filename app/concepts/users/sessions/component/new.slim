@@ -7,7 +7,7 @@
       = f.error_notification
 
       .form-group
-        = f.input :email, autofocus: true, autocomplete: 'email', input_html: { class: 'form-control-custom' }, label_html: { class: 'form-label-custom' }
+        = f.input :email, autofocus: true, autocomplete: 'email', input_html: { class: 'form-control-custom' }, label_html: { class: 'form-label-custom' }, label: I18n.t('sessions.form.email_label')
 
       .form-group
         = f.input :password, autocomplete: 'current-password', input_html: { class: 'form-control-custom' }, label_html: { class: 'form-label-custom' }

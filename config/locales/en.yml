@@ -5,6 +5,7 @@ en:
       user:
         email: Email
         name: Name
+        nickname: Nickname
         password: Password
         password_confirmation: Password confirmation
         remember_me: Remember me
@@ -18,11 +19,23 @@ en:
               taken: has already been taken
             name:
               blank: can't be blank
+            nickname:
+              blank: can't be blank
+              taken: has already been taken
             password:
               blank: can't be blank
               too_short: is too short (minimum is %{count} characters)
             password_confirmation:
               confirmation: doesn't match Password
+  api:
+    users:
+      email_available: Email is available
+      email_invalid: Email format is invalid
+      email_required: Email is required
+      email_taken: Email is already taken
+      nickname_available: Nickname is available
+      nickname_required: Nickname is required
+      nickname_taken: Nickname is already taken
   devise:
     confirmations:
       confirmed: Your email address has been successfully confirmed.
@@ -163,6 +176,7 @@ en:
       unlocked: Your account has been unlocked successfully. Please sign in to continue.
   sessions:
     form:
+      email_label: Email or Nickname
       forgot_password: Forgot your password?
       no_account: Don't have an account?
       sign_up: Sign up

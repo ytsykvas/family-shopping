@@ -5,6 +5,7 @@ uk:
       user:
         email: Електронна пошта
         name: Ім'я
+        nickname: Нікнейм
         password: Пароль
         password_confirmation: Підтвердження пароля
         remember_me: Запам'ятати мене
@@ -18,11 +19,23 @@ uk:
               taken: вже зайнято
             name:
               blank: не може бути порожнім
+            nickname:
+              blank: не може бути порожнім
+              taken: вже зайнято
             password:
               blank: не може бути порожнім
               too_short: занадто короткий (мінімум %{count} символів)
             password_confirmation:
               confirmation: не співпадає з паролем
+  api:
+    users:
+      email_available: Email доступний
+      email_invalid: Неправильний формат email
+      email_required: Email обов'язковий
+      email_taken: Email вже зайнято
+      nickname_available: Нікнейм доступний
+      nickname_required: Нікнейм обов'язковий
+      nickname_taken: Нікнейм вже зайнято
   devise:
     confirmations:
       confirmed: Вашу електронну адресу успішно підтверджено.
@@ -167,6 +180,7 @@ uk:
         продовжити.
   sessions:
     form:
+      email_label: Email або Нікнейм
       forgot_password: Забули пароль?
       no_account: Немає облікового запису?
       sign_up: Зареєструватися

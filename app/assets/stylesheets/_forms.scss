@@ -265,3 +265,28 @@ textarea.form-control-custom {
   min-height: 120px;
   resize: vertical;
 }
+
+.validation-feedback {
+  display: block;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  font-weight: 600;
+  
+  &.text-success {
+    color: $success-color;
+  }
+  
+  &.text-danger {
+    color: $danger-color;
+  }
+}
+
+.form-control-custom.is-valid {
+  border-color: $success-color;
+  box-shadow: 0 0 0 0.2rem rgba($success-color, 0.15);
+}
+
+.form-control-custom.is-invalid {
+  border-color: $danger-color;
+  box-shadow: 0 0 0 0.2rem rgba($danger-color, 0.15);
+}
