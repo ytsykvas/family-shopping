@@ -1,14 +1,18 @@
 class User < ApplicationRecord
   include Devise::JWT::RevocationStrategies::Denylist
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :jwt_authenticatable, jwt_revocation_strategy: self
 
-  # Override jwt_payload to include custom claims
+  validates :name, presence: true
+
   def jwt_payload
-    super.merge("email" => email)
+    {
+      "sub" => id.to_s,
+      "email" => email,
+      "jti" => SecureRandom.uuid,
+      "exp" => 24.hours.from_now.to_i
+    }
   end
 end

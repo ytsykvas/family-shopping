@@ -20,7 +20,7 @@ header.navbar-shell
           a.nav-link href="#" = I18n.t('navbar.friends')
 
       .navbar-actions.d-none.d-lg-flex
-        = link_to I18n.t('navbar.sign_in'), '#', class: 'btn btn-success ms-auto'
+        = link_to I18n.t('navbar.sign_in'), new_user_session_path, class: 'btn btn-success ms-auto'
 
       button.navbar-toggler-mobile.d-lg-none type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvas" aria-controls="navbarOffcanvas" aria-expanded="false" aria-label="Toggle navigation"
         span.hamburger-icon
@@ -60,6 +60,6 @@ header.navbar-shell
           span.link-arrow ↗
 
       .navbar-offcanvas-cta
-        = link_to '#', class: 'btn btn-cta-offcanvas' do
+        = link_to new_user_session_path, class: 'btn btn-cta-offcanvas' do
           span = I18n.t('navbar.sign_in')
           span.cta-arrow ↗

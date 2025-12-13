@@ -1,5 +1,28 @@
 ---
 uk:
+  activerecord:
+    attributes:
+      user:
+        email: Електронна пошта
+        name: Ім'я
+        password: Пароль
+        password_confirmation: Підтвердження пароля
+        remember_me: Запам'ятати мене
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: не може бути порожнім
+              invalid: має неправильний формат
+              taken: вже зайнято
+            name:
+              blank: не може бути порожнім
+            password:
+              blank: не може бути порожнім
+              too_short: занадто короткий (мінімум %{count} символів)
+            password_confirmation:
+              confirmation: не співпадає з паролем
   devise:
     confirmations:
       confirmed: Вашу електронну адресу успішно підтверджено.
@@ -65,13 +88,6 @@ uk:
       already_signed_out: Успішно вийшли з системи.
       signed_in: Успішно увійшли в систему.
       signed_out: Успішно вийшли з системи.
-    unlocks:
-      send_instructions: Ви отримаєте email з інструкціями щодо розблокування облікового
-        запису протягом кількох хвилин.
-      send_paranoid_instructions: Якщо ваш обліковий запис існує, ви отримаєте email
-        з інструкціями щодо його розблокування протягом кількох хвилин.
-      unlocked: Ваш обліковий запис успішно розблоковано. Будь ласка, увійдіть, щоб
-        продовжити.
   errors:
     messages:
       already_confirmed: вже підтверджено, спробуйте увійти
@@ -133,6 +149,29 @@ uk:
     sign_in: Увійти
     teams: Команди
     wishlists: Бажання
+  registrations:
+    form:
+      already_have_account: Вже маєте обліковий запис?
+      password_hint: Мінімум 6 символів
+      sign_in: Увійти
+      submit: Зареєструватися
+      subtitle: Створіть новий обліковий запис
+      title: Реєстрація
+    unlocks:
+      send_instructions: Ви отримаєте email з інструкціями щодо розблокування облікового
+        запису протягом кількох хвилин.
+      send_paranoid_instructions: Якщо ваш обліковий запис існує, ви отримаєте email
+        з інструкціями щодо його розблокування протягом кількох хвилин.
+      unlocked: Ваш обліковий запис успішно розблоковано. Будь ласка, увійдіть, щоб
+        продовжити.
+  sessions:
+    form:
+      forgot_password: Забули пароль?
+      no_account: Немає облікового запису?
+      sign_up: Зареєструватися
+      submit: Увійти
+      subtitle: Увійдіть до свого облікового запису
+      title: Увійти
   simple_form:
     error_notification:
       default_message: 'Будь ласка, перегляньте проблеми нижче:'

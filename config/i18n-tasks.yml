@@ -32,6 +32,7 @@ ignore_missing:
 # Ignore unused keys
 ignore_unused:
   - 'errors.messages.*'
-  - 'activerecord.errors.*'
+  - 'activerecord.*'
   - 'devise.*'
+  - 'registrations.unlocks.*'
   - 'simple_form.*'

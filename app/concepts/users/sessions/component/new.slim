@@ -1,0 +1,28 @@
+.card.form-card
+  .card-body
+    h2.form-title = I18n.t('sessions.form.title')
+    p.form-subtitle = I18n.t('sessions.form.subtitle')
+
+    = helpers.simple_form_for(resource, as: resource_name, url: helpers.user_session_path, html: { class: 'form-custom', data: { turbo: false } }) do |f|
+      = f.error_notification
+
+      .form-group
+        = f.input :email, autofocus: true, autocomplete: 'email', input_html: { class: 'form-control-custom' }, label_html: { class: 'form-label-custom' }
+
+      .form-group
+        = f.input :password, autocomplete: 'current-password', input_html: { class: 'form-control-custom' }, label_html: { class: 'form-label-custom' }
+
+      - if devise_mapping.rememberable?
+        .form-group.form-check-custom
+          = f.input :remember_me, as: :boolean, input_html: { class: 'form-check-input-custom' }, label_html: { class: 'form-check-label-custom' }
+
+      .form-actions
+        = f.button :submit, I18n.t('sessions.form.submit'), class: 'btn btn-submit-custom'
+
+    .form-footer
+      - if devise_mapping.recoverable?
+        = link_to I18n.t('sessions.form.forgot_password'), helpers.new_user_password_path, class: 'form-link'
+      - if devise_mapping.registerable?
+        p.form-footer-text
+          = I18n.t('sessions.form.no_account')
+          = link_to I18n.t('sessions.form.sign_up'), helpers.new_user_registration_path, class: 'form-link'

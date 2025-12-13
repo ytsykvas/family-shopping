@@ -1,0 +1,27 @@
+.card.form-card
+  .card-body
+    h2.form-title = I18n.t('registrations.form.title')
+    p.form-subtitle = I18n.t('registrations.form.subtitle')
+
+    = helpers.simple_form_for(resource, as: resource_name, url: helpers.user_registration_path, html: { class: 'form-custom', data: { turbo: false } }) do |f|
+      = f.error_notification
+
+      .form-group
+        = f.input :name, autofocus: true, input_html: { class: 'form-control-custom' }, label_html: { class: 'form-label-custom' }
+
+      .form-group
+        = f.input :email, autocomplete: 'email', input_html: { class: 'form-control-custom' }, label_html: { class: 'form-label-custom' }
+
+      .form-group
+        = f.input :password, autocomplete: 'new-password', input_html: { class: 'form-control-custom' }, label_html: { class: 'form-label-custom' }, hint: I18n.t('registrations.form.password_hint')
+
+      .form-group
+        = f.input :password_confirmation, autocomplete: 'new-password', input_html: { class: 'form-control-custom' }, label_html: { class: 'form-label-custom' }
+
+      .form-actions
+        = f.button :submit, I18n.t('registrations.form.submit'), class: 'btn btn-submit-custom'
+
+    .form-footer
+      p.form-footer-text
+        = I18n.t('registrations.form.already_have_account')
+        = link_to I18n.t('registrations.form.sign_in'), helpers.new_user_session_path, class: 'form-link'

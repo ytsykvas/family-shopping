@@ -23,7 +23,7 @@ html
     = render Shared::Navbar::Component::Show.new
     
     .content-wrapper
-      - if flash.any?
+      - if flash.any? && !controller_name.in?(%w[sessions registrations passwords])
         .container.mt-3
           - flash.each do |type, message|
             .alert.alert-dismissible.fade.show class="alert-#{type == 'notice' ? 'info' : type == 'alert' ? 'warning' : type}"

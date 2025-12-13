@@ -4,6 +4,9 @@ Rails.application.routes.draw do
                        registrations: "users/registrations"
                      }
 
+  # Redirect GET /users to sign up page (handles page refresh after validation errors)
+  get "/users", to: redirect("/users/sign_up")
+
   # API namespace for future Grape API or Rails API endpoints
   namespace :api do
     namespace :v1 do

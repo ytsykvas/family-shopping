@@ -2,7 +2,14 @@
 
 module Users
   class SessionsController < Devise::SessionsController
-    respond_to :json
+    respond_to :json, :html
+
+    skip_after_action :verify_authorized
+    skip_after_action :verify_policy_scoped
+
+    def new
+      endpoint Users::Sessions::Component::New, resource: resource, resource_name: resource_name, devise_mapping: devise_mapping
+    end
 
     private
 

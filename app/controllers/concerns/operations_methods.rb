@@ -6,11 +6,11 @@ module OperationsMethods
 
   protected
 
-  def endpoint(operation_or_component, component = nil)
+  def endpoint(operation_or_component, component = nil, **component_params)
     # Check if first argument is a component (has no 'call' method)
     if component.nil? && !operation_or_component.respond_to?(:call)
       # Direct component rendering without operation
-      render_component_only(operation_or_component)
+      render_component_only(operation_or_component, **component_params)
     else
       # Operation + Component flow
       operation = operation_or_component
@@ -113,8 +113,8 @@ module OperationsMethods
   end
 
   # Render component without operation
-  def render_component_only(component)
-    render component.new
+  def render_component_only(component, **params)
+    render component.new(**params)
   end
 
   def check_authorization_is_called(result)

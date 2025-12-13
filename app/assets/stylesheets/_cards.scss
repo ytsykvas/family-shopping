@@ -4,6 +4,7 @@
   border-radius: 0 !important;
   border: 3px solid $border-black !important;
   box-shadow: 6px 6px 0 $border-black !important;
+  background-color: $bg-navbar;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 
   .card-body {
