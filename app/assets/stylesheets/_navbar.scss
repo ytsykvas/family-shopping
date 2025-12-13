@@ -89,12 +89,19 @@
     }
 
     .brand-text {
+      display: flex;
+      flex-direction: column;
       font-weight: 900;
       font-size: 1.25rem;
       color: $text-black;
       letter-spacing: -0.5px;
       text-transform: uppercase;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.1;
+
+      .brand-word {
+        display: block;
+      }
     }
   }
 
@@ -151,33 +158,6 @@
 
     @media (min-width: 992px) {
       margin-right: -3rem !important;
-    }
-
-    .btn-success {
-      background-color: $primary-green;
-      color: $text-black;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-size: 0.9rem;
-      padding: 0.65rem 2rem;
-      border: 3px solid $border-black;
-      border-radius: 4px;
-      box-shadow: 6px 6px 0 $border-black;
-      transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
-      text-decoration: none;
-
-      &:hover {
-        background-color: color.scale($primary-green, $lightness: -10%);
-        transform: translate(-2px, -2px);
-        box-shadow: 8px 8px 0 $border-black;
-        color: $text-black;
-      }
-
-      &:active {
-        transform: translate(0, 0);
-        box-shadow: 3px 3px 0 $border-black;
-      }
     }
 
     .cursor-btn {
@@ -392,11 +372,18 @@
     }
 
     .brand-text-mobile {
+      display: flex;
+      flex-direction: column;
       font-weight: 900;
       font-size: 1.2rem;
       color: $text-black;
       letter-spacing: -0.5px;
       text-transform: uppercase;
+      line-height: 1.1;
+
+      .brand-word {
+        display: block;
+      }
     }
   }
 

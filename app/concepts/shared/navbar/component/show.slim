@@ -5,7 +5,9 @@ header.navbar-shell
         .brand-wrapper
           .logo-box aria-hidden="true"
             span.logo-icon ⬣
-          span.brand-text = I18n.t('navbar.brand')
+          .brand-text
+            - I18n.t('navbar.brand').split.each do |word|
+              span.brand-word = word
 
       ul.navbar-nav.d-none.d-lg-flex.flex-row.navbar-desktop-links
         li.nav-item
@@ -18,9 +20,12 @@ header.navbar-shell
           a.nav-link href="#" = I18n.t('navbar.teams')
         li.nav-item
           a.nav-link href="#" = I18n.t('navbar.friends')
-
       .navbar-actions.d-none.d-lg-flex
-        = link_to I18n.t('navbar.sign_in'), new_user_session_path, class: 'btn btn-success ms-auto'
+        - if @current_user.present?
+          / = link_to I18n.t(navbar.profile), profile_path, class: 'btn btn-primary'
+          = button_to I18n.t('navbar.sign_out'), destroy_user_session_path, method: :delete, data: { turbo: false }, class: 'btn btn-danger ms-auto', form_class: 'd-inline'
+        - else
+          = link_to I18n.t('navbar.sign_in'), new_user_session_path, class: 'btn btn-success ms-auto'
 
       button.navbar-toggler-mobile.d-lg-none type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvas" aria-controls="navbarOffcanvas" aria-expanded="false" aria-label="Toggle navigation"
         span.hamburger-icon
@@ -34,7 +39,9 @@ header.navbar-shell
         .brand-wrapper
           .logo-box-mobile aria-hidden="true"
             span.logo-icon ⬣
-          span.brand-text-mobile = I18n.t('navbar.brand')
+          .brand-text-mobile
+            - I18n.t('navbar.brand').split.each do |word|
+              span.brand-word = word
       button.btn.btn-close-custom type="button" data-bs-dismiss="offcanvas" aria-label="Close"
         span.close-icon ✕
 
@@ -60,6 +67,10 @@ header.navbar-shell
           span.link-arrow ↗
 
       .navbar-offcanvas-cta
-        = link_to new_user_session_path, class: 'btn btn-cta-offcanvas' do
-          span = I18n.t('navbar.sign_in')
-          span.cta-arrow ↗
+        - if @current_user.present?
+          / = link_to I18n.t(navbar.profile), profile_path, class: 'btn btn-cta-offcanvas'
+          = button_to I18n.t('navbar.sign_out'), destroy_user_session_path, method: :delete, data: { turbo: false }, class: 'btn btn-danger ms-auto', form_class: 'd-inline'
+        - else
+          = link_to new_user_session_path, class: 'btn btn-cta-offcanvas' do
+            span = I18n.t('navbar.sign_in')
+            span.cta-arrow ↗

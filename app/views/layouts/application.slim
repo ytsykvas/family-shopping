@@ -20,8 +20,8 @@ html
     = javascript_importmap_tags
 
   body
-    = render Shared::Navbar::Component::Show.new
-    
+    = render Shared::Navbar::Component::Show.new(current_user: current_user)
+
     .content-wrapper
       - if flash.any? && !controller_name.in?(%w[sessions registrations passwords])
         .container.mt-3
