@@ -3,6 +3,13 @@
     h2.form-title = I18n.t('sessions.form.title')
     p.form-subtitle = I18n.t('sessions.form.subtitle')
 
+    - if helpers.flash.any?
+      - helpers.flash.each do |type, message|
+        .alert.alert-dismissible.fade.show class="alert-#{type == 'notice' ? 'info' : type == 'alert' ? 'danger' : type == 'warning' ? 'warning' : type}" role="alert"
+          .alert-icon
+          .alert-content= message
+          button.btn-close type="button" data-bs-dismiss="alert" aria-label="Close"
+
     = helpers.simple_form_for(resource, as: resource_name, url: helpers.user_session_path, html: { class: 'form-custom', data: { turbo: false } }) do |f|
       = f.error_notification
 

@@ -26,8 +26,9 @@ html
       - if flash.any? && !controller_name.in?(%w[sessions registrations passwords])
         .container.mt-3
           - flash.each do |type, message|
-            .alert.alert-dismissible.fade.show class="alert-#{type == 'notice' ? 'info' : type == 'alert' ? 'warning' : type}"
-              = message
+            .alert.alert-dismissible.fade.show class="alert-#{type == 'notice' ? 'info' : type == 'alert' ? 'danger' : type == 'warning' ? 'warning' : type}"
+              .alert-icon
+              .alert-content= message
               button.btn-close type="button" data-bs-dismiss="alert" aria-label="Close"
       
       main.main-content

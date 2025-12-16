@@ -243,9 +243,19 @@
 
 // Input field errors styling
 .field_with_errors {
+  display: contents;
+  
   .form-control-custom {
     border-color: $primary-pink;
     box-shadow: 3px 3px 0 $primary-pink;
+    
+    &:focus {
+      box-shadow: 5px 5px 0 $primary-pink;
+    }
+  }
+  
+  label {
+    color: $primary-pink;
   }
 }
 
@@ -279,6 +289,14 @@ textarea.form-control-custom {
   &.text-danger {
     color: $danger-color;
   }
+}
+
+.invalid-feedback {
+  display: block;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  font-weight: 700;
+  color: $danger-color;
 }
 
 .form-control-custom.is-valid {

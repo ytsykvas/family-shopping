@@ -11,9 +11,28 @@ module Users
       endpoint Users::Sessions::Component::New, resource: resource, resource_name: resource_name, devise_mapping: devise_mapping
     end
 
+    def create
+      super
+
+      if flash[:notice]
+        flash[:success] = flash[:notice]
+        flash.delete(:notice)
+      end
+    end
+
+    def destroy
+      super
+
+      if flash[:notice]
+        flash[:success] = flash[:notice]
+        flash.delete(:notice)
+      end
+
+      flash.delete(:alert) if flash[:alert] == I18n.t("devise.failure.unauthenticated")
+    end
+
     private
 
-    # Override respond_with to handle both HTML and JSON responses
     def respond_with(resource, _opts = {})
       if request.format.json?
         render json: {

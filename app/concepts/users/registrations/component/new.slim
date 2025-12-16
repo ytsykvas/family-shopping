@@ -3,6 +3,13 @@
     h2.form-title = I18n.t('registrations.form.title')
     p.form-subtitle = I18n.t('registrations.form.subtitle')
 
+    - if helpers.flash.any?
+      - helpers.flash.each do |type, message|
+        .alert.alert-dismissible.fade.show class="alert-#{type == 'notice' ? 'info' : type == 'alert' ? 'danger' : type == 'warning' ? 'warning' : type}" role="alert"
+          .alert-icon
+          .alert-content= message
+          button.btn-close type="button" data-bs-dismiss="alert" aria-label="Close"
+
     = helpers.simple_form_for(resource, as: resource_name, url: helpers.user_registration_path, html: { class: 'form-custom', data: { turbo: false } }) do |f|
       = f.error_notification
 
@@ -10,13 +17,11 @@
         = f.input :name, autofocus: true, input_html: { class: 'form-control-custom' }, label_html: { class: 'form-label-custom' }
 
       .form-group data-controller="user--nickname-validation" data-user--nickname-validation-url-value=helpers.api_v1_users_check_nickname_path
-        label.form-label-custom for="user_nickname" = User.human_attribute_name(:nickname)
-        = f.input_field :nickname, class: 'form-control-custom', data: { user__nickname_validation_target: 'input', action: 'input->user--nickname-validation#validate' }
+        = f.input :nickname, input_html: { class: 'form-control-custom', data: { user__nickname_validation_target: 'input', action: 'input->user--nickname-validation#validate' } }, label_html: { class: 'form-label-custom' }, wrapper_html: { class: 'w-100' }
         .validation-feedback data-user--nickname-validation-target="feedback"
 
       .form-group data-controller="user--email-validation" data-user--email-validation-url-value=helpers.api_v1_users_check_email_path
-        label.form-label-custom for="user_email" = User.human_attribute_name(:email)
-        = f.input_field :email, autocomplete: 'email', class: 'form-control-custom', data: { user__email_validation_target: 'input', action: 'input->user--email-validation#validate' }
+        = f.input :email, autocomplete: 'email', input_html: { class: 'form-control-custom', data: { user__email_validation_target: 'input', action: 'input->user--email-validation#validate' } }, label_html: { class: 'form-label-custom' }, wrapper_html: { class: 'w-100' }
         .validation-feedback data-user--email-validation-target="feedback"
 
       .form-group
