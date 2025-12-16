@@ -1,0 +1,6 @@
+- if @friends.any?
+  - @friends.each do |friend|
+    = friend.requester.name
+    = friend.accepter.name
+- else
+  = I18n.t("friends.no_friends")

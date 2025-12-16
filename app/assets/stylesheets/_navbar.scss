@@ -572,5 +572,9 @@
 }
 
 .main-content {
-  min-height: calc(100vh);
+  min-height: calc(100vh - 60px);
+  
+  .container {
+    max-width: 1200px;
+  }
 }

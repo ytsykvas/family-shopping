@@ -150,6 +150,8 @@ en:
     solid_buttons: Solid Buttons
     subtitle: Your collaborative shopping list app
     title: Welcome to Family Shopping
+  friends:
+    no_friends: You don't have any friends yet. Start adding friends to create shared shopping lists!
   navbar:
     brand: SHOP TEAM
     events: Events

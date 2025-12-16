@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "ostruct"
+
 module OperationsMethods
   include ActionView::Helpers::JavaScriptHelper
   extend ActiveSupport::Concern

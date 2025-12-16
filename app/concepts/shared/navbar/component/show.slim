@@ -19,10 +19,9 @@ header.navbar-shell
         li.nav-item
           a.nav-link href="#" = I18n.t('navbar.teams')
         li.nav-item
-          a.nav-link href="#" = I18n.t('navbar.friends')
+          a.nav-link href=friends_path = I18n.t('navbar.friends')
       .navbar-actions.d-none.d-lg-flex
         - if @current_user.present?
-          / = link_to I18n.t(navbar.profile), profile_path, class: 'btn btn-primary'
           = button_to I18n.t('navbar.sign_out'), destroy_user_session_path, method: :delete, data: { turbo: false }, class: 'btn btn-danger ms-auto', form_class: 'd-inline'
         - else
           = link_to I18n.t('navbar.sign_in'), new_user_session_path, class: 'btn btn-success ms-auto'
@@ -68,8 +67,7 @@ header.navbar-shell
 
       .navbar-offcanvas-cta
         - if @current_user.present?
-          / = link_to I18n.t(navbar.profile), profile_path, class: 'btn btn-cta-offcanvas'
-          = button_to I18n.t('navbar.sign_out'), destroy_user_session_path, method: :delete, data: { turbo: false }, class: 'btn btn-danger ms-auto', form_class: 'd-inline'
+          = button_to I18n.t('navbar.sign_out'), destroy_user_session_path, method: :delete, data: { turbo: false }, class: 'btn btn-cta-offcanvas', form_class: 'd-inline'
         - else
           = link_to new_user_session_path, class: 'btn btn-cta-offcanvas' do
             span = I18n.t('navbar.sign_in')

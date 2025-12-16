@@ -4,7 +4,65 @@ require "rails_helper"
 
 RSpec.describe User, type: :model do
   describe "associations" do
-    # Add associations tests here when you add them
+    describe "sent_friendships" do
+      let(:user) { create(:user) }
+      let(:other_user) { create(:user) }
+
+      it "has many sent friendships" do
+        friendship = create(:friendship, requester: user, accepter: other_user)
+        expect(user.sent_friendships).to include(friendship)
+      end
+
+      it "destroys sent friendships when user is destroyed" do
+        friendship = create(:friendship, requester: user, accepter: other_user)
+        user.destroy
+        expect(Friendship.find_by(id: friendship.id)).to be_nil
+      end
+    end
+
+    describe "received_friendships" do
+      let(:user) { create(:user) }
+      let(:other_user) { create(:user) }
+
+      it "has many received friendships" do
+        friendship = create(:friendship, requester: other_user, accepter: user)
+        expect(user.received_friendships).to include(friendship)
+      end
+
+      it "destroys received friendships when user is destroyed" do
+        friendship = create(:friendship, requester: other_user, accepter: user)
+        user.destroy
+        expect(Friendship.find_by(id: friendship.id)).to be_nil
+      end
+    end
+
+    describe "accepted_sent_friends" do
+      let(:user) { create(:user) }
+      let(:accepted_friend) { create(:user) }
+      let(:pending_friend) { create(:user) }
+
+      it "returns only accepted friends from sent requests" do
+        create(:friendship, :accepted, requester: user, accepter: accepted_friend)
+        create(:friendship, :pending, requester: user, accepter: pending_friend)
+
+        expect(user.accepted_sent_friends).to include(accepted_friend)
+        expect(user.accepted_sent_friends).not_to include(pending_friend)
+      end
+    end
+
+    describe "accepted_received_friends" do
+      let(:user) { create(:user) }
+      let(:accepted_friend) { create(:user) }
+      let(:pending_friend) { create(:user) }
+
+      it "returns only accepted friends from received requests" do
+        create(:friendship, :accepted, requester: accepted_friend, accepter: user)
+        create(:friendship, :pending, requester: pending_friend, accepter: user)
+
+        expect(user.accepted_received_friends).to include(accepted_friend)
+        expect(user.accepted_received_friends).not_to include(pending_friend)
+      end
+    end
   end
 
   describe "validations" do
@@ -248,6 +306,86 @@ RSpec.describe User, type: :model do
 
     it "is jwt_authenticatable" do
       expect(described_class.devise_modules).to include(:jwt_authenticatable)
+    end
+  end
+
+  describe "#friends" do
+    let(:user) { create(:user) }
+    let(:friend1) { create(:user) }
+    let(:friend2) { create(:user) }
+    let(:friend3) { create(:user) }
+    let(:non_friend) { create(:user) }
+
+    context "when user has no friends" do
+      it "returns empty collection" do
+        expect(user.friends).to be_empty
+      end
+    end
+
+    context "when user has friends from sent requests" do
+      before do
+        create(:friendship, :accepted, requester: user, accepter: friend1)
+        create(:friendship, :accepted, requester: user, accepter: friend2)
+      end
+
+      it "returns accepted friends from sent requests" do
+        expect(user.friends).to include(friend1, friend2)
+      end
+
+      it "does not return pending friends" do
+        pending_friend = create(:user)
+        create(:friendship, :pending, requester: user, accepter: pending_friend)
+        expect(user.friends).not_to include(pending_friend)
+      end
+
+      it "does not return non-friends" do
+        expect(user.friends).not_to include(non_friend)
+      end
+    end
+
+    context "when user has friends from received requests" do
+      before do
+        create(:friendship, :accepted, requester: friend1, accepter: user)
+        create(:friendship, :accepted, requester: friend2, accepter: user)
+      end
+
+      it "returns accepted friends from received requests" do
+        expect(user.friends).to include(friend1, friend2)
+      end
+
+      it "does not return pending friends" do
+        pending_friend = create(:user)
+        create(:friendship, :pending, requester: pending_friend, accepter: user)
+        expect(user.friends).not_to include(pending_friend)
+      end
+    end
+
+    context "when user has friends from both sent and received requests" do
+      before do
+        create(:friendship, :accepted, requester: user, accepter: friend1)
+        create(:friendship, :accepted, requester: friend2, accepter: user)
+        create(:friendship, :accepted, requester: user, accepter: friend3)
+      end
+
+      it "returns all accepted friends regardless of direction" do
+        expect(user.friends).to contain_exactly(friend1, friend2, friend3)
+      end
+
+      it "does not return duplicates" do
+        expect(user.friends.to_a.size).to eq(3)
+      end
+    end
+
+    context "with blocked friendships" do
+      before do
+        create(:friendship, :accepted, requester: user, accepter: friend1)
+        create(:friendship, :blocked, requester: user, accepter: friend2)
+      end
+
+      it "returns only accepted friends, not blocked" do
+        expect(user.friends).to include(friend1)
+        expect(user.friends).not_to include(friend2)
+      end
     end
   end
 end

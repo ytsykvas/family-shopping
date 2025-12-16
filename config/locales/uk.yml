@@ -153,6 +153,8 @@ uk:
     solid_buttons: Суцільні кнопки
     subtitle: Ваш додаток для спільної роботи зі списками покупок
     title: Ласкаво просимо до Family Shopping
+  friends:
+    no_friends: У вас поки немає друзів. Почніть додавати друзів, щоб створювати спільні списки покупок!
   navbar:
     brand: SHOP TEAM
     events: Події
