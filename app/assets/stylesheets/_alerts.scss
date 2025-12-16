@@ -3,7 +3,7 @@
 
 .alert {
   border: 3px solid $border-black;
-  border-radius: 4px;
+  border-radius: 12px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -84,7 +84,7 @@
     opacity: 1;
     background-color: $bg-white;
     border: 3px solid $border-black;
-    border-radius: 4px;
+    border-radius: 8px;
     box-shadow: 3px 3px 0 $border-black;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='%23000' d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e");
     background-size: 1rem;

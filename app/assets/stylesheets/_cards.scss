@@ -1,7 +1,7 @@
 @use 'variables' as *;
 
 .card {
-  border-radius: 0 !important;
+  border-radius: 12px !important;
   border: 3px solid $border-black !important;
   box-shadow: 6px 6px 0 $border-black !important;
   background-color: $bg-navbar;

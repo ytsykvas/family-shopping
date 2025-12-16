@@ -19,12 +19,16 @@ header.navbar-shell
         li.nav-item
           a.nav-link href="#" = I18n.t('navbar.teams')
         li.nav-item
-          a.nav-link href=friends_path = I18n.t('navbar.friends')
+          a.nav-link class=("active" if active_link?("/friends")) href=friends_path = I18n.t('navbar.friends')
       .navbar-actions.d-none.d-lg-flex
         - if @current_user.present?
-          = button_to I18n.t('navbar.sign_out'), destroy_user_session_path, method: :delete, data: { turbo: false }, class: 'btn btn-danger ms-auto', form_class: 'd-inline'
+          = button_to destroy_user_session_path, method: :delete, data: { turbo: false }, class: 'navbar-action-btn navbar-action-btn-danger', form_class: 'd-inline' do
+            .action-icon ←
+            span.action-text = I18n.t('navbar.sign_out')
         - else
-          = link_to I18n.t('navbar.sign_in'), new_user_session_path, class: 'btn btn-success ms-auto'
+          = link_to new_user_session_path, class: 'navbar-action-btn navbar-action-btn-success' do
+            .action-icon →
+            span.action-text = I18n.t('navbar.sign_in')
 
       button.navbar-toggler-mobile.d-lg-none type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvas" aria-controls="navbarOffcanvas" aria-expanded="false" aria-label="Toggle navigation"
         span.hamburger-icon
