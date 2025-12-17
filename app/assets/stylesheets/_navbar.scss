@@ -717,11 +717,36 @@
   padding-top: 0;
 }
 
+.content-wrapper {
+  padding-left: 18px;
+  padding-right: 18px;
+
+  .container {
+    max-width: 1400px;
+
+    @media (min-width: 1600px) {
+      max-width: 1600px;
+    }
+
+    @media (min-width: 1920px) {
+      max-width: 1800px;
+    }
+  }
+}
+
 .main-content {
   min-height: calc(100vh - 60px);
   
   .container {
-    max-width: 1200px;
+    max-width: 1400px;
+
+    @media (min-width: 1600px) {
+      max-width: 1600px;
+    }
+
+    @media (min-width: 1920px) {
+      max-width: 1800px;
+    }
   }
 }
 

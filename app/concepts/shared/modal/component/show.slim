@@ -1,0 +1,12 @@
+.modal.fade id=@id tabindex="-1" aria-labelledby="#{@id}Label" aria-hidden="true" data-bs-backdrop="static"
+  .modal-dialog class=modal_size_class
+    .modal-content
+      .modal-header
+        h2.modal-title id="#{@id}Label" = @title
+        button.btn-modal-close type="button" data-bs-dismiss="modal" aria-label=I18n.t('modal.close_aria_label')
+          span ✕
+      .modal-body
+        = content
+      .modal-footer
+        button.btn.btn-secondary type="button" data-bs-dismiss="modal" = I18n.t('modal.close')
+        = footer if content_for?(:modal_footer)

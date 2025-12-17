@@ -65,7 +65,7 @@ header.navbar-shell
         a.navbar-offcanvas-link href="#"
           span = I18n.t('navbar.teams')
           span.link-arrow ↗
-        a.navbar-offcanvas-link href="#"
+        = link_to friends_path, class: 'navbar-offcanvas-link' do
           span = I18n.t('navbar.friends')
           span.link-arrow ↗
 

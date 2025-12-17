@@ -16,3 +16,68 @@
     box-shadow: 9px 9px 0 $border-black !important;
   }
 }
+
+.empty-content-container {
+  border-radius: 12px;
+  border: 3px solid $border-black;
+  box-shadow: 6px 6px 0 $border-black;
+  background-color: $bg-navbar;
+  padding: 4rem 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+
+  .empty-icon {
+    font-size: 5rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    transform: rotate(-5deg);
+    transition: transform 0.3s ease;
+  }
+
+  .empty-title {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: $text-black;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.75rem;
+  }
+
+  .empty-message {
+    font-size: 1rem;
+    font-weight: 600;
+    color: $text-black;
+    max-width: 500px;
+    line-height: 1.6;
+  }
+
+  &:hover {
+    .empty-icon {
+      transform: rotate(5deg) scale(1.1);
+    }
+  }
+
+  @media (max-width: 576px) {
+    padding: 3rem 1.5rem;
+    min-height: 250px;
+
+    .empty-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+
+    .empty-title {
+      font-size: 1.25rem;
+    }
+
+    .empty-message {
+      font-size: 0.9rem;
+    }
+  }
+}

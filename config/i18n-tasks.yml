@@ -11,6 +11,9 @@ data:
     - config/locales/**/*.yml
   write:
     - config/locales/%{locale}.yml
+  yaml:
+    write:
+      line_width: -1
 
 # Where to look for keys in code
 search:

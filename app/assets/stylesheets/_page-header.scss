@@ -1,0 +1,35 @@
+@use 'variables' as *;
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0;
+  flex-wrap: nowrap;
+
+  .page-title {
+    margin: 0;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .page-header-btn {
+    flex-shrink: 0;
+    white-space: nowrap;
+    
+    @media (max-width: 576px) {
+      padding: 0.5rem 1rem;
+      font-size: 0.8rem;
+    }
+  }
+}
+
+hr {
+  border: 0;
+  height: 4px;
+  background-color: $border-black;
+  border-radius: 3px;
+  margin: 1rem 0 2.5rem 0;
+  opacity: 1;
+}

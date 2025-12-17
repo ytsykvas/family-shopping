@@ -1,6 +1,16 @@
+= render Shared::TitleRow::Component::Show.new(title: I18n.t('friends.index.title'), button_text: I18n.t('friends.index.add_friend'), button_data: { 'bs-toggle': 'modal', 'bs-target': '#addFriendModal' })
+
 - if @friends.any?
   - @friends.each do |friend|
     = friend.requester.name
     = friend.accepter.name
 - else
-  = I18n.t("friends.no_friends")
+  .empty-content-container
+    .empty-icon 👥
+    .empty-title = I18n.t("friends.index.no_friends_title")
+    .empty-message = I18n.t("friends.index.no_friends")
+    button.btn.btn-primary.mt-3 data-bs-toggle="modal" data-bs-target="#addFriendModal" = I18n.t('friends.index.add_friend')
+
+= render Shared::Modal::Component::Show.new(id: 'addFriendModal', title: I18n.t('friends.index.add_friend'), size: 'md') do
+  p This is a test modal content
+  p You can add your form here to add a new friend.

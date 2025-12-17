@@ -1,0 +1,8 @@
+.page-header
+  h1.page-title = @title
+  - if show_button?
+    - if button_is_link?
+      = link_to @button_text, @button_path, class: @button_class
+    - else
+      button class=@button_class data=@button_data = @button_text
+hr
