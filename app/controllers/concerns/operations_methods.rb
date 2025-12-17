@@ -119,6 +119,48 @@ module OperationsMethods
     render component.new(**params)
   end
 
+  # Endpoint for partial/component rendering (e.g., for AJAX/Turbo Stream updates)
+  # Can accept either a partial path string or a component class
+  def endpoint_partial(operation, partial_or_component, target_id: nil)
+    result = operation.call(params: params, current_user: current_user)
+    check_authorization_is_called result
+
+    respond_to do |format|
+      format.turbo_stream do
+        results_html = if partial_or_component.is_a?(String)
+          # Render partial
+          render_to_string(
+            partial: partial_or_component,
+            locals: result.model.is_a?(Hash) ? result.model : { model: result.model },
+            layout: false
+          )
+        else
+          # Render component
+          component_params = result.model.is_a?(Hash) ? result.model : { model: result.model }
+          render_to_string(partial_or_component.new(**component_params), layout: false)
+        end
+
+        if target_id.present?
+          render turbo_stream: turbo_stream.replace(target_id, results_html)
+        else
+          render turbo_stream: results_html
+        end
+      end
+      format.html do
+        if partial_or_component.is_a?(String)
+          # Render partial
+          render partial: partial_or_component,
+                 locals: result.model.is_a?(Hash) ? result.model : { model: result.model },
+                 layout: false
+        else
+          # Render component
+          component_params = result.model.is_a?(Hash) ? result.model : { model: result.model }
+          render partial_or_component.new(**component_params), layout: false
+        end
+      end
+    end
+  end
+
   def check_authorization_is_called(result)
     skip_authorization if result[:pundit] || result["policy.run"] || result.failure?
     skip_policy_scope if result[:pundit_scope] || result.failure?

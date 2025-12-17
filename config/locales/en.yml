@@ -179,3 +179,9 @@ en:
       mark: "*"
       text: required
     'yes': 'Yes'
+  user_searches:
+    add_friend: Add Friend
+    label: Search Users
+    nickname_label: 'Nickname:'
+    no_results: No users found
+    placeholder: Search by nickname or email

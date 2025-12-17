@@ -1,0 +1,20 @@
+- if has_query?
+  - if has_results?
+    .search-results.mt-3
+      .row.g-4
+        - @users.each do |user|
+          .col-md-6.col-lg-4
+            .card
+              .card-body
+                .user-info
+                  .user-name.mb-2 = user.name
+                  hr
+                  .user-details.mb-3
+                    .user-nickname.text-muted.small.mb-1 = "#{I18n.t('user_searches.nickname_label')} #{user.nickname}"
+                    .user-email.text-muted.small = user.email
+                .user-actions
+                  button.btn.btn-primary.btn-sm = I18n.t('user_searches.add_friend')
+  - else
+    .no-results.mt-3
+      i.bi.bi-search.no-results-icon
+      .no-results-text = I18n.t('user_searches.no_results')

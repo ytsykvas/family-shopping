@@ -6,11 +6,10 @@
     = friend.accepter.name
 - else
   .empty-content-container
-    .empty-icon 👥
+    i.bi.bi-people.empty-icon
     .empty-title = I18n.t("friends.index.no_friends_title")
     .empty-message = I18n.t("friends.index.no_friends")
     button.btn.btn-primary.mt-3 data-bs-toggle="modal" data-bs-target="#addFriendModal" = I18n.t('friends.index.add_friend')
 
-= render Shared::Modal::Component::Show.new(id: 'addFriendModal', title: I18n.t('friends.index.add_friend'), size: 'md') do
-  p This is a test modal content
-  p You can add your form here to add a new friend.
+= render Shared::Modal::Component::Show.new(id: 'addFriendModal', title: I18n.t('friends.index.add_friend'), size: 'md', type: 'form') do
+  = render UserSearches::Component::Index.new(query: nil, users: [])

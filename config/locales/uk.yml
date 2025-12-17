@@ -179,3 +179,9 @@ uk:
       mark: "*"
       text: обов'язково
     'yes': Так
+  user_searches:
+    add_friend: Додати друга
+    label: Пошук користувачів
+    nickname_label: 'Нікнейм:'
+    no_results: Користувачів не знайдено
+    placeholder: Пошук за нікнеймом або email

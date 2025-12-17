@@ -1,0 +1,7 @@
+.user-search-form data-controller="user-search" data-user-search-url-value=user_searches_path
+  .form-custom
+    .form-group
+      = label_tag :query, I18n.t('user_searches.label'), class: "form-label-custom"
+      = text_field_tag :query, @query, placeholder: I18n.t('user_searches.placeholder'), class: "form-control form-control-custom", data: { "user-search-target": "input", action: "input->user-search#search" }
+
+  #user-search-results data-user-search-target="results"
