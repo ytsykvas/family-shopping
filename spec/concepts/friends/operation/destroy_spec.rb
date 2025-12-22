@@ -2,14 +2,14 @@
 
 require "rails_helper"
 
-RSpec.describe FriendshipRequest::Operation::Destroy, type: :operation do
+RSpec.describe Friends::Operation::Destroy, type: :operation do
   describe "#perform!" do
     let(:requester) { create(:user) }
     let(:accepter) { create(:user) }
-    let!(:friendship) { create(:friendship, :pending, requester: requester, accepter: accepter) }
+    let!(:friendship) { create(:friendship, :accepted, requester: requester, accepter: accepter) }
     let(:params) { { id: friendship.id } }
 
-    context "when requester cancels the request" do
+    context "when requester removes the friend" do
       it "returns successful result" do
         result = described_class.call(params: params, current_user: requester)
         expect(result).to be_success
@@ -39,7 +39,7 @@ RSpec.describe FriendshipRequest::Operation::Destroy, type: :operation do
 
       it "sets success notice" do
         result = described_class.call(params: params, current_user: requester)
-        expect(result.message).to eq(I18n.t("friendship_requests.destroy.success"))
+        expect(result.message).to eq(I18n.t("friends.destroy.success"))
       end
 
       it "marks pundit authorization as called" do
@@ -48,7 +48,7 @@ RSpec.describe FriendshipRequest::Operation::Destroy, type: :operation do
       end
     end
 
-    context "when accepter rejects the request" do
+    context "when accepter removes the friend" do
       it "returns successful result" do
         result = described_class.call(params: params, current_user: accepter)
         expect(result).to be_success
@@ -62,7 +62,7 @@ RSpec.describe FriendshipRequest::Operation::Destroy, type: :operation do
 
       it "sets success notice" do
         result = described_class.call(params: params, current_user: accepter)
-        expect(result.message).to eq(I18n.t("friendship_requests.destroy.success"))
+        expect(result.message).to eq(I18n.t("friends.destroy.success"))
       end
     end
 
@@ -86,8 +86,8 @@ RSpec.describe FriendshipRequest::Operation::Destroy, type: :operation do
       end
     end
 
-    context "when friendship is not pending" do
-      let!(:friendship) { create(:friendship, :accepted, requester: requester, accepter: accepter) }
+    context "when friendship is pending" do
+      let!(:friendship) { create(:friendship, :pending, requester: requester, accepter: accepter) }
 
       it "returns failure result" do
         result = described_class.call(params: params, current_user: requester)
@@ -102,7 +102,7 @@ RSpec.describe FriendshipRequest::Operation::Destroy, type: :operation do
 
       it "sets error message" do
         result = described_class.call(params: params, current_user: requester)
-        expect(result.errors[:base]).to include(I18n.t("friendship_requests.destroy.not_pending"))
+        expect(result.errors[:base]).to include(I18n.t("friends.destroy.not_accepted"))
       end
     end
 

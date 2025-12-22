@@ -237,5 +237,156 @@ RSpec.describe UserSearches::Operation::Index, type: :operation do
         expect(users).to be_empty
       end
     end
+
+    context "when users have different friendship statuses" do
+      let!(:friend_user) { create(:user, nickname: "friend_user", email: "friend@example.com") }
+      let!(:incoming_request_user) { create(:user, nickname: "incoming_user", email: "incoming@example.com") }
+      let!(:outgoing_request_user) { create(:user, nickname: "outgoing_user", email: "outgoing@example.com") }
+      let!(:no_relation_user) { create(:user, nickname: "stranger_user", email: "stranger@example.com") }
+      let(:params) { { query: "user" } }
+
+      before do
+        create(:friendship, requester: current_user, accepter: friend_user, status: :accepted)
+        create(:friendship, requester: incoming_request_user, accepter: current_user, status: :pending)
+        create(:friendship, requester: current_user, accepter: outgoing_request_user, status: :pending)
+      end
+
+      it "returns all matching users" do
+        result = described_class.call(params: params, current_user: current_user)
+        users = result.model[:users]
+
+        expect(users).to include(friend_user, incoming_request_user, outgoing_request_user, no_relation_user)
+      end
+
+      it "identifies friends correctly" do
+        result = described_class.call(params: params, current_user: current_user)
+        friends_ids = result.model[:friends_ids]
+
+        expect(friends_ids).to include(friend_user.id)
+        expect(friends_ids).not_to include(incoming_request_user.id, outgoing_request_user.id, no_relation_user.id)
+      end
+
+      it "identifies incoming requests correctly" do
+        result = described_class.call(params: params, current_user: current_user)
+        incoming_requests = result.model[:incoming_requests]
+
+        expect(incoming_requests.keys).to include(incoming_request_user.id)
+        expect(incoming_requests.keys).not_to include(friend_user.id, outgoing_request_user.id, no_relation_user.id)
+      end
+
+      it "identifies outgoing requests correctly" do
+        result = described_class.call(params: params, current_user: current_user)
+        outgoing_requests = result.model[:outgoing_requests]
+
+        expect(outgoing_requests.keys).to include(outgoing_request_user.id)
+        expect(outgoing_requests.keys).not_to include(friend_user.id, incoming_request_user.id, no_relation_user.id)
+      end
+
+      it "returns empty hashes for users with no relationship" do
+        result = described_class.call(params: params, current_user: current_user)
+        friends_ids = result.model[:friends_ids]
+        incoming_requests = result.model[:incoming_requests]
+        outgoing_requests = result.model[:outgoing_requests]
+
+        expect(friends_ids).not_to include(no_relation_user.id)
+        expect(incoming_requests.keys).not_to include(no_relation_user.id)
+        expect(outgoing_requests.keys).not_to include(no_relation_user.id)
+      end
+
+      it "returns friendship objects in incoming_requests hash" do
+        result = described_class.call(params: params, current_user: current_user)
+        incoming_requests = result.model[:incoming_requests]
+
+        expect(incoming_requests[incoming_request_user.id]).to be_a(Friendship)
+        expect(incoming_requests[incoming_request_user.id].requester_id).to eq(incoming_request_user.id)
+        expect(incoming_requests[incoming_request_user.id].accepter_id).to eq(current_user.id)
+      end
+
+      it "returns friendship objects in outgoing_requests hash" do
+        result = described_class.call(params: params, current_user: current_user)
+        outgoing_requests = result.model[:outgoing_requests]
+
+        expect(outgoing_requests[outgoing_request_user.id]).to be_a(Friendship)
+        expect(outgoing_requests[outgoing_request_user.id].requester_id).to eq(current_user.id)
+        expect(outgoing_requests[outgoing_request_user.id].accepter_id).to eq(outgoing_request_user.id)
+      end
+    end
+
+    context "when friend relationship is reversed (current_user is accepter)" do
+      let!(:friend_user) { create(:user, nickname: "friend_user", email: "friend@example.com") }
+      let(:params) { { query: "friend" } }
+
+      before do
+        create(:friendship, requester: friend_user, accepter: current_user, status: :accepted)
+      end
+
+      it "identifies friend correctly regardless of who initiated" do
+        result = described_class.call(params: params, current_user: current_user)
+        friends_ids = result.model[:friends_ids]
+
+        expect(friends_ids).to include(friend_user.id)
+      end
+    end
+
+    context "when query is blank with friendship data" do
+      let(:params) { { query: "" } }
+
+      it "returns empty friends_ids array" do
+        result = described_class.call(params: params, current_user: current_user)
+        expect(result.model[:friends_ids]).to eq([])
+      end
+
+      it "returns empty incoming_requests hash" do
+        result = described_class.call(params: params, current_user: current_user)
+        expect(result.model[:incoming_requests]).to eq({})
+      end
+
+      it "returns empty outgoing_requests hash" do
+        result = described_class.call(params: params, current_user: current_user)
+        expect(result.model[:outgoing_requests]).to eq({})
+      end
+    end
+
+    context "when there are no friendships" do
+      let!(:user1) { create(:user, nickname: "user1", email: "user1@example.com") }
+      let!(:user2) { create(:user, nickname: "user2", email: "user2@example.com") }
+      let(:params) { { query: "user" } }
+
+      it "returns empty friends_ids array" do
+        result = described_class.call(params: params, current_user: current_user)
+        expect(result.model[:friends_ids]).to be_empty
+      end
+
+      it "returns empty incoming_requests hash" do
+        result = described_class.call(params: params, current_user: current_user)
+        expect(result.model[:incoming_requests]).to be_empty
+      end
+
+      it "returns empty outgoing_requests hash" do
+        result = described_class.call(params: params, current_user: current_user)
+        expect(result.model[:outgoing_requests]).to be_empty
+      end
+    end
+
+    context "when user has multiple friends in search results" do
+      let!(:friend1) { create(:user, nickname: "friend1", email: "friend1@example.com") }
+      let!(:friend2) { create(:user, nickname: "friend2", email: "friend2@example.com") }
+      let!(:friend3) { create(:user, nickname: "friend3", email: "friend3@example.com") }
+      let(:params) { { query: "friend" } }
+
+      before do
+        create(:friendship, requester: current_user, accepter: friend1, status: :accepted)
+        create(:friendship, requester: friend2, accepter: current_user, status: :accepted)
+        create(:friendship, requester: current_user, accepter: friend3, status: :accepted)
+      end
+
+      it "includes all friends in friends_ids" do
+        result = described_class.call(params: params, current_user: current_user)
+        friends_ids = result.model[:friends_ids]
+
+        expect(friends_ids).to include(friend1.id, friend2.id, friend3.id)
+        expect(friends_ids.count).to eq(3)
+      end
+    end
   end
 end

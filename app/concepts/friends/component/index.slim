@@ -1,9 +1,10 @@
 = render Shared::TitleRow::Component::Show.new(title: I18n.t('friends.index.title'), button_text: I18n.t('friends.index.add_friend'), button_data: { 'bs-toggle': 'modal', 'bs-target': '#addFriendModal' })
 
 - if @friends.any?
-  - @friends.each do |friend|
-    = friend.requester.name
-    = friend.accepter.name
+  .row.g-4.mb-4
+    - @friends.each do |friendship|
+      .col-md-6.col-lg-4
+        = render Friends::Component::FriendCard.new(friendship: friendship, current_user: @current_user)
 - else
   .empty-content-container
     i.bi.bi-people.empty-icon

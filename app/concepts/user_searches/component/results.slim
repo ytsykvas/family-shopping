@@ -4,16 +4,7 @@
       .row.g-4
         - @users.each do |user|
           .col-md-6.col-lg-4
-            .card
-              .card-body
-                .user-info
-                  .user-name.mb-2 = user.name
-                  hr
-                  .user-details.mb-3
-                    .user-nickname.text-muted.small.mb-1 = "#{I18n.t('user_searches.nickname_label')} #{user.nickname}"
-                    .user-email.text-muted.small = user.email
-                .user-actions
-                  = button_to I18n.t('user_searches.add_friend'), friendship_requests_path, method: :post, params: { friendship_request: { accepter_id: user.id } }, class: 'btn btn-primary btn-sm', data: { turbo: false }
+            = render UserSearches::Component::ResultCard.new(user: user, friends_ids: @friends_ids, incoming_requests: @incoming_requests, outgoing_requests: @outgoing_requests)
   - else
     .no-results.mt-3
       i.bi.bi-search.no-results-icon

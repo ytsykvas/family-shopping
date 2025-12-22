@@ -99,4 +99,70 @@ RSpec.describe FriendshipPolicy, type: :policy do
       end
     end
   end
+
+  describe "#destroy?" do
+    context "when user is the requester" do
+      let(:friendship) { create(:friendship, :pending, requester: user, accepter: other_user) }
+
+      it "allows deletion" do
+        expect(subject.new(user, friendship).destroy?).to be true
+      end
+    end
+
+    context "when user is the accepter" do
+      let(:friendship) { create(:friendship, :pending, requester: other_user, accepter: user) }
+
+      it "allows deletion" do
+        expect(subject.new(user, friendship).destroy?).to be true
+      end
+    end
+
+    context "when user is neither requester nor accepter" do
+      let(:friendship) { create(:friendship, :pending, requester: other_user, accepter: third_user) }
+
+      it "denies deletion" do
+        expect(subject.new(user, friendship).destroy?).to be false
+      end
+    end
+
+    context "when user is nil" do
+      let(:friendship) { create(:friendship, :pending, requester: other_user, accepter: third_user) }
+
+      it "denies deletion" do
+        expect(subject.new(nil, friendship).destroy?).to be false
+      end
+    end
+
+    context "when friendship is pending" do
+      let(:friendship) { create(:friendship, :pending, requester: user, accepter: other_user) }
+
+      it "allows deletion" do
+        expect(subject.new(user, friendship).destroy?).to be true
+      end
+    end
+
+    context "when friendship is accepted" do
+      let(:friendship) { create(:friendship, :accepted, requester: user, accepter: other_user) }
+
+      it "allows deletion" do
+        expect(subject.new(user, friendship).destroy?).to be true
+      end
+    end
+
+    context "when friendship is blocked" do
+      let(:friendship) { create(:friendship, :blocked, requester: user, accepter: other_user) }
+
+      it "denies deletion" do
+        expect(subject.new(user, friendship).destroy?).to be false
+      end
+    end
+
+    context "when user is accepter and friendship is blocked" do
+      let(:friendship) { create(:friendship, :blocked, requester: other_user, accepter: user) }
+
+      it "denies deletion" do
+        expect(subject.new(user, friendship).destroy?).to be false
+      end
+    end
+  end
 end

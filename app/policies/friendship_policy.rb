@@ -14,7 +14,7 @@ class FriendshipPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.present? && (record.requester_id == user.id || record.accepter_id == user.id) && record.pending?
+    user.present? && (record.requester_id == user.id || record.accepter_id == user.id) && !record.blocked?
   end
 
   class Scope < ApplicationPolicy::Scope

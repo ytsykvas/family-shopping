@@ -1,0 +1,27 @@
+.card
+  .card-body
+    - if is_friend?
+      .badge.bg-success.mb-2 = I18n.t('user_searches.friend')
+    - elsif has_incoming_request?
+      .badge.bg-primary.mb-2 = I18n.t('friendship_requests.index.incoming_request')
+    - elsif has_outgoing_request?
+      .badge.bg-warning.mb-2 = I18n.t('friendship_requests.index.outgoing_request')
+    .user-info
+      .d-flex.align-items-center.mb-2
+        i.bi.bi-person-circle.me-2 style="font-size: 2rem;"
+        .user-name = @user.name
+      hr
+      .user-details.mb-3
+        .user-nickname.text-muted.small.mb-1 = "#{I18n.t('user_searches.nickname_label')} #{@user.nickname}"
+        .user-email.text-muted.small = @user.email
+    .user-actions.mt-3.text-center
+      - if is_friend?
+      - elsif has_incoming_request?
+        .d-grid.gap-2
+          = button_to I18n.t('friendship_requests.index.accept'), friendship_request_path(incoming_request), method: :patch, class: 'btn btn-success btn-sm', style: 'width: 100%;', data: { turbo: false }
+          = button_to I18n.t('friendship_requests.index.reject'), friendship_request_path(incoming_request), method: :delete, class: 'btn btn-danger btn-sm', style: 'width: 100%;', data: { turbo: false }
+      - elsif has_outgoing_request?
+        = button_to I18n.t('friendship_requests.index.cancel'), friendship_request_path(outgoing_request), method: :delete, class: 'btn btn-danger btn-sm', style: 'width: 100%;', data: { turbo: false }
+      - else
+        = button_to I18n.t('user_searches.add_friend'), friendship_requests_path, method: :post, params: { friendship_request: { accepter_id: @user.id } }, class: 'btn btn-primary btn-sm', data: { turbo: false }
+

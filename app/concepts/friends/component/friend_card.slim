@@ -1,0 +1,12 @@
+.card
+  .card-body
+    .user-info
+      .d-flex.align-items-center.mb-2
+        i.bi.bi-person-circle.me-2 style="font-size: 2rem;"
+        .user-name = friend.name
+      hr
+      .user-details.mb-3
+        .user-nickname.text-muted.small.mb-1 = "#{I18n.t('user_searches.nickname_label')} #{friend.nickname}"
+        .user-email.text-muted.small = friend.email
+    .user-actions.mt-3.text-center
+      = button_to I18n.t('friends.index.remove_friend'), friend_path(@friendship), method: :delete, class: 'btn btn-danger btn-sm', style: 'width: 100%;', data: { turbo_confirm: I18n.t('friends.index.remove_friend_confirm') }

@@ -95,10 +95,16 @@ uk:
         one: '1 помилка завадила збереженню цього %{resource}:'
         other: "%{count} помилок завадили збереженню цього %{resource}:"
   friends:
+    destroy:
+      not_accepted: Ця дружба ще не прийнята
+      not_authorized: Ви не можете видалити цього друга
+      success: Друга успішно видалено
     index:
       add_friend: Додати друга
       no_friends: У вас поки немає друзів. Почніть додавати друзів, щоб створювати спільні списки покупок!
       no_friends_title: Поки немає друзів
+      remove_friend: Видалити друга
+      remove_friend_confirm: Ви впевнені, що хочете видалити цього друга?
       title: Мої друзі
   friendship_requests:
     create:
@@ -203,6 +209,7 @@ uk:
     'yes': Так
   user_searches:
     add_friend: Додати друга
+    friend: Друг
     label: Пошук користувачів
     nickname_label: 'Нікнейм:'
     no_results: Користувачів не знайдено

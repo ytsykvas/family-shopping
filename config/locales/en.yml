@@ -95,10 +95,16 @@ en:
         one: '1 error prohibited this %{resource} from being saved:'
         other: "%{count} errors prohibited this %{resource} from being saved:"
   friends:
+    destroy:
+      not_accepted: This friendship is not accepted yet
+      not_authorized: You cannot remove this friend
+      success: Friend removed successfully
     index:
       add_friend: Add Friend
       no_friends: You don't have any friends yet. Start adding friends to create shared shopping lists!
       no_friends_title: No Friends Yet
+      remove_friend: Remove Friend
+      remove_friend_confirm: Are you sure you want to remove this friend?
       title: My Friends
   friendship_requests:
     create:
@@ -203,6 +209,7 @@ en:
     'yes': 'Yes'
   user_searches:
     add_friend: Add Friend
+    friend: Friend
     label: Search Users
     nickname_label: 'Nickname:'
     no_results: No users found

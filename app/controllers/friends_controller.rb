@@ -6,4 +6,8 @@ class FriendsController < ApplicationController
   def index
     endpoint Friends::Operation::Index, Friends::Component::Index
   end
+
+  def destroy
+    endpoint Friends::Operation::Destroy
+  end
 end
