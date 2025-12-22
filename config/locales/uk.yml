@@ -100,6 +100,28 @@ uk:
       no_friends: У вас поки немає друзів. Почніть додавати друзів, щоб створювати спільні списки покупок!
       no_friends_title: Поки немає друзів
       title: Мої друзі
+  friendship_requests:
+    create:
+      already_exists: Запит на дружбу вже існує
+      cannot_request_self: Ви не можете надіслати запит на дружбу самому собі
+      success: Запит на дружбу успішно надіслано
+    destroy:
+      not_authorized: Ви не можете скасувати цей запит
+      not_pending: Цей запит більше не очікує на розгляд
+      success: Запит на дружбу скасовано
+    index:
+      accept: Прийняти
+      cancel: Скасувати
+      incoming_request: Отримано
+      no_friendship_requests: Тут ви знайдете запити на дружбу від інших користувачів.
+      no_friendship_requests_title: Немає запитів на дружбу
+      outgoing_request: Надіслано
+      reject: Відхилити
+      title: Запити на дружбу
+    update:
+      not_accepter: Ви не можете прийняти цей запит
+      not_pending: Цей запит більше не очікує на розгляд
+      success: Запит на дружбу прийнято
   home:
     alert_danger_message: Це повідомлення про небезпеку.
     alert_danger_title: Небезпека!

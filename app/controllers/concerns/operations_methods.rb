@@ -24,7 +24,10 @@ module OperationsMethods
         format.html do
           if action_name == "create" || action_name == "update" || action_name.include?("destroy")
             path = result.redirect_path || public_send("#{controller_name}_path")
-            redirect_to path, notice: result.message, alert: result.error_message
+            flash_params = {}
+            flash_params[:notice] = result.message if result.message.present?
+            flash_params[:alert] = result.error_message if result.error_message.present?
+            redirect_to path, **flash_params
           elsif action_name == "index"
             params = if result.model.is_a?(OpenStruct)
                        result.model.to_h

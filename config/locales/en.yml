@@ -100,6 +100,28 @@ en:
       no_friends: You don't have any friends yet. Start adding friends to create shared shopping lists!
       no_friends_title: No Friends Yet
       title: My Friends
+  friendship_requests:
+    create:
+      already_exists: Friendship request already exists
+      cannot_request_self: You cannot send a friendship request to yourself
+      success: Friendship request sent successfully
+    destroy:
+      not_authorized: You cannot cancel this request
+      not_pending: This request is no longer pending
+      success: Friendship request cancelled
+    index:
+      accept: Accept
+      cancel: Cancel
+      incoming_request: Incoming
+      no_friendship_requests: Here you will find friendship requests from other users.
+      no_friendship_requests_title: No Friendship Requests
+      outgoing_request: Outgoing
+      reject: Reject
+      title: Friendship Requests
+    update:
+      not_accepter: You cannot accept this request
+      not_pending: This request is no longer pending
+      success: Friendship request accepted
   home:
     alert_danger_message: This is a danger alert message.
     alert_danger_title: Danger!

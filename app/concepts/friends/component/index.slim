@@ -11,5 +11,7 @@
     .empty-message = I18n.t("friends.index.no_friends")
     button.btn.btn-primary.mt-3 data-bs-toggle="modal" data-bs-target="#addFriendModal" = I18n.t('friends.index.add_friend')
 
+= render FriendshipRequest::Component::Index.new(friendship_requests: @friendship_requests, current_user: @current_user)
+
 = render Shared::Modal::Component::Show.new(id: 'addFriendModal', title: I18n.t('friends.index.add_friend'), size: 'md', type: 'form') do
   = render UserSearches::Component::Index.new(query: nil, users: [])

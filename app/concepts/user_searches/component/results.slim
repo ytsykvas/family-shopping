@@ -13,7 +13,7 @@
                     .user-nickname.text-muted.small.mb-1 = "#{I18n.t('user_searches.nickname_label')} #{user.nickname}"
                     .user-email.text-muted.small = user.email
                 .user-actions
-                  button.btn.btn-primary.btn-sm = I18n.t('user_searches.add_friend')
+                  = button_to I18n.t('user_searches.add_friend'), friendship_requests_path, method: :post, params: { friendship_request: { accepter_id: user.id } }, class: 'btn btn-primary btn-sm', data: { turbo: false }
   - else
     .no-results.mt-3
       i.bi.bi-search.no-results-icon

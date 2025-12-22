@@ -5,6 +5,18 @@ class FriendshipPolicy < ApplicationPolicy
     user.present?
   end
 
+  def create?
+    user.present?
+  end
+
+  def update?
+    user.present? && record.accepter_id == user.id && record.pending?
+  end
+
+  def destroy?
+    user.present? && (record.requester_id == user.id || record.accepter_id == user.id) && record.pending?
+  end
+
   class Scope < ApplicationPolicy::Scope
     def resolve
       if user.present?

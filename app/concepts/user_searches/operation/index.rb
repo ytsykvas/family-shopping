@@ -7,7 +7,6 @@ class UserSearches::Operation::Index < Base::Operation::Base
     query = params[:query]&.strip
 
     if query.blank?
-      # Still call policy_scope to mark it as called, even though we return empty results
       policy_scope(User).none
       self.model = { query: nil, users: [] }
       return

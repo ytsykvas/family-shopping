@@ -1,0 +1,151 @@
+@use 'sass:color';
+@use 'variables' as *;
+
+.badge {
+  display: inline-block;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.75rem;
+  font-weight: 900;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 8px;
+  border: 2px solid $border-black;
+  box-shadow: 3px 3px 0 $border-black;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+  &:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 $border-black;
+  }
+}
+
+// Success badge (green)
+.badge.bg-success {
+  background-color: $success-color !important;
+  color: $text-black !important;
+  border-color: $border-black;
+
+  &:hover {
+    background-color: color.scale($success-color, $lightness: -10%) !important;
+  }
+}
+
+// Info badge (cyan/blue)
+.badge.bg-info {
+  background-color: $info-color !important;
+  color: $text-black !important;
+  border-color: $border-black;
+
+  &:hover {
+    background-color: color.scale($info-color, $lightness: -10%) !important;
+  }
+}
+
+// Danger badge (pink)
+.badge.bg-danger {
+  background-color: $danger-color !important;
+  color: $text-white !important;
+  border-color: $border-black;
+
+  &:hover {
+    background-color: color.scale($danger-color, $lightness: -10%) !important;
+  }
+}
+
+// Warning badge (yellow)
+.badge.bg-warning {
+  background-color: $warning-color !important;
+  color: $text-black !important;
+  border-color: $border-black;
+
+  &:hover {
+    background-color: color.scale($warning-color, $lightness: -10%) !important;
+  }
+}
+
+// Primary badge (blue)
+.badge.bg-primary {
+  background-color: #0d6efd !important;
+  color: $text-white !important;
+  border-color: $border-black;
+
+  &:hover {
+    background-color: color.scale(#0d6efd, $lightness: -10%) !important;
+  }
+}
+
+// Secondary badge (gray)
+.badge.bg-secondary {
+  background-color: #6c757d !important;
+  color: $text-white !important;
+  border-color: $border-black;
+
+  &:hover {
+    background-color: color.scale(#6c757d, $lightness: -10%) !important;
+  }
+}
+
+// Light badge
+.badge.bg-light {
+  background-color: $bg-light-gray !important;
+  color: $text-black !important;
+  border-color: $border-black;
+
+  &:hover {
+    background-color: color.scale($bg-light-gray, $lightness: -10%) !important;
+  }
+}
+
+// Dark badge
+.badge.bg-dark {
+  background-color: $text-black !important;
+  color: $text-white !important;
+  border-color: $text-black;
+  box-shadow: 3px 3px 0 $shadow-gray;
+
+  &:hover {
+    background-color: color.scale($text-black, $lightness: 10%) !important;
+    box-shadow: 4px 4px 0 $shadow-gray;
+  }
+}
+
+// Small badge variant
+.badge-sm {
+  padding: 0.3rem 0.7rem;
+  font-size: 0.65rem;
+  border-radius: 6px;
+  box-shadow: 2px 2px 0 $border-black;
+
+  &:hover {
+    box-shadow: 3px 3px 0 $border-black;
+  }
+}
+
+// Large badge variant
+.badge-lg {
+  padding: 0.5rem 1.1rem;
+  font-size: 0.85rem;
+  border-radius: 10px;
+  box-shadow: 4px 4px 0 $border-black;
+
+  &:hover {
+    box-shadow: 5px 5px 0 $border-black;
+  }
+}
+
+// Pill badge (rounded)
+.badge.rounded-pill {
+  border-radius: 50rem;
+}
+
+// Badge with icon
+.badge {
+  i {
+    margin-right: 0.25rem;
+    font-size: 0.9em;
+  }
+}
