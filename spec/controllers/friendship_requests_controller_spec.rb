@@ -125,23 +125,6 @@ RSpec.describe FriendshipRequestsController, type: :controller do
           expect(flash[:alert]).to include(I18n.t("friendship_requests.create.already_exists"))
         end
       end
-
-      context "with message parameter" do
-        let(:params) do
-          {
-            friendship_request: {
-              accepter_id: other_user.id,
-              message: "Let's be friends!"
-            }
-          }
-        end
-
-        it "creates friendship with message" do
-          post :create, params: params
-          friendship = Friendship.last
-          expect(friendship.message).to eq("Let's be friends!")
-        end
-      end
     end
 
     context "when user is not authenticated" do

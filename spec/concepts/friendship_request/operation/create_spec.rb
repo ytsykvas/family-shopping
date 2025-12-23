@@ -144,22 +144,6 @@ RSpec.describe FriendshipRequest::Operation::Create, type: :operation do
           end.not_to change(Friendship, :count)
         end
       end
-
-      context "with message parameter" do
-        let(:params) do
-          {
-            friendship_request: {
-              accepter_id: accepter.id,
-              message: "Let's be friends!"
-            }
-          }
-        end
-
-        it "creates friendship with message" do
-          result = described_class.call(params: params, current_user: user)
-          expect(result.model.message).to eq("Let's be friends!")
-        end
-      end
     end
 
     context "when user is not authorized" do

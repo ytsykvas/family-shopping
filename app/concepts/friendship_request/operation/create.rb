@@ -24,8 +24,7 @@ class FriendshipRequest::Operation::Create < Base::Operation::Base
     friendship = Friendship.new(
       requester: current_user,
       accepter: accepter,
-      status: :pending,
-      message: friendship_params[:message]
+      status: :pending
     )
 
     authorize! friendship, :create?
@@ -41,9 +40,9 @@ class FriendshipRequest::Operation::Create < Base::Operation::Base
 
   def friendship_request_params(params)
     if params.is_a?(ActionController::Parameters)
-      params.require(:friendship_request).permit(:accepter_id, :message)
+      params.require(:friendship_request).permit(:accepter_id)
     else
-      params.fetch(:friendship_request, {}).slice(:accepter_id, :message).with_indifferent_access
+      params.fetch(:friendship_request, {}).slice(:accepter_id).with_indifferent_access
     end
   end
 end

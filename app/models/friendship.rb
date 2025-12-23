@@ -9,7 +9,6 @@ class Friendship < ApplicationRecord
   validates :requester_id, presence: true
   validates :accepter_id, presence: true
   validates :accepter_id, uniqueness: { scope: :requester_id }
-  validates :message, length: { maximum: 500 }, allow_blank: true
 
   scope :pending, -> { where(status: :pending) }
   scope :accepted, -> { where(status: :accepted) }
