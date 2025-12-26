@@ -31,10 +31,8 @@ en:
     users:
       email_available: Email is available
       email_invalid: Email format is invalid
-      email_required: Email is required
       email_taken: Email is already taken
       nickname_available: Nickname is available
-      nickname_required: Nickname is required
       nickname_taken: Nickname is already taken
   devise:
     confirmations:

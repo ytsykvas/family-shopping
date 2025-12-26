@@ -31,10 +31,8 @@ uk:
     users:
       email_available: Email доступний
       email_invalid: Неправильний формат email
-      email_required: Email обов'язковий
       email_taken: Email вже зайнято
       nickname_available: Нікнейм доступний
-      nickname_required: Нікнейм обов'язковий
       nickname_taken: Нікнейм вже зайнято
   devise:
     confirmations:
