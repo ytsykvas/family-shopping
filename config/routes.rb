@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount ApiRoot => "/"
+  mount GrapeSwaggerRails::Engine => "/api/docs"
   devise_for :users, controllers: {
                        sessions: "users/sessions",
                        registrations: "users/registrations"
@@ -6,12 +8,6 @@ Rails.application.routes.draw do
 
   get "/users", to: redirect("/users/sign_up")
 
-  namespace :api do
-    namespace :v1 do
-      get "users/check_nickname", to: "users#check_nickname"
-      get "users/check_email", to: "users#check_email"
-    end
-  end
 
   get "up" => "rails/health#show", as: :rails_health_check
 

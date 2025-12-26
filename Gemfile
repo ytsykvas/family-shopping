@@ -6,6 +6,11 @@ ruby "3.4.7"
 gem "rails", "8.1.1"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
+gem "grape"
+gem "grape-swagger"
+gem "grape-swagger-rails"
+gem "grape-entity"
+gem "grape-swagger-entity"
 # Use postgresql as the database for Active Record
 gem "pg", "1.6.2"
 # Use the Puma web server [https://github.com/puma/puma]
