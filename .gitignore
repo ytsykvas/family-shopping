@@ -38,4 +38,4 @@
 /config/master.key
 
 # Ignore Cursor IDE files
-/.cursor
+# /.cursor
