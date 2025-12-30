@@ -19,6 +19,10 @@ class User < ApplicationRecord
            foreign_key: :accepter_id,
            dependent: :destroy
 
+  has_many :owned_shopping_lists, class_name: "ShoppingList", foreign_key: :owner_id, dependent: :destroy
+  has_many :shopping_list_users, dependent: :destroy
+  has_many :shared_shopping_lists, through: :shopping_list_users, source: :shopping_list
+
   has_many :accepted_sent_friends,
            -> { where(friendships: { status: Friendship.statuses[:accepted] }) },
            through: :sent_friendships,

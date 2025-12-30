@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :friends, only: [ :index, :destroy ]
   resources :user_searches, only: [ :index ]
   resources :friendship_requests, only: [ :index, :create, :update, :destroy ]
+  resources :shopping_lists
 
   root "home#index"
 end

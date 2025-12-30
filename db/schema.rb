@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_23_120000) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_26_150806) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
   create_table "friendships", force: :cascade do |t|
     t.bigint "accepter_id", null: false
     t.datetime "created_at", null: false
+    t.text "message"
     t.bigint "requester_id", null: false
     t.integer "status", default: 0, null: false
     t.datetime "updated_at", null: false
@@ -32,6 +33,37 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_23_120000) do
     t.string "jti"
     t.datetime "updated_at", null: false
     t.index ["jti"], name: "index_jwt_denylists_on_jti", unique: true
+  end
+
+  create_table "shopping_list_items", force: :cascade do |t|
+    t.bigint "added_by_id", null: false
+    t.datetime "created_at", null: false
+    t.bigint "edited_by_id"
+    t.string "name"
+    t.bigint "shopping_list_id", null: false
+    t.string "status", default: "pending", null: false
+    t.datetime "updated_at", null: false
+    t.index ["added_by_id"], name: "index_shopping_list_items_on_added_by_id"
+    t.index ["edited_by_id"], name: "index_shopping_list_items_on_edited_by_id"
+    t.index ["shopping_list_id"], name: "index_shopping_list_items_on_shopping_list_id"
+  end
+
+  create_table "shopping_list_users", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "shopping_list_id", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["shopping_list_id", "user_id"], name: "index_shopping_list_users_on_shopping_list_id_and_user_id", unique: true
+    t.index ["shopping_list_id"], name: "index_shopping_list_users_on_shopping_list_id"
+    t.index ["user_id"], name: "index_shopping_list_users_on_user_id"
+  end
+
+  create_table "shopping_lists", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name"
+    t.bigint "owner_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["owner_id"], name: "index_shopping_lists_on_owner_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -51,4 +83,10 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_23_120000) do
 
   add_foreign_key "friendships", "users", column: "accepter_id"
   add_foreign_key "friendships", "users", column: "requester_id"
+  add_foreign_key "shopping_list_items", "shopping_lists"
+  add_foreign_key "shopping_list_items", "users", column: "added_by_id"
+  add_foreign_key "shopping_list_items", "users", column: "edited_by_id"
+  add_foreign_key "shopping_list_users", "shopping_lists"
+  add_foreign_key "shopping_list_users", "users"
+  add_foreign_key "shopping_lists", "users", column: "owner_id"
 end
