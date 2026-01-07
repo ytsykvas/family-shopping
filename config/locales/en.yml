@@ -11,6 +11,10 @@ en:
         remember_me: Remember me
     errors:
       models:
+        shopping_list:
+          attributes:
+            name:
+              blank: can't be blank
         user:
           attributes:
             email:
@@ -197,6 +201,20 @@ en:
       submit: Sign In
       subtitle: Sign in to your account
       title: Sign In
+  shopping_lists:
+    create:
+      success: Shopping list created successfully
+      title: Create List
+    form:
+      name_label: List Name
+      submit: Create List
+    index:
+      create: Create List
+      no_lists: Create shopping lists and share them with friends and family!
+      no_lists_title: No Shopping Lists Yet
+      owner: 'Owner: %{owner}'
+      title: My Shopping Lists
+      view: View
   simple_form:
     error_notification:
       default_message: 'Please review the problems below:'

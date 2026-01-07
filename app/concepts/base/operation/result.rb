@@ -22,6 +22,12 @@ class Base::Operation::Result
     @attrs[:sub_results] ||= []
   end
 
+  def error_message
+    return if errors.empty?
+
+    errors.full_messages.join(", ")
+  end
+
   def success?
     return false unless !@forced_invalid && errors.empty?
     return false unless model.nil? || !model.respond_to?(:errors) ? true : model.errors.empty?
@@ -37,9 +43,7 @@ class Base::Operation::Result
     @forced_invalid = true
   end
 
-  def error_message
-    errors[:base].join(" ")
-  end
+
 
   def all_error_messages
     errors.map(&:message)

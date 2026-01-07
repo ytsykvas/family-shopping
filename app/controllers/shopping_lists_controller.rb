@@ -2,7 +2,10 @@
 
 
 class ShoppingListsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
+    endpoint ShoppingList::Operation::Index, ShoppingList::Component::Index
   end
 
   def show
@@ -15,6 +18,7 @@ class ShoppingListsController < ApplicationController
   end
 
   def create
+    endpoint ShoppingList::Operation::Create
   end
 
   def update

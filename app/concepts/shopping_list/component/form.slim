@@ -1,0 +1,8 @@
+= helpers.simple_form_for(@shopping_list, url: helpers.shopping_lists_path, html: { class: 'form-custom', data: { turbo: false } }) do |f|
+  = f.error_notification
+
+  .form-group
+    = f.input :name, autofocus: true, input_html: { class: 'form-control-custom' }, label_html: { class: 'form-label-custom' }, label: I18n.t('shopping_lists.form.name_label')
+
+  .form-actions
+    = f.button :submit, I18n.t('shopping_lists.form.submit'), class: 'btn btn-primary w-100'

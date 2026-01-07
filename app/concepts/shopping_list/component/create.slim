@@ -1,0 +1,2 @@
+= render Shared::Modal::Component::Show.new(id: 'createShoppingListModal', title: I18n.t('shopping_lists.create.title'), size: 'md', type: 'form') do
+  = render ShoppingList::Component::Form.new(shopping_list: @new_shopping_list)

@@ -11,6 +11,10 @@ uk:
         remember_me: Запам'ятати мене
     errors:
       models:
+        shopping_list:
+          attributes:
+            name:
+              blank: не може бути порожнім
         user:
           attributes:
             email:
@@ -197,6 +201,20 @@ uk:
       submit: Увійти
       subtitle: Увійдіть до свого облікового запису
       title: Увійти
+  shopping_lists:
+    create:
+      success: Список успішно створено
+      title: Створити список
+    form:
+      name_label: Назва списку
+      submit: Створити список
+    index:
+      create: Створити список
+      no_lists: Створюйте списки покупок та діліться ними з друзями та родиною!
+      no_lists_title: Списків покупок поки немає
+      owner: 'Власник: %{owner}'
+      title: Мої списки покупок
+      view: Переглянути
   simple_form:
     error_notification:
       default_message: 'Будь ласка, перегляньте проблеми нижче:'
