@@ -1,8 +1,12 @@
-= helpers.simple_form_for(@shopping_list, url: helpers.shopping_lists_path, html: { class: 'form-custom', data: { turbo: false } }) do |f|
+- url = @shopping_list.persisted? ? helpers.shopping_list_path(@shopping_list) : helpers.shopping_lists_path
+- html_opts = { class: 'form-custom', data: { turbo: false }, id: @form_id }.compact
+= helpers.simple_form_for(@shopping_list, url: url, html: html_opts) do |f|
   = f.error_notification
 
   .form-group
     = f.input :name, autofocus: true, input_html: { class: 'form-control-custom' }, label_html: { class: 'form-label-custom' }, label: I18n.t('shopping_lists.form.name_label')
 
-  .form-actions
-    = f.button :submit, I18n.t('shopping_lists.form.submit'), class: 'btn btn-primary w-100'
+  - unless @hide_actions
+    .form-actions.d-flex.justify-content-end
+      - submit_key = @shopping_list.persisted? ? 'submit_update' : 'submit_create'
+      = f.button :submit, I18n.t("shopping_lists.form.#{submit_key}"), class: 'btn btn-primary'

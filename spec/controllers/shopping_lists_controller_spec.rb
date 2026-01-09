@@ -118,4 +118,81 @@ RSpec.describe ShoppingListsController, type: :controller do
       end
     end
   end
+  describe "PATCH #update" do
+    let(:shopping_list) { create(:shopping_list, owner: user) }
+    let(:params) do
+      {
+        id: shopping_list.id,
+        shopping_list: {
+          name: "Updated Name"
+        }
+      }
+    end
+
+    context "when user is authenticated" do
+      before do
+        sign_in user
+      end
+
+      it "calls endpoint with correct operation" do
+        expect(controller).to receive(:endpoint).with(
+          ShoppingList::Operation::Update
+        ).and_call_original
+        patch :update, params: params
+      end
+
+      it "updates the shopping list" do
+        patch :update, params: params
+        expect(shopping_list.reload.name).to eq("Updated Name")
+      end
+
+      it "redirects to index" do
+        patch :update, params: params
+        expect(response).to redirect_to("/shopping_lists")
+      end
+    end
+
+    context "when user is not authenticated" do
+      it "redirects to sign in page" do
+        patch :update, params: params
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+  end
+
+  describe "DELETE #destroy" do
+    let!(:shopping_list) { create(:shopping_list, owner: user) }
+    let(:params) { { id: shopping_list.id } }
+
+    context "when user is authenticated" do
+      before do
+        sign_in user
+      end
+
+      it "calls endpoint with correct operation" do
+        expect(controller).to receive(:endpoint).with(
+          ShoppingList::Operation::Destroy
+        ).and_call_original
+        delete :destroy, params: params
+      end
+
+      it "destroys the shopping list" do
+        expect do
+          delete :destroy, params: params
+        end.to change(ShoppingList, :count).by(-1)
+      end
+
+      it "redirects to index" do
+        delete :destroy, params: params
+        expect(response).to redirect_to("/shopping_lists")
+      end
+    end
+
+    context "when user is not authenticated" do
+      it "redirects to sign in page" do
+        delete :destroy, params: params
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+  end
 end

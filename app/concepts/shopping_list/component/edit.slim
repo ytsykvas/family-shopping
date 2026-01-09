@@ -1,0 +1,7 @@
+- form_id = "edit_shopping_list_form_#{@shopping_list.id}"
+= render Shared::Modal::Component::Show.new(id: "editShoppingListModal_#{@shopping_list.id}", title: I18n.t('shopping_lists.edit.title'), size: 'md', type: 'form') do |modal|
+  = render ShoppingList::Component::Form.new(shopping_list: @shopping_list, form_id: form_id, hide_actions: true)
+  .mt-3.pt-3.border-top.text-center
+    = button_to I18n.t('shopping_lists.index.delete'), helpers.shopping_list_path(@shopping_list), method: :delete, class: 'btn btn-outline-danger', form: { data: { turbo_confirm: I18n.t('shopping_lists.index.delete_confirm') } }
+  - modal.with_footer do
+    button.btn.btn-primary type="submit" form=form_id = I18n.t('shopping_lists.form.submit_update')

@@ -11,19 +11,15 @@ class ShoppingListsController < ApplicationController
   def show
   end
 
-  def new
-  end
-
-  def edit
-  end
-
   def create
     endpoint ShoppingList::Operation::Create
   end
 
   def update
+    endpoint ShoppingList::Operation::Update
   end
 
   def destroy
+    endpoint ShoppingList::Operation::Destroy
   end
 end

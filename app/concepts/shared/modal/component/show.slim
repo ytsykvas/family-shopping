@@ -7,6 +7,6 @@
           span ✕
       .modal-body
         = content
-      .modal-footer
+      .modal-footer.d-flex.justify-content-between
         button.btn.btn-secondary type="button" data-bs-dismiss="modal" = I18n.t('modal.close')
-        = footer if content_for?(:modal_footer)
+        = footer if footer?

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Shared::Modal::Component::Show < Base::Component::Base
+  renders_one :footer
+
   def initialize(id:, title:, size: "md", type: nil)
     @id = id
     @title = title

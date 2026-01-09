@@ -205,16 +205,24 @@ en:
     create:
       success: Shopping list created successfully
       title: Create List
+    destroy:
+      success: Shopping list deleted successfully
+    edit:
+      title: Edit List
     form:
       name_label: List Name
-      submit: Create List
+      submit_create: Create List
+      submit_update: Update List
     index:
       create: Create List
+      delete: Delete List
+      delete_confirm: Are you sure you want to delete this shopping list?
       no_lists: Create shopping lists and share them with friends and family!
       no_lists_title: No Shopping Lists Yet
-      owner: 'Owner: %{owner}'
       title: My Shopping Lists
       view: View
+    update:
+      success: Shopping list updated successfully
   simple_form:
     error_notification:
       default_message: 'Please review the problems below:'

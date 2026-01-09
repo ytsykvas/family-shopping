@@ -205,16 +205,24 @@ uk:
     create:
       success: Список успішно створено
       title: Створити список
+    destroy:
+      success: Список покупок успішно видалено
+    edit:
+      title: Редагувати список
     form:
       name_label: Назва списку
-      submit: Створити список
+      submit_create: Створити список
+      submit_update: Оновити список
     index:
       create: Створити список
+      delete: Видалити список
+      delete_confirm: Ви впевнені, що хочете видалити цей список покупок?
       no_lists: Створюйте списки покупок та діліться ними з друзями та родиною!
       no_lists_title: Списків покупок поки немає
-      owner: 'Власник: %{owner}'
       title: Мої списки покупок
       view: Переглянути
+    update:
+      success: Список покупок успішно оновлено
   simple_form:
     error_notification:
       default_message: 'Будь ласка, перегляньте проблеми нижче:'
