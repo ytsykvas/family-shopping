@@ -168,7 +168,6 @@ uk:
     subtitle: Ваш додаток для спільної роботи зі списками покупок
     title: Ласкаво просимо до Family Shopping
   modal:
-    close: Закрити
     close_aria_label: Закрити
   navbar:
     brand: SHOP TEAM

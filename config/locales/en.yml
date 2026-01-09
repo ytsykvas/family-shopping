@@ -168,7 +168,6 @@ en:
     subtitle: Your collaborative shopping list app
     title: Welcome to Family Shopping
   modal:
-    close: Close
     close_aria_label: Close
   navbar:
     brand: SHOP TEAM
