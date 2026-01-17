@@ -200,6 +200,29 @@ uk:
       submit: Увійти
       subtitle: Увійдіть до свого облікового запису
       title: Увійти
+  shopping_list_invitations:
+    accept: Прийняти
+    create:
+      already_invited: Цього користувача вже запрошено
+      already_member: Цей користувач вже є учасником списку
+      not_friend: Ви можете запрошувати тільки друзів
+      not_owner: Тільки власник списку може запрошувати друзів
+      success: Запрошення успішно надіслано
+    destroy:
+      not_authorized: Ви не маєте прав скасувати це запрошення
+      not_pending: Це запрошення більше не очікує на розгляд
+      success: Запрошення скасовано
+    invite_friend: Запросити друга
+    invited_by: Запросив %{name}
+    pending: Очікує
+    pending_invitations: Очікують запрошення
+    reject: Відхилити
+    select_friend: Оберіть друга
+    send_invitation: Надіслати запрошення
+    update:
+      not_invitee: Тільки запрошений користувач може прийняти
+      not_pending: Це запрошення більше не очікує на розгляд
+      success: Запрошення прийнято! Тепер ви маєте доступ до списку покупок
   shopping_lists:
     create:
       success: Список успішно створено
@@ -220,45 +243,21 @@ uk:
       no_lists_title: Списків покупок поки немає
       title: Мої списки покупок
       view: Переглянути
-    show:
-      title: Список покупок
-      back: До списків
-      members: Учасники
-      owner: Власник
-      items: Товари
-      no_items: У цьому списку ще немає товарів
-      added_by: "Додав %{name}"
-    update:
-      success: Список покупок успішно оновлено
     leave:
       button: Покинути список
       confirm: Ви впевнені, що хочете покинути цей список?
-      success: Ви покинули список покупок
-      owner_cannot_leave: Власники не можуть покинути власні списки
       not_member: Ви не є учасником цього списку
-  shopping_list_invitations:
-    create:
-      success: Запрошення успішно надіслано
-      not_owner: Тільки власник списку може запрошувати друзів
-      not_friend: Ви можете запрошувати тільки друзів
-      already_member: Цей користувач вже є учасником списку
-      already_invited: Цього користувача вже запрошено
+      owner_cannot_leave: Власники не можуть покинути власні списки
+      success: Ви покинули список покупок
+    show:
+      added_by: Додав %{name}
+      back: До списків
+      items: Товари
+      members: Учасники
+      no_items: У цьому списку ще немає товарів
+      owner: Власник
     update:
-      success: Запрошення прийнято! Тепер ви маєте доступ до списку покупок
-      not_invitee: Тільки запрошений користувач може прийняти
-      not_pending: Це запрошення більше не очікує на розгляд
-    destroy:
-      success: Запрошення скасовано
-      not_authorized: Ви не маєте прав скасувати це запрошення
-      not_pending: Це запрошення більше не очікує на розгляд
-    invite_friend: Запросити друга
-    select_friend: Оберіть друга
-    send_invitation: Надіслати запрошення
-    pending_invitations: Очікують запрошення
-    pending: Очікує
-    accept: Прийняти
-    reject: Відхилити
-    invited_by: "Запросив %{name}"
+      success: Список покупок успішно оновлено
   simple_form:
     error_notification:
       default_message: 'Будь ласка, перегляньте проблеми нижче:'
