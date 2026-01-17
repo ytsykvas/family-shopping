@@ -9,6 +9,6 @@ class Shared::Navbar::Component::Show < ViewComponent::Base
   def active_link?(path)
     return false if @current_path.blank?
 
-    @current_path == path
+    @current_path.start_with?(path)
   end
 end

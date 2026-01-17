@@ -38,6 +38,37 @@ RSpec.describe ShoppingListsController, type: :controller do
     end
   end
 
+  describe "GET #show" do
+    let(:shopping_list) { create(:shopping_list, owner: user) }
+    let(:params) { { id: shopping_list.id } }
+
+    context "when user is authenticated" do
+      before do
+        sign_in user
+      end
+
+      it "calls endpoint with correct operation and component" do
+        expect(controller).to receive(:endpoint).with(
+          ShoppingList::Operation::Show,
+          ShoppingList::Component::Show
+        ).and_call_original
+        get :show, params: params
+      end
+
+      it "returns successful response" do
+        get :show, params: params
+        expect(response).to have_http_status(:success)
+      end
+    end
+
+    context "when user is not authenticated" do
+      it "redirects to sign in page" do
+        get :show, params: params
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+  end
+
   describe "POST #create" do
     let(:params) do
       {

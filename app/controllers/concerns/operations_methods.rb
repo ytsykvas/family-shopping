@@ -37,7 +37,7 @@ module OperationsMethods
             end
 
             render component.new(**params)
-          elsif action_name == "edit" || action_name == "new"
+          elsif action_name == "edit" || action_name == "new" || action_name == "show"
             params = if result.model.is_a?(OpenStruct)
                        result.model.to_h
             else

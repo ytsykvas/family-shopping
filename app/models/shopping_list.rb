@@ -5,6 +5,7 @@ class ShoppingList < ApplicationRecord
   has_many :shopping_list_items, dependent: :destroy
   has_many :shopping_list_users, dependent: :destroy
   has_many :members, through: :shopping_list_users, source: :user
+  has_many :invitations, class_name: "ShoppingListInvitation", dependent: :destroy
 
   validates :name, presence: true
 

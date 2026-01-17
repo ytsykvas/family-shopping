@@ -1,0 +1,33 @@
+.col-12 data-controller="collapse"
+  .card
+    .card-header.d-flex.justify-content-between.align-items-center
+      h5.mb-0 = I18n.t('shopping_lists.show.members')
+      button.btn.btn-sm.btn-primary type="button" data-action="click->collapse#toggle"
+        i.bi.bi-chevron-down
+    #membersCollapse.collapse data-collapse-target="content"
+      .card-body
+        .d-flex.flex-wrap.gap-2.mb-3
+          .badge.bg-primary.d-flex.align-items-center.gap-1
+            i.bi.bi-star-fill
+            = @shopping_list.owner.name || @shopping_list.owner.nickname
+            span.text-muted.small = "(#{I18n.t('shopping_lists.show.owner')})"
+          - @shopping_list.members.each do |member|
+            .badge.bg-secondary
+              = member.name || member.nickname
+
+        - if owner? && invitable_friends.any?
+          hr.my-3
+          .d-flex.justify-content-center
+            button.btn.btn-primary.btn-sm type="button" data-bs-toggle="modal" data-bs-target="#inviteFriendModal"
+              i.bi.bi-person-plus.me-1
+              = I18n.t('shopping_list_invitations.invite_friend')
+
+        - if member?
+          hr.my-3
+          .d-flex.justify-content-center
+            = form_with url: helpers.shopping_list_membership_path(current_membership), method: :delete, data: { turbo: false, turbo_confirm: I18n.t('shopping_lists.leave.confirm') } do |f|
+              = f.submit I18n.t('shopping_lists.leave.button'), class: 'btn btn-outline-danger btn-sm'
+
+- if owner? && invitable_friends.any?
+  = render ShoppingListInvitation::Component::InviteModal.new(shopping_list: @shopping_list, friends: invitable_friends)
+

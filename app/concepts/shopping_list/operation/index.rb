@@ -5,11 +5,13 @@ class ShoppingList::Operation::Index < Base::Operation::Base
     authorize! ShoppingList, :index?
 
     shopping_lists = policy_scope(ShoppingList).order(created_at: :desc)
+    pending_invitations = current_user&.received_shopping_list_invitations&.pending&.includes(:shopping_list, :inviter) || []
 
     self.model = OpenStruct.new(
       shopping_lists: shopping_lists,
       new_shopping_list: ShoppingList.new,
-      current_user: current_user
+      current_user: current_user,
+      pending_invitations: pending_invitations
     )
   end
 end

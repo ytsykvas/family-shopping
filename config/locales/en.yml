@@ -220,8 +220,45 @@ en:
       no_lists_title: No Shopping Lists Yet
       title: My Shopping Lists
       view: View
+    show:
+      title: Shopping List
+      back: Back to Lists
+      members: Members
+      owner: Owner
+      items: Items
+      no_items: No items in this list yet
+      added_by: "Added by %{name}"
     update:
       success: Shopping list updated successfully
+    leave:
+      button: Leave List
+      confirm: Are you sure you want to leave this list?
+      success: You have left the shopping list
+      owner_cannot_leave: Owners cannot leave their own lists
+      not_member: You are not a member of this list
+  shopping_list_invitations:
+    create:
+      success: Invitation sent successfully
+      not_owner: Only the list owner can invite friends
+      not_friend: You can only invite friends
+      already_member: This user is already a member of the list
+      already_invited: This user has already been invited
+    update:
+      success: Invitation accepted! You can now access the shopping list
+      not_invitee: Only the invited user can accept
+      not_pending: This invitation is no longer pending
+    destroy:
+      success: Invitation cancelled
+      not_authorized: You are not authorized to cancel this invitation
+      not_pending: This invitation is no longer pending
+    invite_friend: Invite Friend
+    select_friend: Select Friend
+    send_invitation: Send Invitation
+    pending_invitations: Pending Invitations
+    pending: Pending
+    accept: Accept
+    reject: Reject
+    invited_by: "Invited by %{name}"
   simple_form:
     error_notification:
       default_message: 'Please review the problems below:'

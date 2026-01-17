@@ -1,0 +1,15 @@
+.col-md-6.col-lg-4
+  .card.h-100.border-primary
+    .card-body
+      .d-flex.justify-content-between.align-items-start
+        h5.card-title = list_name
+        .badge.bg-info = I18n.t('shopping_list_invitations.pending')
+      hr.mb-2.mt-auto
+      .d-flex.align-items-center.text-muted.small.mb-3
+        i.bi.bi-person-circle.me-2
+        = I18n.t('shopping_list_invitations.invited_by', name: inviter_name)
+      .d-flex.gap-2.justify-content-center
+        = form_with url: shopping_list_invitation_path(@invitation), method: :patch, data: { turbo: false }, class: 'd-inline' do |f|
+          = f.submit I18n.t('shopping_list_invitations.accept'), class: 'btn btn-success btn-sm'
+        = form_with url: shopping_list_invitation_path(@invitation), method: :delete, data: { turbo: false }, class: 'd-inline' do |f|
+          = f.submit I18n.t('shopping_list_invitations.reject'), class: 'btn btn-outline-danger btn-sm'

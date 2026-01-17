@@ -1,0 +1,14 @@
+.modal.fade#inviteFriendModal tabindex="-1" aria-labelledby="inviteFriendModalLabel" aria-hidden="true"
+  .modal-dialog.modal-dialog-centered
+    .modal-content
+      .modal-header
+        h5.modal-title#inviteFriendModalLabel = I18n.t('shopping_list_invitations.invite_friend')
+        button.btn-close type="button" data-bs-dismiss="modal" aria-label=I18n.t('modal.close_aria_label')
+      = form_with url: helpers.shopping_list_invitations_path, method: :post, data: { turbo: false } do |f|
+        .modal-body
+          = f.hidden_field :shopping_list_id, value: @shopping_list.id, name: "shopping_list_invitation[shopping_list_id]"
+          .mb-3
+            = f.label :invitee_id, I18n.t('shopping_list_invitations.select_friend'), class: 'form-label', for: "shopping_list_invitation_invitee_id"
+            = f.select :invitee_id, @friends.map { |friend| [friend.name || friend.nickname, friend.id] }, {}, class: 'form-select', name: "shopping_list_invitation[invitee_id]", id: "shopping_list_invitation_invitee_id"
+        .modal-footer.justify-content-center
+          = f.submit I18n.t('shopping_list_invitations.send_invitation'), class: 'btn btn-primary'

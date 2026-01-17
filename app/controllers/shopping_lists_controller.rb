@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-
 class ShoppingListsController < ApplicationController
   before_action :authenticate_user!
 
@@ -9,6 +8,7 @@ class ShoppingListsController < ApplicationController
   end
 
   def show
+    endpoint ShoppingList::Operation::Show, ShoppingList::Component::Show
   end
 
   def create

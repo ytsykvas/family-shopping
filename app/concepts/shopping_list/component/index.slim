@@ -1,5 +1,11 @@
 = render Shared::TitleRow::Component::Show.new(title: I18n.t('shopping_lists.index.title'), button_text: I18n.t('shopping_lists.index.create'), button_data: { 'bs-toggle': 'modal', 'bs-target': '#createShoppingListModal' })
 
+- if @pending_invitations.any?
+  h5.mb-3 = I18n.t('shopping_list_invitations.pending_invitations')
+  .row.g-4.mb-4
+    - @pending_invitations.each do |invitation|
+      = render ShoppingListInvitation::Component::InvitationCard.new(invitation: invitation, current_user: @current_user)
+
 - if @shopping_lists.any?
   .row.g-4.mb-4
     - @shopping_lists.each do |list|
