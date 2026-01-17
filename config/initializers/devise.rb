@@ -314,7 +314,7 @@ Devise.setup do |config|
   # ==> Configuration for JWT authentication
   # Configure JWT authentication for API
   config.jwt do |jwt|
-    jwt.secret = Rails.application.credentials.devise_jwt_secret_key || ENV["DEVISE_JWT_SECRET_KEY"]
+    jwt.secret = Rails.application.credentials.devise_jwt_secret_key || ENV["DEVISE_JWT_SECRET_KEY"] || "development_secret_key_needs_to_be_at_least_32_bytes"
     jwt.dispatch_requests = [
       [ "POST", %r{^/users/sign_in$} ],
       [ "POST", %r{^/api/v1/auth/login$} ]

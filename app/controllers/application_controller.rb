@@ -8,6 +8,8 @@ class ApplicationController < ActionController::Base
   after_action :verify_authorized, unless: :devise_controller?
   after_action :verify_policy_scoped, only: :index, unless: :devise_controller?
 
+  protect_from_forgery with: :null_session, if: -> { request.format.json? }
+
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   private

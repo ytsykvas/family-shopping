@@ -23,7 +23,7 @@ module AuthenticationHelper
   end
 
   def devise_jwt_secret
-    Rails.application.credentials.devise_jwt_secret_key || ENV["DEVISE_JWT_SECRET_KEY"]
+    Devise::JWT.config.secret
   end
 
   def authorize!(record, query)

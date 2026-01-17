@@ -4,7 +4,10 @@ class Friends::Operation::Index < Base::Operation::Base
   def perform!(params:, current_user:)
     authorize! Friendship, :index?
 
-    friends = policy_scope(Friendship).accepted.includes(:requester, :accepter)
+    friendships = policy_scope(Friendship).accepted.includes(:requester, :accepter)
+    friends = friendships.map do |friendship|
+      friendship.requester_id == current_user.id ? friendship.accepter : friendship.requester
+    end
     friendship_requests = policy_scope(Friendship).pending.includes(:requester, :accepter)
 
     self.model = OpenStruct.new(

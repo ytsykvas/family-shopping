@@ -25,7 +25,7 @@ gem "stimulus-rails"
 gem "jbuilder"
 
 # Authentication
-gem "devise"
+gem "devise", git: "https://github.com/heartcombo/devise", branch: "main"
 gem "devise-jwt"
 gem "pundit"
 

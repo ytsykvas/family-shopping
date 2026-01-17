@@ -1,12 +1,21 @@
 .container.mt-4
   = render Shared::TitleRow::Component::Show.new(title: I18n.t("friendship_requests.index.title"))
 
-  - if @friendship_requests.any?
+  - if @incoming_requests.any?
+    h4.mb-3 = I18n.t("friendship_requests.index.incoming_title")
     .row.g-4
-      - @friendship_requests.each do |friendship_request|
+      - @incoming_requests.each do |friendship_request|
         .col-md-6.col-lg-4
           = render FriendshipRequest::Component::RequestCard.new(friendship_request: friendship_request, current_user: @current_user)
-  - else
+  
+  - if @outgoing_requests.any?
+    h4.mb-3.mt-5 = I18n.t("friendship_requests.index.outgoing_title")
+    .row.g-4
+      - @outgoing_requests.each do |friendship_request|
+        .col-md-6.col-lg-4
+          = render FriendshipRequest::Component::RequestCard.new(friendship_request: friendship_request, current_user: @current_user)
+
+  - if @incoming_requests.empty? && @outgoing_requests.empty?
     .empty-content-container
       i.bi.bi-people.empty-icon
       .empty-title = I18n.t("friendship_requests.index.no_friendship_requests_title")

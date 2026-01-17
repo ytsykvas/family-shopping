@@ -36,15 +36,18 @@ RSpec.describe FriendshipRequest::Operation::Index, type: :operation do
 
       it "returns only pending friendships where user is involved" do
         result = described_class.call(params: params, current_user: user)
-        friendships = result.model
+        incoming = result.model.incoming_requests
+        outgoing = result.model.outgoing_requests
 
-        expect(friendships).to include(pending_friendship1, pending_friendship2)
-        expect(friendships).not_to include(accepted_friendship, blocked_friendship, unrelated_friendship)
+        expect(incoming).to include(pending_friendship2)
+        expect(outgoing).to include(pending_friendship1)
+        expect(incoming).not_to include(accepted_friendship, blocked_friendship, unrelated_friendship)
+        expect(outgoing).not_to include(accepted_friendship, blocked_friendship, unrelated_friendship)
       end
 
       it "includes requester and accepter associations" do
         result = described_class.call(params: params, current_user: user)
-        friendships = result.model.to_a
+        friendships = result.model.incoming_requests.to_a + result.model.outgoing_requests.to_a
 
         friendships.each do |friendship|
           expect(friendship.association(:requester).loaded?).to be true
@@ -55,7 +58,9 @@ RSpec.describe FriendshipRequest::Operation::Index, type: :operation do
       it "sets model in result" do
         result = described_class.call(params: params, current_user: user)
         expect(result.model).to be_present
-        expect(result.model).to be_a(ActiveRecord::Relation)
+        expect(result.model).to be_a(OpenStruct)
+        expect(result.model.incoming_requests).to be_a(ActiveRecord::Relation)
+        expect(result.model.outgoing_requests).to be_a(ActiveRecord::Relation)
       end
 
       it "marks pundit authorization as called" do
@@ -73,7 +78,8 @@ RSpec.describe FriendshipRequest::Operation::Index, type: :operation do
 
         it "returns empty collection" do
           result = described_class.call(params: params, current_user: user_without_requests)
-          expect(result.model).to be_empty
+          expect(result.model.incoming_requests).to be_empty
+          expect(result.model.outgoing_requests).to be_empty
         end
       end
 
@@ -85,13 +91,16 @@ RSpec.describe FriendshipRequest::Operation::Index, type: :operation do
 
         it "returns all pending friendships where user is involved" do
           result = described_class.call(params: params, current_user: user)
-          friendships = result.model
+          incoming = result.model.incoming_requests
+          outgoing = result.model.outgoing_requests
 
-          expect(friendships).to contain_exactly(
-            pending_friendship1,
+          expect(incoming).to contain_exactly(
             pending_friendship2,
-            friendship3,
             friendship4
+          )
+          expect(outgoing).to contain_exactly(
+            pending_friendship1,
+            friendship3
           )
         end
       end
