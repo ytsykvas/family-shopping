@@ -256,6 +256,8 @@ uk:
       members: Учасники
       no_items: У цьому списку ще немає товарів
       owner: Власник
+      no_invitable_friends: Немає друзів для запрошення
+      manage_friends: Керувати друзями
     update:
       success: Список покупок успішно оновлено
   simple_form:

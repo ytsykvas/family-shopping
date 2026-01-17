@@ -256,6 +256,8 @@ en:
       members: Members
       no_items: No items in this list yet
       owner: Owner
+      no_invitable_friends: No friends to invite
+      manage_friends: Manage Friends
     update:
       success: Shopping list updated successfully
   simple_form:

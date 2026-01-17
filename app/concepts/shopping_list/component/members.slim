@@ -21,13 +21,16 @@
             button.btn.btn-primary.btn-sm type="button" data-bs-toggle="modal" data-bs-target="#inviteFriendModal"
               i.bi.bi-person-plus.me-1
               = I18n.t('shopping_list_invitations.invite_friend')
+        - unless invitable_friends.any?
+          .d-flex.flex-column.align-items-center.gap-2
+            span.text-muted = I18n.t('shopping_lists.show.no_invitable_friends')
+            = link_to I18n.t('shopping_lists.show.manage_friends', default: 'Manage Friends'), friends_path, class: 'btn btn-primary btn-sm'
 
         - if member?
           hr.my-3
           .d-flex.justify-content-center
             = form_with url: helpers.shopping_list_membership_path(current_membership), method: :delete, data: { turbo: false, turbo_confirm: I18n.t('shopping_lists.leave.confirm') } do |f|
-              = f.submit I18n.t('shopping_lists.leave.button'), class: 'btn btn-outline-danger btn-sm'
+              = f.submit I18n.t('shopping_lists.leave.button'), class: 'btn btn-danger btn-sm'
 
 - if owner? && invitable_friends.any?
   = render ShoppingListInvitation::Component::InviteModal.new(shopping_list: @shopping_list, friends: invitable_friends)
-
