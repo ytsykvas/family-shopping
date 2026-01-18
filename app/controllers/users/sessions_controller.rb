@@ -44,7 +44,7 @@ module Users
       end
     end
 
-    def respond_to_on_destroy
+    def respond_to_on_destroy(*)
       if request.format.json?
         if current_user
           render json: {
@@ -58,7 +58,7 @@ module Users
           }, status: :unauthorized
         end
       else
-        super
+        super()
       end
     end
   end
