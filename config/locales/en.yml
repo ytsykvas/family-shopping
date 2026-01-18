@@ -133,42 +133,34 @@ en:
       not_pending: This request is no longer pending
       success: Friendship request accepted
   home:
-    alert_danger_message: This is a danger alert message.
-    alert_danger_title: Danger!
-    alert_info_message: This is an info alert message.
-    alert_info_title: Info!
-    alert_showcase: Alert Styles Showcase
-    alert_success_message: This is a success alert message.
-    alert_success_title: Success!
-    alert_warning_message: This is a warning alert message.
-    alert_warning_title: Warning!
-    button_danger: Danger
-    button_dark: Dark
-    button_info: Info
-    button_light: Light
-    button_outline_danger: Outline Danger
-    button_outline_dark: Outline Dark
-    button_outline_info: Outline Info
-    button_outline_light: Outline Light
-    button_outline_primary: Outline Primary
-    button_outline_secondary: Outline Secondary
-    button_outline_success: Outline Success
-    button_outline_warning: Outline Warning
-    button_primary: Primary
-    button_secondary: Secondary
-    button_showcase: Button Styles Showcase
-    button_success: Success
-    button_warning: Warning
-    feature_family_sharing_description: Share lists with family members and shop together in real-time
-    feature_family_sharing_title: "👨‍👩‍👧‍👦 Family Sharing"
-    feature_recipe_ideas_description: Discover new recipes and add ingredients directly to your shopping list
-    feature_recipe_ideas_title: "🍳 Recipe Ideas"
-    feature_shopping_lists_description: Create and manage shopping lists collaboratively with your family members
-    feature_shopping_lists_title: "📝 Shopping Lists"
-    outline_buttons: Outline Buttons
-    solid_buttons: Solid Buttons
-    subtitle: Your collaborative shopping list app
-    title: Welcome to Family Shopping
+    features:
+      beautiful_interface: Beautiful Interface
+      real_time: Real-time updates
+      smart_suggestions: Smart suggestions
+    hero:
+      cta: Start Shopping Now
+      headline: Shopping Simply. Together.
+      subtitle: Stop double-buying milk. Keep your family in sync with the most stylish shopping list app.
+    problem:
+      double_buy:
+        description: You and your partner both bought eggs. Now you have 24 eggs.
+        title: The Double Buy
+      forgotten_item:
+        description: Realizing you forgot bread when you're already home.
+        title: The Forgotten Item
+      messy_chat:
+        description: Scrolling through 50 messages to find "apples".
+        title: The Messy Chat
+    solution:
+      create:
+        description: Make a list in seconds.
+        title: Create
+      invite:
+        description: Add your family or roommates.
+        title: Invite
+      sync:
+        description: Tick off items in real-time.
+        title: Sync
   modal:
     close_aria_label: Close
   navbar:

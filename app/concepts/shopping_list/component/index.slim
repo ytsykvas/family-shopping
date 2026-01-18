@@ -1,3 +1,4 @@
+= image_tag "banners/shopping_lists.png", class: "img-fluid w-100 rounded mb-4 border-3 border-dark", style: "border: 3px solid #000; box-shadow: 4px 4px 0 #000; object-fit: cover; height: 15rem;"
 = render Shared::TitleRow::Component::Show.new(title: I18n.t('shopping_lists.index.title'), button_text: I18n.t('shopping_lists.index.create'), button_data: { 'bs-toggle': 'modal', 'bs-target': '#createShoppingListModal' })
 
 - if @pending_invitations.any?

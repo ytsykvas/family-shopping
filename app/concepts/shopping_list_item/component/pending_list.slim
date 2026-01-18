@@ -1,14 +1,36 @@
 - if @pending_items.any?
   .shopping-items-list
     - @pending_items.each do |item|
-      .shopping-item.d-flex.align-items-center.justify-content-between.mb-2
-        = form_with url: helpers.shopping_list_shopping_list_item_path(@shopping_list, item), method: :patch, local: true, class: "d-flex align-items-center flex-grow-1" do |f|
+      .shopping-item.d-flex.align-items-center.justify-content-between.mb-2 data-controller="inline-edit"
+        / Status Checkbox Form
+        = form_with url: helpers.shopping_list_shopping_list_item_path(@shopping_list, item), method: :patch, local: true, class: "d-flex align-items-center me-2" do |f|
           = f.hidden_field :shopping_list_item, name: "shopping_list_item[status]", value: "done"
-          label.shopping-item-checkbox.d-flex.align-items-center.gap-2
+          label.shopping-item-checkbox.d-flex.align-items-center
             = f.check_box :status, { class: "form-check-input-custom shopping-checkbox", onchange: "this.form.submit()" }, "done", "pending"
+
+        / Name Display & Edit Form
+        .flex-grow-1.me-2
+          / View Mode
+          .d-flex.align-items-center.justify-content-between data-inline-edit-target="view"
             .d-flex.flex-column
               span.shopping-item-name = item.name
               span.text-muted.small = I18n.t('shopping_lists.show.added_by', name: item.added_by.nickname)
+            
+            - if @can_manage
+              i.bi.bi-pencil-square.text-muted.cursor-pointer.ms-2 data-action="click->inline-edit#toggle" style="cursor: pointer; font-size: 1.1rem;"
+
+          / Edit Mode
+          - if @can_manage
+            .d-none.w-100 data-inline-edit-target="form"
+              = form_with model: item, url: helpers.shopping_list_shopping_list_item_path(@shopping_list, item), method: :patch, local: true, class: "d-flex flex-column flex-sm-row gap-2 align-items-stretch align-items-sm-center w-100" do |f|
+                = f.text_field :name, class: "form-control form-control-sm border-2 border-dark w-100", data: { inline_edit_target: "input" }
+                .d-flex.gap-2.justify-content-end
+                  button.btn.btn-sm.btn-success.border-2.border-dark type="submit" style="box-shadow: 2px 2px 0 #000;"
+                    i.bi.bi-check-lg
+                  button.btn.btn-sm.btn-outline-danger.border-2.border-dark type="button" data-action="click->inline-edit#toggle" style="box-shadow: 2px 2px 0 #000;"
+                    i.bi.bi-x-lg
+
+        / Delete Button
         - if @can_manage
           = button_to helpers.shopping_list_shopping_list_item_path(@shopping_list, item), method: :delete, class: "btn-icon-delete", data: { turbo_confirm: I18n.t('shopping_list_items.destroy.confirm') } do
             i.bi.bi-trash

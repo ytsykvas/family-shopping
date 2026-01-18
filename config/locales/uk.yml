@@ -133,42 +133,34 @@ uk:
       not_pending: Цей запит більше не очікує на розгляд
       success: Запит на дружбу прийнято
   home:
-    alert_danger_message: Це повідомлення про небезпеку.
-    alert_danger_title: Небезпека!
-    alert_info_message: Це інформаційне повідомлення.
-    alert_info_title: Інформація!
-    alert_showcase: Приклади стилів сповіщень
-    alert_success_message: Це повідомлення про успіх.
-    alert_success_title: Успіх!
-    alert_warning_message: Це попереджувальне повідомлення.
-    alert_warning_title: Попередження!
-    button_danger: Небезпека
-    button_dark: Темний
-    button_info: Інформація
-    button_light: Світлий
-    button_outline_danger: Контурна небезпека
-    button_outline_dark: Контурний темний
-    button_outline_info: Контурна інформація
-    button_outline_light: Контурний світлий
-    button_outline_primary: Контурний основний
-    button_outline_secondary: Контурний додатковий
-    button_outline_success: Контурний успіх
-    button_outline_warning: Контурне попередження
-    button_primary: Основний
-    button_secondary: Додатковий
-    button_showcase: Приклади стилів кнопок
-    button_success: Успіх
-    button_warning: Попередження
-    feature_family_sharing_description: Діліться списками з членами родини та робіть покупки разом у реальному часі
-    feature_family_sharing_title: "👨‍👩‍👧‍👦 Сімейний обмін"
-    feature_recipe_ideas_description: Відкривайте нові рецепти та додавайте інгредієнти безпосередньо до вашого списку покупок
-    feature_recipe_ideas_title: "🍳 Ідеї рецептів"
-    feature_shopping_lists_description: Створюйте та керуйте списками покупок разом з членами вашої родини
-    feature_shopping_lists_title: "📝 Списки покупок"
-    outline_buttons: Контурні кнопки
-    solid_buttons: Суцільні кнопки
-    subtitle: Ваш додаток для спільної роботи зі списками покупок
-    title: Ласкаво просимо до Family Shopping
+    features:
+      beautiful_interface: Зручний інтерфейс
+      real_time: Оновлення в реальному часі
+      smart_suggestions: Розумні пропозиції
+    hero:
+      cta: Почати покупки
+      headline: Шопінг. Просто. Разом.
+      subtitle: Досить купувати зайве молоко. Тримайте сім'ю на одні хвилі з найстильнішим списком покупок.
+    problem:
+      double_buy:
+        description: Ви і ваш партнер купили яйця. Тепер у вас 24 яйця.
+        title: Подвійна покупка
+      forgotten_item:
+        description: Зрозуміти, що забув хліб, коли вже вдома.
+        title: Забутий товар
+      messy_chat:
+        description: Гортати 50 повідомлень, щоб знайти "яблука".
+        title: Хаос у чаті
+    solution:
+      create:
+        description: Створи список за секунди.
+        title: Створити
+      invite:
+        description: Додай сім'ю або друзів.
+        title: Запросити
+      sync:
+        description: Відмічай товари в реальному часі.
+        title: Синхронізувати
   modal:
     close_aria_label: Закрити
   navbar:
