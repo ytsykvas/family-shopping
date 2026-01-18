@@ -8,20 +8,6 @@
       .card-header.d-flex.justify-content-between.align-items-center
         h5.mb-0 = I18n.t('shopping_lists.show.items')
       .card-body
-        - if @shopping_list.shopping_list_items.any?
-          ul.list-group.list-group-flush
-            - @shopping_list.shopping_list_items.each do |item|
-              li.list-group-item.d-flex.justify-content-between.align-items-center
-                .d-flex.align-items-center.gap-2
-                  - if item.done_status?
-                    i.bi.bi-check-circle-fill.text-success
-                  - else
-                    i.bi.bi-circle.text-muted
-                  span class=(item.done_status? ? 'text-decoration-line-through text-muted' : '')
-                    = item.name
-                .text-muted.small
-                  = I18n.t('shopping_lists.show.added_by', name: item.added_by.nickname)
-        - else
-          .text-center.text-muted.py-4
-            i.bi.bi-basket.fs-1.mb-2.d-block
-            = I18n.t('shopping_lists.show.no_items')
+        = render ShoppingListItem::Component::NewForm.new(shopping_list: @shopping_list)
+        = render ShoppingListItem::Component::PendingList.new(shopping_list: @shopping_list, pending_items: pending_items, can_manage: can_manage_items?)
+        = render ShoppingListItem::Component::DoneList.new(shopping_list: @shopping_list, done_items: done_items, can_manage: can_manage_items?)

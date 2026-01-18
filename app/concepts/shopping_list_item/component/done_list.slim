@@ -1,0 +1,20 @@
+.mt-4 data-controller="collapse"
+  button.btn-toggle-done type="button" data-action="click->collapse#toggle" data-show-text=I18n.t('shopping_list_items.show_done') data-hide-text=I18n.t('shopping_list_items.hide_done')
+    i.bi.bi-check-circle.me-2
+    span.toggle-text = I18n.t('shopping_list_items.show_done')
+    span.badge.bg-secondary.ms-2 = @done_items.count
+
+  .collapse.mt-3 data-collapse-target="content"
+    .shopping-items-list.done-items
+      - @done_items.each do |item|
+        .shopping-item.shopping-item-done.d-flex.align-items-center.justify-content-between.mb-2
+          = form_with url: helpers.shopping_list_shopping_list_item_path(@shopping_list, item), method: :patch, local: true, class: "d-flex align-items-center flex-grow-1" do |f|
+            = f.hidden_field :shopping_list_item, name: "shopping_list_item[status]", value: "pending"
+            label.shopping-item-checkbox.d-flex.align-items-center.gap-2
+              = f.check_box :status, { class: "form-check-input-custom shopping-checkbox", checked: true, onchange: "this.form.submit()" }, "pending", "done"
+              .d-flex.flex-column
+                span.shopping-item-name.text-decoration-line-through.text-muted = item.name
+                span.text-muted.small = I18n.t('shopping_lists.show.added_by', name: item.added_by.nickname)
+          - if @can_manage
+            = button_to helpers.shopping_list_shopping_list_item_path(@shopping_list, item), method: :delete, class: "btn-icon-delete", data: { turbo_confirm: I18n.t('shopping_list_items.destroy.confirm') } do
+              i.bi.bi-trash

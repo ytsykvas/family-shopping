@@ -121,9 +121,11 @@ en:
       accept: Accept
       cancel: Cancel
       incoming_request: Incoming
+      incoming_title: Incoming Requests
       no_friendship_requests: Here you will find friendship requests from other users.
       no_friendship_requests_title: No Friendship Requests
       outgoing_request: Outgoing
+      outgoing_title: Outgoing Requests
       reject: Reject
       title: Friendship Requests
     update:
@@ -223,6 +225,19 @@ en:
       not_invitee: Only the invited user can accept
       not_pending: This invitation is no longer pending
       success: Invitation accepted! You can now access the shopping list
+  shopping_list_items:
+    create:
+      success: Item added successfully
+    destroy:
+      confirm: Are you sure you want to delete this item?
+      success: Item deleted successfully
+    form:
+      placeholder: Add a new item...
+      submit: Add
+    hide_done: Hide completed items
+    show_done: Show completed items
+    update:
+      success: Item updated successfully
   shopping_lists:
     create:
       success: Shopping list created successfully

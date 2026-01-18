@@ -121,9 +121,11 @@ uk:
       accept: Прийняти
       cancel: Скасувати
       incoming_request: Отримано
+      incoming_title: Вхідні запити
       no_friendship_requests: Тут ви знайдете запити на дружбу від інших користувачів.
       no_friendship_requests_title: Немає запитів на дружбу
       outgoing_request: Надіслано
+      outgoing_title: Вихідні запити
       reject: Відхилити
       title: Запити на дружбу
     update:
@@ -223,6 +225,19 @@ uk:
       not_invitee: Тільки запрошений користувач може прийняти
       not_pending: Це запрошення більше не очікує на розгляд
       success: Запрошення прийнято! Тепер ви маєте доступ до списку покупок
+  shopping_list_items:
+    create:
+      success: Товар успішно додано
+    destroy:
+      confirm: Ви впевнені, що хочете видалити цей товар?
+      success: Товар успішно видалено
+    form:
+      placeholder: Додати новий товар...
+      submit: Додати
+    hide_done: Сховати виконані
+    show_done: Показати виконані
+    update:
+      success: Товар успішно оновлено
   shopping_lists:
     create:
       success: Список успішно створено

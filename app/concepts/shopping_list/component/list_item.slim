@@ -7,6 +7,17 @@
         - if helpers.policy(@shopping_list).update?
           button.btn.btn-link.text-dark.p-0 type="button" data-bs-toggle="modal" data-bs-target="#editShoppingListModal_#{@shopping_list.id}"
             i.bi.bi-pencil
+      
+      - if pending_items.any?
+        .shopping-items-preview.mt-3
+          - pending_items.each do |item|
+            .shopping-item-mini.d-flex.align-items-center.gap-2.mb-1
+              i.bi.bi-circle.text-muted.small
+              span.small.text-truncate = item.name
+          - if pending_items_count > 5
+            .text-muted.small.mt-1
+              = "... +#{pending_items_count - 5}"
+      
       hr.mb-2.mt-auto
       .d-flex.align-items-center.text-muted.small
         i.bi.bi-person-circle.me-2

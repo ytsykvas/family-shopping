@@ -15,7 +15,9 @@ Rails.application.routes.draw do
   resources :friends, only: [ :index, :destroy ]
   resources :user_searches, only: [ :index ]
   resources :friendship_requests, only: [ :index, :create, :update, :destroy ]
-  resources :shopping_lists, except: [ :new, :edit ]
+  resources :shopping_lists, except: [ :new, :edit ] do
+    resources :shopping_list_items, only: [ :create, :update, :destroy ]
+  end
   resources :shopping_list_memberships, only: [ :destroy ]
   resources :shopping_list_invitations, only: [ :create, :update, :destroy ]
 

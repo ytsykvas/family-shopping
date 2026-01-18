@@ -1,8 +1,8 @@
 = render Shared::TitleRow::Component::Show.new(title: I18n.t('friends.index.title'), button_text: I18n.t('friends.index.add_friend'), button_data: { 'bs-toggle': 'modal', 'bs-target': '#addFriendModal' })
 
-- if @friends.any?
+- if @friendships.any?
   .row.g-4.mb-4
-    - @friends.each do |friendship|
+    - @friendships.each do |friendship|
       .col-md-6.col-lg-4
         = render Friends::Component::FriendCard.new(friendship: friendship, current_user: @current_user)
 - else
@@ -12,7 +12,7 @@
     .empty-message = I18n.t("friends.index.no_friends")
     button.btn.btn-primary.mt-3 data-bs-toggle="modal" data-bs-target="#addFriendModal" = I18n.t('friends.index.add_friend')
 
-= render FriendshipRequest::Component::Index.new(friendship_requests: @friendship_requests, current_user: @current_user)
+= render FriendshipRequest::Component::Index.new(incoming_requests: @incoming_requests, outgoing_requests: @outgoing_requests, current_user: @current_user)
 
 = render Shared::Modal::Component::Show.new(id: 'addFriendModal', title: I18n.t('friends.index.add_friend'), size: 'md', type: 'form') do
   = render UserSearches::Component::Index.new(query: nil, users: [])
