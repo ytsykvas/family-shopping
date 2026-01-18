@@ -6,7 +6,7 @@
 
   .collapse.mt-3 data-collapse-target="content"
     .shopping-items-list.done-items
-      - @done_items.each do |item|
+      - @done_items.last(10).each do |item|
         .shopping-item.shopping-item-done.d-flex.align-items-center.justify-content-between.mb-2
           = form_with url: helpers.shopping_list_shopping_list_item_path(@shopping_list, item), method: :patch, local: true, class: "d-flex align-items-center flex-grow-1" do |f|
             = f.hidden_field :shopping_list_item, name: "shopping_list_item[status]", value: "pending"

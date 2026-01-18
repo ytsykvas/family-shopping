@@ -14,10 +14,7 @@ header.navbar-shell
           a.nav-link class=("active" if active_link?("/shopping_lists")) href=shopping_lists_path = I18n.t('navbar.shopping_lists')
         li.nav-item
           a.nav-link href="#" = I18n.t('navbar.wishlists')
-        li.nav-item
-          a.nav-link href="#" = I18n.t('navbar.events')
-        li.nav-item
-          a.nav-link href="#" = I18n.t('navbar.teams')
+
         li.nav-item
           a.nav-link class=("active" if active_link?("/friends")) href=friends_path = I18n.t('navbar.friends')
       .navbar-actions.d-none.d-lg-flex
@@ -59,12 +56,7 @@ header.navbar-shell
         a.navbar-offcanvas-link href="#"
           span = I18n.t('navbar.wishlists')
           span.link-arrow ↗
-        a.navbar-offcanvas-link href="#"
-          span = I18n.t('navbar.events')
-          span.link-arrow ↗
-        a.navbar-offcanvas-link href="#"
-          span = I18n.t('navbar.teams')
-          span.link-arrow ↗
+
         = link_to friends_path, class: 'navbar-offcanvas-link' do
           span = I18n.t('navbar.friends')
           span.link-arrow ↗

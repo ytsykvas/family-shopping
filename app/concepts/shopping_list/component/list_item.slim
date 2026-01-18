@@ -13,7 +13,7 @@
           - pending_items.each do |item|
             .shopping-item-mini.d-flex.align-items-center.gap-2.mb-1
               i.bi.bi-circle.text-muted.small
-              span.small.text-truncate = item.name
+              span.text-truncate = item.name
           - if pending_items_count > 5
             .text-muted.small.mt-1
               = "... +#{pending_items_count - 5}"
