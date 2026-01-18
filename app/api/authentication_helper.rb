@@ -40,6 +40,11 @@ module AuthenticationHelper
   # Run operation and return its model as JSON
   def run_operation(operation_class)
     result = operation_class.call(params: params, current_user: current_user)
+
+    if result.failure?
+      error!({ errors: result.all_error_messages }, 422)
+    end
+
     result.model
   end
 end

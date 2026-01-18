@@ -17,6 +17,7 @@ class V1::Base < Grape::API
 
   mount V1::Users
   mount V1::ShoppingLists
+  mount V1::ShoppingListItems
   mount V1::ShoppingListInvitations
   mount V1::ShoppingListMemberships
   mount V1::Friends
