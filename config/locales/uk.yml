@@ -165,13 +165,13 @@ uk:
     close_aria_label: Закрити
   navbar:
     brand: SHOP TEAM
-
     friends: Друзі
     home: Головна
+    recipes: Рецепти
     shopping_lists: Покупки
     sign_in: Увійти
     sign_out: Вийти
-
+    subscription: Підписка
     wishlists: Бажання
   registrations:
     form:

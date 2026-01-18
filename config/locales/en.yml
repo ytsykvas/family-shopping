@@ -165,13 +165,13 @@ en:
     close_aria_label: Close
   navbar:
     brand: SHOP TEAM
-
     friends: Friends
     home: Home
+    recipes: Recipes
     shopping_lists: Shopping Lists
     sign_in: Sign In
     sign_out: Sign Out
-
+    subscription: Subscription
     wishlists: Wishes
   registrations:
     form:
