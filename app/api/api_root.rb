@@ -20,6 +20,9 @@ class ApiRoot < Grape::API
         in: "header"
       }
     },
+    security: [
+      { Bearer: [] }
+    ],
     models: [
       Entities::AvailabilityResponse
     ]

@@ -15,6 +15,7 @@ class V1::Base < Grape::API
     authenticate_user! unless route.settings[:public]
   end
 
+  mount V1::Sessions
   mount V1::Users
   mount V1::ShoppingLists
   mount V1::ShoppingListItems
