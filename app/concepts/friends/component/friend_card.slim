@@ -1,12 +1,12 @@
 .card
-  .card-body
+  .card-body.p-2
     .user-info
-      .d-flex.align-items-center.mb-2
-        i.bi.bi-person-circle.me-2 style="font-size: 2rem;"
-        .user-name = friend.name
-      hr
-      .user-details.mb-3
-        .user-nickname.text-muted.small.mb-1 = "#{I18n.t('user_searches.nickname_label')} #{friend.nickname}"
+      .d-flex.align-items-center.mb-1
+        i.bi.bi-person-circle.me-2 style="font-size: 1.5rem;"
+        .user-name.fw-bold = friend.name
+      .user-details.mb-1
+        .user-nickname.text-muted.small.mb-0 = "#{I18n.t('user_searches.nickname_label')} #{friend.nickname}"
         .user-email.text-muted.small = friend.email
-    .user-actions.mt-3.text-center
-      = button_to I18n.t('friends.index.remove_friend'), friend_path(@friendship), method: :delete, class: 'btn btn-danger btn-sm', style: 'width: 100%;', data: { turbo_confirm: I18n.t('friends.index.remove_friend_confirm') }
+    .user-actions.mt-2.text-center
+      = button_to friend_path(@friendship), method: :delete, class: 'btn btn-danger btn-sm w-100 py-1', data: { turbo_confirm: I18n.t('friends.index.remove_friend_confirm') } do
+        i.bi.bi-trash

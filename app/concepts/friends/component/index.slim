@@ -4,7 +4,7 @@
 - if @friendships.any?
   .row.g-4.mb-4
     - @friendships.each do |friendship|
-      .col-md-6.col-lg-4
+      .col-6.col-md-4.col-lg-3.col-xl-2
         = render Friends::Component::FriendCard.new(friendship: friendship, current_user: @current_user)
 - else
   .empty-content-container
