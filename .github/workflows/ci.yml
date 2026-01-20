@@ -91,6 +91,13 @@ jobs:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432
         run: bin/rails db:test:prepare
 
+      - name: Build assets
+        env:
+          RAILS_ENV: test
+        run: |
+          bin/rails dartsass:build
+          bin/rails assets:precompile
+
       - name: Run tests
         env:
           RAILS_ENV: test
