@@ -15,10 +15,6 @@ en:
           attributes:
             name:
               blank: can't be blank
-        wishlist_item:
-          attributes:
-            title:
-              blank: can't be blank
         user:
           attributes:
             email:
@@ -35,6 +31,10 @@ en:
               too_short: is too short (minimum is %{count} characters)
             password_confirmation:
               confirmation: doesn't match Password
+        wishlist_item:
+          attributes:
+            title:
+              blank: can't be blank
   api:
     users:
       email_available: Email is available
@@ -295,26 +295,26 @@ en:
   wishlist_items:
     create:
       success: Wishlist item added successfully
-    update:
-      success: Wishlist item updated successfully
     destroy:
       success: Wishlist item removed successfully
-    index:
-      title: My Wishlist
-      create: Add Wish
-      edit: Edit Wish
-      delete: Delete
-      i_will_gift: I will gift
-      delete_confirm: Are you sure you want to delete this wish?
-      delete_confirm_title: Confirm Deletion
-      no_items_title: No Wishes Yet
-      no_items: Start adding things you'd love to receive as a gift!
     form:
-      title: Title
-      description: Description
-      url: Store Link
-      price: Price
       currency: Currency
+      description: Description
       image: Image
+      price: Price
       submit_create: Add Wish
       submit_update: Update Wish
+      title: Title
+      url: Store Link
+    index:
+      create: Add Wish
+      delete: Delete
+      delete_confirm: Are you sure you want to delete this wish?
+      delete_confirm_title: Confirm Deletion
+      edit: Edit Wish
+      i_will_gift: I will gift
+      no_items: Start adding things you'd love to receive as a gift!
+      no_items_title: No Wishes Yet
+      title: My Wishlist
+    update:
+      success: Wishlist item updated successfully
