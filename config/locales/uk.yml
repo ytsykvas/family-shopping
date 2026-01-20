@@ -15,6 +15,10 @@ uk:
           attributes:
             name:
               blank: не може бути порожнім
+        wishlist_item:
+          attributes:
+            title:
+              blank: не може бути порожнім
         user:
           attributes:
             email:
@@ -38,6 +42,64 @@ uk:
       email_taken: Email вже зайнято
       nickname_available: Нікнейм доступний
       nickname_taken: Нікнейм вже зайнято
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: близько 1 години
+        few: близько %{count} годин
+        many: близько %{count} годин
+        other: близько %{count} годин
+      about_x_months:
+        one: близько 1 місяця
+        few: близько %{count} місяців
+        many: близько %{count} місяців
+        other: близько %{count} місяців
+      about_x_years:
+        one: близько 1 року
+        few: близько %{count} років
+        many: близько %{count} років
+        other: близько %{count} років
+      almost_x_years:
+        one: майже 1 рік
+        few: майже %{count} роки
+        many: майже %{count} років
+        other: майже %{count} років
+      half_a_minute: менше хвилини
+      less_than_x_minutes:
+        one: менше 1 хвилини
+        few: менше %{count} хвилин
+        many: менше %{count} хвилин
+        other: менше %{count} хвилин
+      less_than_x_seconds:
+        one: менше 1 секунди
+        few: менше %{count} секунд
+        many: менше %{count} секунд
+        other: менше %{count} секунд
+      over_x_years:
+        one: більше 1 року
+        few: більше %{count} років
+        many: більше %{count} років
+        other: більше %{count} років
+      x_days:
+        one: 1 день
+        few: "%{count} дні"
+        many: "%{count} днів"
+        other: "%{count} днів"
+      x_minutes:
+        one: 1 хвилину
+        few: "%{count} хвилини"
+        many: "%{count} хвилин"
+        other: "%{count} хвилин"
+      x_months:
+        one: 1 місяць
+        few: "%{count} місяці"
+        many: "%{count} місяців"
+        other: "%{count} місяців"
+      x_seconds:
+        one: 1 секунду
+        few: "%{count} секунди"
+        many: "%{count} секунд"
+        other: "%{count} секунд"
   devise:
     confirmations:
       confirmed: Вашу електронну адресу успішно підтверджено.
@@ -288,3 +350,29 @@ uk:
       back_to_friends: Назад до друзів
       friend_status: Друг
       remove_friend: Видалити з друзів
+  wishlist_items:
+    create:
+      success: Бажання успішно додано
+    update:
+      success: Бажання успішно оновлено
+    destroy:
+      success: Бажання успішно видалено
+    index:
+      title: Мій вішліст
+      create: Додати бажання
+      edit: Редагувати бажання
+      delete: Видалити
+      i_will_gift: Я подарую
+      delete_confirm: Ви впевнені, що хочете видалити це бажання?
+      delete_confirm_title: Підтвердження видалення
+      no_items_title: Поки немає бажань
+      no_items: Почніть додавати те, що хотіли б отримати у подарунок!
+    form:
+      title: Назва
+      description: Опис
+      url: Посилання на магазин
+      price: Ціна
+      currency: Валюта
+      image: Фото
+      submit_create: Додати бажання
+      submit_update: Оновити бажання

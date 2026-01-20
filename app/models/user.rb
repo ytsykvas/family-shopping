@@ -26,6 +26,8 @@ class User < ApplicationRecord
   has_many :sent_shopping_list_invitations, class_name: "ShoppingListInvitation", foreign_key: :inviter_id, dependent: :destroy
   has_many :received_shopping_list_invitations, class_name: "ShoppingListInvitation", foreign_key: :invitee_id, dependent: :destroy
 
+  has_many :wishlist_items, dependent: :destroy
+
   has_many :accepted_sent_friends,
            -> { where(friendships: { status: Friendship.statuses[:accepted] }) },
            through: :sent_friendships,

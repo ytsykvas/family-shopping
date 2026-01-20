@@ -1,0 +1,10 @@
+.modal.fade id="deleteWishlistItemModal_#{@wishlist_item.id}" tabindex="-1" aria-labelledby="deleteWishlistItemModalLabel_#{@wishlist_item.id}" aria-hidden="true"
+  .modal-dialog.modal-dialog-centered
+    .modal-content
+      .modal-header
+          h5.modal-title id="deleteWishlistItemModalLabel_#{@wishlist_item.id}" = I18n.t('wishlist_items.index.delete_confirm_title')
+          button.btn-close type="button" data-bs-dismiss="modal" aria-label="Close"
+      .modal-body
+          = I18n.t('wishlist_items.index.delete_confirm')
+      .modal-footer
+          = helpers.button_to I18n.t('wishlist_items.index.delete'), helpers.wishlist_item_path(@wishlist_item), method: :delete, class: "btn btn-danger"

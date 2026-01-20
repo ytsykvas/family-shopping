@@ -1,0 +1,30 @@
+.modal.fade id=@modal_id tabindex="-1" aria-labelledby="#{@modal_id}Label" aria-hidden="true"
+  .modal-dialog.modal-dialog-centered
+    .modal-content.form-card
+      .modal-header.border-0.pb-0
+        h5.modal-title.form-title.fs-3 id="#{@modal_id}Label" = @title
+        button.btn-close type="button" data-bs-dismiss="modal" aria-label="Close"
+      .modal-body.pt-2
+        = helpers.simple_form_for @wishlist_item, url: @url, method: @method, html: { class: 'form-custom', data: { turbo: false } } do |f|
+          .form-group
+            = f.input :title, label: I18n.t('wishlist_items.form.title'), input_html: { class: 'form-control-custom' }, label_html: { class: 'form-label-custom' }
+          
+          .form-group
+            = f.input :description, as: :text, label: I18n.t('wishlist_items.form.description'), input_html: { class: 'form-control-custom' }, label_html: { class: 'form-label-custom' }
+          
+          .form-group
+            = f.input :url, label: I18n.t('wishlist_items.form.url'), input_html: { class: 'form-control-custom' }, label_html: { class: 'form-label-custom' }
+          
+          .row
+            .col-8
+              .form-group
+                = f.input :price, label: I18n.t('wishlist_items.form.price'), input_html: { class: 'form-control-custom' }, label_html: { class: 'form-label-custom' }
+            .col-4
+              .form-group
+                = f.input :currency, label: I18n.t('wishlist_items.form.currency'), collection: WishlistItem::CURRENCIES, include_blank: true, input_html: { class: 'form-control-custom form-select' }, label_html: { class: 'form-label-custom' }
+          
+          .form-group.mb-4
+            = f.input :image, as: :file, label: I18n.t('wishlist_items.form.image'), input_html: { class: 'form-control-custom' }, label_html: { class: 'form-label-custom' }
+          
+          .form-actions
+            = f.button :submit, @submit_text, class: "btn btn-submit-custom"

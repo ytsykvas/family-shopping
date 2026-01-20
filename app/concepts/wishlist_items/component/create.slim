@@ -1,0 +1,7 @@
+= render WishlistItems::Component::Form.new(\
+    wishlist_item: @new_wishlist_item,\
+    modal_id: "createWishlistItemModal",\
+    title: I18n.t('wishlist_items.index.create'),\
+    submit_text: I18n.t('wishlist_items.form.submit_create'),\
+    url: helpers.wishlist_items_path\
+  )

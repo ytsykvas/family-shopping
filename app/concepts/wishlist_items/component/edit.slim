@@ -1,0 +1,8 @@
+= render WishlistItems::Component::Form.new(\
+    wishlist_item: @wishlist_item,\
+    modal_id: "editWishlistItemModal_#{@wishlist_item.id}",\
+    title: I18n.t('wishlist_items.index.edit'),\
+    submit_text: I18n.t('wishlist_items.form.submit_update'),\
+    url: helpers.wishlist_item_path(@wishlist_item),\
+    method: :patch\
+  )

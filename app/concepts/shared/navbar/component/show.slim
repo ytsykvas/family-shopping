@@ -13,7 +13,7 @@ header.navbar-shell
         li.nav-item
           a.nav-link class=("active" if active_link?("/shopping_lists")) href=shopping_lists_path = I18n.t('navbar.shopping_lists')
         li.nav-item
-          a.nav-link href="#" = I18n.t('navbar.wishlists')
+          a.nav-link class=("active" if active_link?("/wishlist_items")) href=wishlist_items_path = I18n.t('navbar.wishlists')
         li.nav-item
           a.nav-link href="#" = I18n.t('navbar.recipes')
         li.nav-item
@@ -56,7 +56,7 @@ header.navbar-shell
         a.navbar-offcanvas-link href=shopping_lists_path
           span = I18n.t('navbar.shopping_lists')
           span.link-arrow ↗
-        a.navbar-offcanvas-link href="#"
+        a.navbar-offcanvas-link href=wishlist_items_path
           span = I18n.t('navbar.wishlists')
           span.link-arrow ↗
         a.navbar-offcanvas-link href="#"
