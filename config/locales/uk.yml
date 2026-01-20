@@ -105,7 +105,6 @@ uk:
       add_friend: Додати друга
       no_friends: У вас поки немає друзів. Почніть додавати друзів, щоб створювати спільні списки покупок!
       no_friends_title: Поки немає друзів
-      remove_friend: Видалити друга
       remove_friend_confirm: Ви впевнені, що хочете видалити цього друга?
       title: Мої друзі
   friendship_requests:

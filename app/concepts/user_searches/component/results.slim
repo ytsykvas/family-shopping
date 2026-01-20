@@ -3,7 +3,7 @@
     .search-results.mt-3
       .row.g-4
         - @users.each do |user|
-          .col-6.col-md-4.col-lg-3.col-xl-2
+          .col-md-6.col-lg-4
             = render UserSearches::Component::ResultCard.new(user: user, friends_ids: @friends_ids, incoming_requests: @incoming_requests, outgoing_requests: @outgoing_requests)
   - else
     .no-results.mt-3

@@ -7,17 +7,20 @@
         - if helpers.policy(@shopping_list).update?
           button.btn.btn-link.text-dark.p-0 type="button" data-bs-toggle="modal" data-bs-target="#editShoppingListModal_#{@shopping_list.id}"
             i.bi.bi-pencil
-      
+      hr.mb-2.mt-auto
       - if pending_items.any?
         .shopping-items-preview.mt-3
-          - pending_items.each do |item|
+          - pending_items.last(5).each do |item|
             .shopping-item-mini.d-flex.align-items-center.gap-2.mb-1
               i.bi.bi-circle.text-muted.small
               span.text-truncate = item.name
           - if pending_items_count > 5
             .text-muted.small.mt-1
               = "... +#{pending_items_count - 5}"
-      
+      - else
+        .text-center.text-muted.py-4
+          i.bi.bi-basket.fs-1.mb-2.d-block
+          = I18n.t('shopping_lists.show.no_items')
       hr.mb-2.mt-auto
       .d-flex.align-items-center.text-muted.small
         i.bi.bi-person-circle.me-2
