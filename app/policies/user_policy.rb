@@ -2,6 +2,10 @@
 
 # Policy for User model
 class UserPolicy < ApplicationPolicy
+  def show?
+    user.present?
+  end
+
   class Scope < ApplicationPolicy::Scope
     def resolve
       if user.present?

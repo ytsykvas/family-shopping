@@ -7,9 +7,12 @@
     - elsif has_outgoing_request?
       .badge.bg-warning.mb-2 = I18n.t('friendship_requests.index.outgoing_request')
     .user-info
-      .d-flex.align-items-center.mb-2
-        i.bi.bi-person-circle.me-2 style="font-size: 2rem;"
-        .user-name = @user.name
+      .d-flex.align-items-center.justify-content-between.mb-2
+        .d-flex.align-items-center
+          i.bi.bi-person-circle.me-2 style="font-size: 2rem;"
+          .user-name = @user.name
+        = link_to user_path(@user), class: 'btn btn-link btn-sm p-0 text-muted'
+          i.bi.bi-box-arrow-up-right
       hr
       .user-details.mb-3
         .user-nickname.text-muted.small.mb-1 = "#{I18n.t('user_searches.nickname_label')} #{@user.nickname}"

@@ -1,0 +1,21 @@
+- unless is_own_profile?
+  .user-actions.d-grid.gap-2
+    - if is_friend?
+      = button_to friend_path(@friendship), method: :delete, class: 'btn btn-outline-danger', data: { turbo_confirm: I18n.t('friends.index.remove_friend_confirm') } do
+        i.bi.bi-person-x.me-2
+        = I18n.t('users.show.remove_friend')
+    - elsif has_incoming_request?
+      = button_to friendship_request_path(@incoming_request), method: :patch, class: 'btn btn-success', data: { turbo: false } do
+        i.bi.bi-check-lg.me-2
+        = I18n.t('friendship_requests.index.accept')
+      = button_to friendship_request_path(@incoming_request), method: :delete, class: 'btn btn-outline-danger', data: { turbo_confirm: I18n.t('friendship_requests.index.reject_confirm') } do
+        i.bi.bi-x-lg.me-2
+        = I18n.t('friendship_requests.index.reject')
+    - elsif has_outgoing_request?
+      = button_to friendship_request_path(@outgoing_request), method: :delete, class: 'btn btn-outline-danger', data: { turbo_confirm: I18n.t('friendship_requests.index.cancel_confirm') } do
+        i.bi.bi-x-lg.me-2
+        = I18n.t('friendship_requests.index.cancel')
+    - else
+      = button_to friendship_requests_path, method: :post, params: { friendship_request: { accepter_id: @user.id } }, class: 'btn btn-primary', data: { turbo: false } do
+        i.bi.bi-person-plus.me-2
+        = I18n.t('user_searches.add_friend')

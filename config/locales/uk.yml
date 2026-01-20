@@ -119,6 +119,7 @@ uk:
     index:
       accept: Прийняти
       cancel: Скасувати
+      cancel_confirm: Ви впевнені, що хочете скасувати цей запит на дружбу?
       incoming_request: Отримано
       incoming_title: Вхідні запити
       no_friendship_requests: Тут ви знайдете запити на дружбу від інших користувачів.
@@ -126,6 +127,7 @@ uk:
       outgoing_request: Надіслано
       outgoing_title: Вихідні запити
       reject: Відхилити
+      reject_confirm: Ви впевнені, що хочете відхилити цей запит на дружбу?
       title: Запити на дружбу
     update:
       not_accepter: Ви не можете прийняти цей запит
@@ -167,10 +169,10 @@ uk:
     friends: Друзі
     home: Головна
     recipes: Рецепти
+    settings: Налаштування
     shopping_lists: Покупки
     sign_in: Увійти
     sign_out: Вийти
-    subscription: Підписка
     wishlists: Бажання
   registrations:
     form:
@@ -281,3 +283,8 @@ uk:
     nickname_label: 'Нікнейм:'
     no_results: Користувачів не знайдено
     placeholder: Пошук за нікнеймом або email
+  users:
+    show:
+      back_to_friends: Назад до друзів
+      friend_status: Друг
+      remove_friend: Видалити з друзів

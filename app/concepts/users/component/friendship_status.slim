@@ -1,0 +1,14 @@
+- if show_status?
+  .mb-3
+    - if is_friend?
+      .badge.bg-success.fs-6
+        i.bi.bi-check-circle.me-1
+        = I18n.t('users.show.friend_status')
+    - elsif has_incoming_request?
+      .badge.bg-primary.fs-6
+        i.bi.bi-envelope.me-1
+        = I18n.t('friendship_requests.index.incoming_request')
+    - elsif has_outgoing_request?
+      .badge.bg-warning.fs-6
+        i.bi.bi-send.me-1
+        = I18n.t('friendship_requests.index.outgoing_request')

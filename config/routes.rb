@@ -7,6 +7,7 @@ Rails.application.routes.draw do
                      }
 
   get "/users", to: redirect("/users/sign_up")
+  resources :users, only: [ :show ]
 
 
   get "up" => "rails/health#show", as: :rails_health_check

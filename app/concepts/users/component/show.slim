@@ -1,0 +1,14 @@
+.container.mt-4
+  .row.justify-content-center
+    .col-md-8.col-lg-6
+      .card
+        .card-body.text-center
+          = render Users::Component::ProfileHeader.new(user: @user)
+          = render Users::Component::FriendshipStatus.new(is_friend: @is_friend, incoming_request: @incoming_request, outgoing_request: @outgoing_request, is_own_profile: is_own_profile?)
+          hr
+          = render Users::Component::ProfileDetails.new(user: @user)
+          = render Users::Component::ProfileActions.new(user: @user, is_friend: @is_friend, friendship: @friendship, incoming_request: @incoming_request, outgoing_request: @outgoing_request, is_own_profile: is_own_profile?)
+          .mt-4
+            = link_to friends_path, class: 'btn btn-secondary' do
+              i.bi.bi-arrow-left.me-2
+              = I18n.t('users.show.back_to_friends')

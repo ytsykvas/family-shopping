@@ -119,6 +119,7 @@ en:
     index:
       accept: Accept
       cancel: Cancel
+      cancel_confirm: Are you sure you want to cancel this friendship request?
       incoming_request: Incoming
       incoming_title: Incoming Requests
       no_friendship_requests: Here you will find friendship requests from other users.
@@ -126,6 +127,7 @@ en:
       outgoing_request: Outgoing
       outgoing_title: Outgoing Requests
       reject: Reject
+      reject_confirm: Are you sure you want to reject this friendship request?
       title: Friendship Requests
     update:
       not_accepter: You cannot accept this request
@@ -167,10 +169,10 @@ en:
     friends: Friends
     home: Home
     recipes: Recipes
+    settings: Settings
     shopping_lists: Shopping Lists
     sign_in: Sign In
     sign_out: Sign Out
-    subscription: Subscription
     wishlists: Wishes
   registrations:
     form:
@@ -281,3 +283,8 @@ en:
     nickname_label: 'Nickname:'
     no_results: No users found
     placeholder: Search by nickname or email
+  users:
+    show:
+      back_to_friends: Back to Friends
+      friend_status: Friend
+      remove_friend: Remove Friend

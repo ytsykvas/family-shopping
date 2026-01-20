@@ -6,9 +6,12 @@
       - else
         .badge.bg-success = I18n.t('friendship_requests.index.outgoing_request')
     .user-info
-      .d-flex.align-items-center.mb-1
-        i.bi.bi-person-circle.me-2 style="font-size: 1.5rem;"
-        .user-name.fw-bold = request_user.name
+      .d-flex.align-items-center.justify-content-between.mb-1
+        .d-flex.align-items-center
+          i.bi.bi-person-circle.me-2 style="font-size: 1.5rem;"
+          .user-name.fw-bold = request_user.name
+        = link_to user_path(request_user), class: 'btn btn-link btn-sm p-0 text-muted'
+          i.bi.bi-box-arrow-up-right
       .user-details.mb-1
         .user-nickname.text-muted.small.mb-0 = "#{I18n.t('user_searches.nickname_label')} #{request_user.nickname}"
         .user-email.text-muted.small = request_user.email
