@@ -1,29 +1,31 @@
 
 .col-md-6.col-lg-4
   .card.h-100
-    .card-body
-      .d-flex.justify-content-between.align-items-start
-        h5.card-title = @shopping_list.name
+    .card-body.d-flex.flex-column
+      .d-flex.justify-content-between.align-items-start.mb-3
+        h4.card-title.fw-bold.mb-0 = @shopping_list.name
         - if helpers.policy(@shopping_list).update?
-          button.btn.btn-link.text-dark.p-0 type="button" data-bs-toggle="modal" data-bs-target="#editShoppingListModal_#{@shopping_list.id}"
-            i.bi.bi-pencil
-      hr.mb-2.mt-auto
-      - if pending_items.any?
-        .shopping-items-preview.mt-3
-          - pending_items.last(5).each do |item|
-            .shopping-item-mini.d-flex.align-items-center.gap-2.mb-1
-              i.bi.bi-circle.text-muted.small
-              span.text-truncate = item.name
-          - if pending_items_count > 5
-            .text-muted.small.mt-1
-              = "... +#{pending_items_count - 5}"
-      - else
-        .text-center.text-muted.py-4
-          i.bi.bi-basket.fs-1.mb-2.d-block
-          = I18n.t('shopping_lists.show.no_items')
-      hr.mb-2.mt-3
-      .d-flex.align-items-center.text-muted.small
-        i.bi.bi-person-circle.me-2
-        = @shopping_list.owner.nickname
-      .text-center.mt-3
-        a.btn.btn-primary href=helpers.shopping_list_path(@shopping_list) = I18n.t('shopping_lists.index.view')
+          button.btn.btn-link.text-dark.p-0.ms-2 type="button" data-bs-toggle="modal" data-bs-target="#editShoppingListModal_#{@shopping_list.id}"
+            i.bi.bi-pencil-square.fs-5
+
+      .flex-grow-1
+        - if pending_items.any?
+          .d-flex.flex-wrap.gap-2.mb-3
+            - pending_items.each do |item|
+              span.badge.bg-warning.text-dark.border = item.name
+            - if pending_items_count > 5
+              span.badge.bg-warning.text-dark.border = "+#{pending_items_count - 5}"
+        - else
+          .text-center.py-4.opacity-50
+            i.bi.bi-basket3.fs-1.mb-2.d-block
+            span.small.fw-bold.text-uppercase = I18n.t('shopping_lists.show.no_items')
+
+      hr.my-3.border-dark
+
+      .d-flex.align-items-center.justify-content-between.mt-auto
+        .d-flex.align-items-center.gap-2
+          i.bi.bi-person-circle.fs-5
+          span.fw-bold.small = @shopping_list.owner.nickname
+
+        a.btn.btn-primary href=helpers.shopping_list_path(@shopping_list)
+          = I18n.t('shopping_lists.index.view')
