@@ -27,5 +27,4 @@
           i.bi.bi-person-circle.fs-5
           span.fw-bold.small = @shopping_list.owner.nickname
 
-        a.btn.btn-primary href=helpers.shopping_list_path(@shopping_list)
-          = I18n.t('shopping_lists.index.view')
+        = render ::Base::Component::Button.new(type: :show, path: helpers.shopping_list_path(@shopping_list))

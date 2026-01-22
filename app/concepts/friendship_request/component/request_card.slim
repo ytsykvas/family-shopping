@@ -10,18 +10,14 @@
         .d-flex.align-items-center
           i.bi.bi-person-circle.me-2 style="font-size: 1.5rem;"
           .user-name.fw-bold = request_user.name
-        = link_to user_path(request_user), class: 'btn btn-link btn-sm p-0 text-muted'
-          i.bi.bi-box-arrow-up-right
+        = render ::Base::Component::Button.new(type: :external_link, path: user_path(request_user), class: 'btn-sm p-0 text-muted')
       .user-details.mb-1
         .user-nickname.text-muted.small.mb-0 = "#{I18n.t('user_searches.nickname_label')} #{request_user.nickname}"
         .user-email.text-muted.small = request_user.email
     .user-actions.mt-2.text-center
       - if is_incoming_request?
         .d-flex.flex-column.gap-2
-          = button_to friendship_request_path(@friendship_request), method: :patch, class: 'btn btn-success btn-sm w-100 py-1', data: { turbo: false } do
-            i.bi.bi-check-lg
-          = button_to friendship_request_path(@friendship_request), method: :delete, class: 'btn btn-danger btn-sm w-100 py-1', data: { turbo: false } do
-            i.bi.bi-x-lg
+          = render ::Base::Component::Button.new(type: :accept, path: friendship_request_path(@friendship_request), class: 'btn-sm w-100 py-1', data: { turbo_method: :patch })
+          = render ::Base::Component::Button.new(type: :reject, path: friendship_request_path(@friendship_request), class: 'btn-sm w-100 py-1', data: { turbo_method: :delete })
       - else
-        = button_to friendship_request_path(@friendship_request), method: :delete, class: 'btn btn-danger btn-sm w-100 py-1', data: { turbo: false } do
-          i.bi.bi-trash
+        = render ::Base::Component::Button.new(type: :delete, path: friendship_request_path(@friendship_request), class: 'btn-sm w-100 py-1', data: { turbo_method: :delete })
