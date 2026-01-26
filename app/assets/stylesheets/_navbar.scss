@@ -632,8 +632,6 @@
       align-items: center;
       justify-content: space-between;
       width: 100%;
-      background-color: $primary-green;
-      color: $text-black;
       border: 0;
       border-top: 3px solid $border-black;
       border-radius: 0;
@@ -644,7 +642,7 @@
       letter-spacing: 1px;
       text-transform: uppercase;
       text-decoration: none;
-      transition: background-color 0.2s ease;
+      transition: background-color 0.2s ease, color 0.2s ease;
 
       .cta-arrow {
         font-size: 1.5rem;
@@ -655,11 +653,30 @@
 
       &:hover,
       &:focus {
-        background-color: color.scale($primary-green, $lightness: -10%);
-        color: $text-black;
-
         .cta-arrow {
           transform: translate(4px, -4px);
+        }
+      }
+
+      &.btn-cta-offcanvas-success {
+        background-color: $primary-green !important;
+        color: $text-black !important;
+
+        &:hover,
+        &:focus {
+          background-color: color.scale($primary-green, $lightness: -10%) !important;
+          color: $text-black !important;
+        }
+      }
+
+      &.btn-cta-offcanvas-danger {
+        background-color: $primary-pink !important;
+        color: $text-white !important;
+
+        &:hover,
+        &:focus {
+          background-color: color.scale($primary-pink, $lightness: -10%) !important;
+          color: $text-white !important;
         }
       }
     }
@@ -736,7 +753,7 @@
 
 .main-content {
   min-height: calc(100vh - 60px);
-  
+
   .container {
     max-width: 1400px;
 
@@ -749,4 +766,3 @@
     }
   }
 }
-

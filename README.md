@@ -1,50 +1,56 @@
 # 🛒 Family Shopping
 
-A collaborative shopping list management application for families. Keep track of what needs to be purchased, share lists with family members, and mark items as completed in real-time.
+A sophisticated collaborative shopping list and wishlist management application for families and friends. Designed with a modern architecture, it ensures seamless coordination for household needs and gift-giving.
 
 ## 📱 Project Overview
 
-**Family Shopping** is a full-stack application designed to simplify household shopping management. Family members can register, add items to shared shopping lists, and check them off as they're purchased. Everyone stays synchronized with real-time updates.
+**Family Shopping** is a full-stack Rails application built for real-world family collaboration. It moves beyond simple lists, offering a robust friendship system, shared shopping lists with invitation workflows, and collaborative wishlists where users can "book" items they intend to gift.
 
-### Architecture
+### 🏗 Architecture & Design Patterns
 
-- **Backend**: Ruby on Rails 8.1 with PostgreSQL
-- **Frontend**: Web interface with Slim templates and ViewComponents
-- **API**: Grape API (planned) for mobile integration
-- **Mobile**: React Native app (planned)
-- **Authentication**: Devise + JWT for both web sessions and API tokens
+The project follows a modern, component-based architecture to ensure maintainability and scalability:
 
-## ✨ Features
+- **Operations-Based Business Logic**: All business logic is encapsulated in **Operations** located in `app/concepts/*/operation`. This keeps models thin and controllers focused only on request/response handling.
+- **ViewComponents & Slim**: The UI is built using **ViewComponents** and **Slim** templates, providing a clean, reusable, and testable frontend structure (`app/concepts/*/component`).
+- **Grape API**: A dedicated, versioned API built with **Grape**, featuring automated documentation via Swagger.
+- **Hybrid Authentication**: **Devise** for web sessions and **JWT** (via `devise-jwt`) for secure API access.
 
-- 🔐 **User Authentication**: Secure registration and login with Devise
-- 👨‍👩‍👧‍👦 **Family Collaboration**: Multiple users can share shopping lists
-- ✅ **Item Management**: Add, edit, and mark items as purchased
-- 📱 **Cross-Platform**: Web interface ready, mobile API prepared
-- 🔒 **Authorization**: Pundit-based access control
-- 🚀 **API Ready**: JWT authentication for future React Native app
+## ✨ Key Features
+
+- 🔐 **Secure Authentication**: Traditional login and registration with nickname support and JWT tokens for mobile integration.
+- 👨‍👩‍👧‍👦 **Friendship System**: Connect with family and friends. Send, accept, or manage friendship requests.
+- 📋 **Collaborative Shopping Lists**:
+    - Create and manage multiple lists.
+    - Invite members via a formal invitation system.
+    - Real-time item management (add, update, delete).
+- 🎁 **Shared Wishlists**:
+    - Personal wishlists shared with friends.
+    - "I will gift" (booking) feature to coordinate gift-giving and avoid duplicates.
+- 🔍 **User Discovery**: Search for family members by email or nickname.
+- 📜 **API Documentation**: Interactive Swagger UI at `/api/docs`.
 
 ## 🛠 Tech Stack
 
 ### Backend
 - **Ruby**: 3.4.7
-- **Rails**: 8.1.1
+- **Rails**: 8.1.2 (using Propshaft)
 - **Database**: PostgreSQL
-- **Authentication**: Devise + Devise-JWT
+- **API**: Grape + Grape-Entity + Swagger
+- **Authentication**: Devise + `devise-jwt`
 - **Authorization**: Pundit
-- **Testing**: RSpec, Capybara, FactoryBot
 
 ### Frontend
 - **Templates**: Slim
-- **Components**: ViewComponent
-- **Styles**: SCSS with Dartsass
+- **Components**: `view_component`
+- **Styles**: SCSS with `dartsass-rails`
 - **JavaScript**: Stimulus, Turbo
 
 ### Infrastructure
-- **Web Server**: Puma
-- **Deployment**: Kamal (Docker-based)
 - **Background Jobs**: Solid Queue
 - **Caching**: Solid Cache
 - **WebSockets**: Solid Cable
+- **Deployment**: Kamal (Docker-based)
+- **Web Server**: Puma + Thruster
 
 ## 🚀 Getting Started
 
@@ -52,8 +58,7 @@ A collaborative shopping list management application for families. Keep track of
 
 - Ruby 3.4.7
 - PostgreSQL 14+
-- Node.js (for JavaScript dependencies)
-- Docker (optional, for deployment)
+- Redis (optional, for some configurations)
 
 ### Installation
 
@@ -70,152 +75,49 @@ A collaborative shopping list management application for families. Keep track of
 
 3. **Setup database**
    ```bash
-   bin/rails db:create
-   bin/rails db:migrate
+   bin/rails db:prepare
    ```
 
-4. **Configure credentials**
+4. **Environment Configuration**
+   Create a `.env` file (see `.env.example` if available) or use Rails credentials:
    ```bash
    bin/rails credentials:edit
    ```
-   
-   Add your JWT secret:
-   ```yaml
-   devise_jwt_secret_key: your_secret_key_here
-   ```
+   *Note: Ensure `DEVISE_JWT_SECRET_KEY` is set.*
 
-5. **Start the server**
+5. **Start the development server**
    ```bash
-   bin/rails server
+   bin/dev
    ```
 
-6. **Visit the app**
-   Open [http://localhost:3000](http://localhost:3000) in your browser
+6. **Access the application**
+   - Web UI: [http://localhost:3000](http://localhost:3000)
+   - API Docs: [http://localhost:3000/api/docs](http://localhost:3000/api/docs)
 
-## 📚 Documentation
+## 🏗 Project Structure (Concept-Based)
 
-- **[Authentication Guide](doc/AUTHENTICATION.md)** - Complete guide for web and API authentication
-- **[API Examples](doc/API_EXAMPLES.md)** - API usage examples for React Native integration
+The application uses a directory structure organized by **domain concepts** rather than just Rails types:
+
+```text
+app/concepts/
+├── [concept_name]/        # e.g., shopping_list, wishlist_items, friends
+│   ├── component/         # ViewComponents and Slim templates
+│   └── operation/         # Business logic (Service Objects / Operations)
+├── shared/                # Common UI elements (navbar, modals)
+└── base/                  # Base classes for Operations and Components
+```
 
 ## 🧪 Testing
 
-Run the test suite:
+We use **RSpec** for comprehensive testing across the stack:
 
 ```bash
 # Run all tests
 bundle exec rspec
 
-# Run specific test file
-bundle exec rspec spec/models/user_spec.rb
-
-# Run with coverage
+# Run with coverage (SimpleCov)
 COVERAGE=true bundle exec rspec
 ```
-
-## 🏗 Project Structure
-
-```
-app/
-├── concepts/           # Domain concepts (components + operations)
-│   ├── base/          # Base classes for components and operations
-│   └── home/          # Home page concept
-├── controllers/       # Controllers
-│   ├── api/          # API controllers (JWT auth)
-│   └── users/        # Devise controllers (custom)
-├── models/           # ActiveRecord models
-├── policies/         # Pundit authorization policies
-├── serializers/      # JSON serializers for API
-└── views/            # ERB/Slim templates
-
-config/
-├── initializers/     # Rails initializers
-│   └── devise.rb    # Devise + JWT configuration
-└── routes.rb        # Application routes
-
-spec/
-├── models/          # Model tests
-├── requests/        # Request tests
-├── support/         # Test helpers
-└── factories/       # FactoryBot factories
-```
-
-## 🔐 Authentication
-
-### Web Authentication
-
-Traditional session-based authentication for web interface:
-
-```ruby
-# Login
-POST /users/sign_in
-# Logout
-DELETE /users/sign_out
-# Register
-POST /users
-```
-
-## 🗺 Roadmap
-
-### Phase 1: Core Features ✅
-- [x] User authentication (web + API)
-- [x] Authorization with Pundit
-- [x] JWT token management
-- [ ] Shopping list creation and management
-- [ ] Item CRUD operations
-- [ ] Mark items as purchased
-
-### Phase 2: Family Features 🚧
-- [ ] Family groups
-- [ ] Invite family members
-- [ ] Shared shopping lists
-- [ ] Real-time updates with Action Cable
-
-### Phase 3: Advanced Features 📋
-- [ ] Item categories
-- [ ] Recurring items
-- [ ] Shopping history
-- [ ] Price tracking
-- [ ] Store locations
-
-### Phase 4: Mobile App 📱
-- [ ] Grape API endpoints
-- [ ] React Native mobile app
-- [ ] Push notifications
-- [ ] Offline mode
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-### Code Style
-
-- Follow Ruby Style Guide
-- Use RuboCop for linting: `bundle exec rubocop`
-- Write tests for new features
-- Keep test coverage above 90%
-
-## 📝 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 👥 Authors
-
-- **Your Name** - *Initial work*
-
-## 🙏 Acknowledgments
-
-- Built with [Ruby on Rails](https://rubyonrails.org/)
-- Authentication by [Devise](https://github.com/heartcombo/devise)
-- JWT tokens by [devise-jwt](https://github.com/waiting-for-dev/devise-jwt)
-- Authorization by [Pundit](https://github.com/varvet/pundit)
-
-## 📞 Support
-
-For questions or issues, please open an issue on GitHub or contact the maintainers.
 
 ---
 

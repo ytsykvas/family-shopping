@@ -71,8 +71,8 @@ header.navbar-shell
 
       .navbar-offcanvas-cta
         - if @current_user.present?
-          = button_to I18n.t('navbar.sign_out'), destroy_user_session_path, method: :delete, data: { turbo: false }, class: 'btn btn-cta-offcanvas', form_class: 'd-inline'
+          = button_to I18n.t('navbar.sign_out'), destroy_user_session_path, method: :delete, data: { turbo: false }, class: 'btn btn-cta-offcanvas btn-cta-offcanvas-danger', form_class: 'd-inline'
         - else
-          = link_to new_user_session_path, class: 'btn btn-cta-offcanvas' do
+          = link_to new_user_session_path, class: 'btn btn-cta-offcanvas btn-cta-offcanvas-success' do
             span = I18n.t('navbar.sign_in')
             span.cta-arrow ↗
