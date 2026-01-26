@@ -15,12 +15,20 @@ class WishlistItemPolicy < ApplicationPolicy
     record.user == user
   end
 
+  def book?
+    record.user != user
+  end
+
+  def unbook?
+    record.booked? && record.booked_by_user == user
+  end
+
   class Scope < Scope
     def resolve
       # For now, index shows my own items.
       # If we view others, we might need a param or different scope logic.
       # But usually 'index' is 'my collection'.
-      scope.where(user: user)
+      scope.all
     end
   end
 end

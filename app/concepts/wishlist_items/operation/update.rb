@@ -10,7 +10,7 @@ module WishlistItems
         if wishlist_item.update(wishlist_item_params(params))
           self.model = wishlist_item
           self.redirect_path = "/wishlist_items"
-          notice(I18n.t("wishlist_items.update.success", default: "Item updated successfully"), level: :success)
+          notice(I18n.t("wishlist_items.update.success"), level: :success)
         else
           self.redirect_path = "/wishlist_items"
           add_errors(wishlist_item.errors)

@@ -25,5 +25,14 @@ class V1::Users < Grape::API
       result = run_operation Api::Users::Operation::CheckEmail
       present result, with: Entities::AvailabilityResponse
     end
+    route_param :id do
+      desc "Get a user",
+           tags: [ "Users" ],
+           success: Entities::User
+      get do
+        result = run_operation ::Users::Operation::Show
+        present result.user, with: Entities::User
+      end
+    end
   end
 end

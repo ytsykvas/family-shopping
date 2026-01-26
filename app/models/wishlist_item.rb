@@ -10,4 +10,25 @@ class WishlistItem < ApplicationRecord
 
   validates :title, presence: true
   validates :currency, inclusion: { in: CURRENCIES }, allow_blank: true
+
+  before_save :normalize_url
+
+  def external_url
+    return nil if url.blank?
+
+    if url.match?(%r{\Ahttps?://})
+      url
+    else
+      "https://#{url}"
+    end
+  end
+
+  private
+
+  def normalize_url
+    return if url.blank?
+    return if url.match?(%r{\Ahttps?://})
+
+    self.url = "https://#{url}"
+  end
 end

@@ -21,7 +21,10 @@ Rails.application.routes.draw do
   end
   resources :shopping_list_memberships, only: [ :destroy ]
   resources :shopping_list_invitations, only: [ :create, :update, :destroy ]
-  resources :wishlist_items, only: [ :index, :create, :update, :destroy ]
+  resources :wishlist_items, only: [ :index, :show, :create, :update, :destroy ] do
+    post :book, on: :member
+    delete :unbook, on: :member
+  end
 
   root "home#index"
 end

@@ -103,6 +103,19 @@ module OperationsMethods
         end
       end
 
+      format.turbo_stream do
+        if result.failure?
+          @error_message = result.error_message
+          response.status = :unprocessable_entity
+        end
+
+        if result.model.is_a?(OpenStruct)
+          result.model.to_h.each { |k, v| instance_variable_set("@#{k}", v) }
+        else
+          @model = result.model
+        end
+      end
+
         # TODO: auto-submit controller sends null request that could be handled only with format.any
         format.any do
           params = if result.model.is_a?(OpenStruct)

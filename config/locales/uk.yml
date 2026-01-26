@@ -312,7 +312,6 @@ uk:
       no_lists: Створюйте списки покупок та діліться ними з друзями та родиною!
       no_lists_title: Списків покупок поки немає
       title: Мої списки покупок
-
     leave:
       button: Покинути список
       confirm: Ви впевнені, що хочете покинути цей список?
@@ -347,10 +346,15 @@ uk:
     placeholder: Пошук за нікнеймом або email
   users:
     show:
-      back_to_friends: Назад до друзів
       friend_status: Друг
       remove_friend: Видалити з друзів
+      wishlist: Бажання
   wishlist_items:
+    book:
+      errors:
+        already_booked: Це бажання вже заброньовано
+        own_item: Ви не можете забронювати власне бажання
+      success: Бажання заброньовано та додано до вашого списку покупок!
     create:
       success: Бажання успішно додано
     destroy:
@@ -373,6 +377,18 @@ uk:
       i_will_gift: Я подарую
       no_items: Почніть додавати те, що хотіли б отримати у подарунок!
       no_items_title: Поки немає бажань
+      reserved: Заброньовано
       title: Мій вішліст
+      you_will_gift: Ви це даруєте
+    show:
+      no_items: У цього користувача поки немає бажань.
+      no_items_title: Бажань не знайдено
+      title: Вішліст %{name}
+    unbook:
+      cancel_button: Скасувати
+      confirm: Ви впевнені, що хочете скасувати бронювання?
+      errors:
+        not_booked_by_you: Ви не можете скасувати бронювання, яке не вами зроблено
+      success: Бронювання скасовано
     update:
       success: Бажання успішно оновлено

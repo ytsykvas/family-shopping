@@ -1,4 +1,4 @@
-.col
+.col id=helpers.dom_id(@wishlist_item)
   .card.h-100.shadow-sm.border-0.rounded-3
     - if @wishlist_item.image.attached?
       = helpers.image_tag @wishlist_item.image, class: "card-img-top", style: "height: 200px; object-fit: cover; border-top-left-radius: 0.5rem; border-top-right-radius: 0.5rem;"
@@ -20,23 +20,36 @@
       
       - if @wishlist_item.url.present?
         .text-center
-          a.btn.btn-sm.btn-outline-primary.mb-3 href=@wishlist_item.url target="_blank"
+          a.btn.btn-sm.btn-outline-primary.mb-3(href=@wishlist_item.external_url target="_blank" rel="noopener noreferrer")
             i.bi.bi-link-45deg.me-1
             = I18n.t('wishlist_items.form.url')
 
     .card-footer.bg-white.border-top-0.pb-3
       .d-block.mb-2
         small.text-muted = helpers.time_ago_in_words(@wishlist_item.created_at)
-      .d-flex.justify-content-between.align-items-center
+      
         - if @wishlist_item.user == helpers.current_user
-          button.btn.btn-sm.btn-danger.px-4 type="button" data-bs-toggle="modal" data-bs-target="#deleteWishlistItemModal_#{@wishlist_item.id}"
-            i.bi.bi-trash.fs-5
-          
-          button.btn.btn-sm.btn-primary.px-4 type="button" data-bs-toggle="modal" data-bs-target="#editWishlistItemModal_#{@wishlist_item.id}"
-            i.bi.bi-pencil.fs-5
+          .d-flex.justify-content-between.align-items-center
+            button.btn.btn-sm.btn-danger.px-4 type="button" data-bs-toggle="modal" data-bs-target="#deleteWishlistItemModal_#{@wishlist_item.id}"
+              i.bi.bi-trash.fs-5
+            
+            button.btn.btn-sm.btn-primary.px-4 type="button" data-bs-toggle="modal" data-bs-target="#editWishlistItemModal_#{@wishlist_item.id}"
+              i.bi.bi-pencil.fs-5
         - else
-          button.btn.btn-sm.btn-success.w-100
-            i.bi.bi-gift.me-2
-            = I18n.t('wishlist_items.index.i_will_gift')
-
-
+          .d-flex.justify-content-center.align-items-center
+            - if booked_by_me?
+              .d-flex.flex-column.gap-2.align-items-center
+                button.btn.btn-sm.btn-success disabled=true
+                  i.bi.bi-check-circle-fill.me-2
+                  = I18n.t('wishlist_items.index.you_will_gift')
+                = button_to unbook_wishlist_item_path(@wishlist_item), method: :delete, class: 'btn btn-sm btn-outline-danger', data: { turbo: false, turbo_confirm: I18n.t('wishlist_items.unbook.confirm') } do
+                  i.bi.bi-x-lg.me-2
+                  = I18n.t('wishlist_items.unbook.cancel_button')
+            - elsif booked?
+              button.btn.btn-sm.btn-secondary.w-100 disabled=true
+                i.bi.bi-lock-fill.me-2
+                = I18n.t('wishlist_items.index.reserved')
+            - else
+              = button_to book_wishlist_item_path(@wishlist_item), method: :post, class: 'btn btn-sm btn-success w-100', data: { turbo: false } do
+                i.bi.bi-gift.me-2
+                = I18n.t('wishlist_items.index.i_will_gift')

@@ -4,7 +4,7 @@ RSpec.describe "ShoppingListMemberships", type: :request do
   let(:owner) { create(:user) }
   let(:member) { create(:user) }
   let(:shopping_list) { create(:shopping_list, owner: owner) }
-  let(:headers) { authenticated_header(member) }
+  let(:headers) { auth_headers(member) }
 
   before do
     create(:shopping_list_user, shopping_list: shopping_list, user: member)

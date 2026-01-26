@@ -48,9 +48,9 @@ RSpec.describe WishlistItemPolicy, type: :policy do
 
     subject(:scope) { Pundit.policy_scope(user, WishlistItem) }
 
-    it 'includes only user items' do
+    it 'includes all items (public wishlists)' do
       expect(scope).to include(my_item)
-      expect(scope).not_to include(other_item)
+      expect(scope).to include(other_item)
     end
   end
 end

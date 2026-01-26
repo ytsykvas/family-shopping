@@ -39,7 +39,9 @@ module AuthenticationHelper
 
   # Run operation and return its model as JSON
   def run_operation(operation_class)
-    result = operation_class.call(params: params, current_user: current_user)
+    # Ensure params are compatible with Rails strong parameters
+    rails_params = ActionController::Parameters.new(params)
+    result = operation_class.call(params: rails_params, current_user: current_user)
 
     if result.failure?
       error!({ errors: result.all_error_messages }, 422)

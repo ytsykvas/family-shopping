@@ -1,0 +1,13 @@
+= helpers.image_tag "banners/wishlists.png", class: "img-fluid w-100 rounded mb-4 border-3 border-dark", style: "border: 3px solid #000; box-shadow: 4px 4px 0 #000; object-fit: cover; height: 15rem;"
+= render Shared::TitleRow::Component::Show.new(title: title)
+
+- if @wishlist_items.any?
+  .row.row-cols-1.row-cols-md-2.row-cols-lg-3.g-4.mb-4
+    - @wishlist_items.each do |item|
+      = render WishlistItems::Component::ItemCard.new(wishlist_item: item)
+
+- else
+  .empty-content-container
+    i.bi.bi-heart.empty-icon
+    .empty-title = I18n.t("wishlist_items.show.no_items_title")
+    .empty-message = I18n.t("wishlist_items.show.no_items")

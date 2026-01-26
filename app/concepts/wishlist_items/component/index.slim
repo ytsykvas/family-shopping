@@ -1,5 +1,5 @@
 = helpers.image_tag "banners/wishlists.png", class: "img-fluid w-100 rounded mb-4 border-3 border-dark", style: "border: 3px solid #000; box-shadow: 4px 4px 0 #000; object-fit: cover; height: 15rem;"
-= render Shared::TitleRow::Component::Show.new(title: I18n.t('wishlist_items.index.title'), button_text: I18n.t('wishlist_items.index.create'), button_data: { 'bs-toggle': 'modal', 'bs-target': '#createWishlistItemModal' })
+= render Shared::TitleRow::Component::Show.new(title: title, button_text: (show_create_button? ? I18n.t('wishlist_items.index.create') : nil), button_data: { 'bs-toggle': 'modal', 'bs-target': '#createWishlistItemModal' })
 
 - if @wishlist_items.any?
   .row.row-cols-1.row-cols-md-2.row-cols-lg-3.g-4.mb-4
@@ -11,9 +11,11 @@
     i.bi.bi-heart.empty-icon
     .empty-title = I18n.t("wishlist_items.index.no_items_title")
     .empty-message = I18n.t("wishlist_items.index.no_items")
-    button.btn.btn-primary.mt-3 data-bs-toggle="modal" data-bs-target="#createWishlistItemModal" = I18n.t('wishlist_items.index.create')
+    - if show_create_button?
+      button.btn.btn-primary.mt-3 data-bs-toggle="modal" data-bs-target="#createWishlistItemModal" = I18n.t('wishlist_items.index.create')
 
-= render WishlistItems::Component::Create.new(new_wishlist_item: @new_wishlist_item)
+- if show_create_button?
+  = render WishlistItems::Component::Create.new(new_wishlist_item: @new_wishlist_item)
 
 - @wishlist_items.each do |item|
   - if helpers.policy(item).update?

@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "ShoppingLists", type: :request do
   let(:user) { create(:user) }
-  let(:headers) { authenticated_header(user) }
+  let(:headers) { auth_headers(user) }
 
   describe "GET /api/v1/shopping_lists" do
     let!(:shopping_list) { create(:shopping_list, owner: user) }

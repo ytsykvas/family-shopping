@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe "UserSearches", type: :request do
   let(:user) { create(:user) }
   let!(:other_user) { create(:user, nickname: "target_user") }
-  let(:headers) { authenticated_header(user) }
+  let(:headers) { auth_headers(user) }
 
   describe "GET /api/v1/user_searches" do
     it "returns matching users" do

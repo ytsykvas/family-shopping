@@ -6,9 +6,7 @@
           = render Users::Component::ProfileHeader.new(user: @user)
           = render Users::Component::FriendshipStatus.new(is_friend: @is_friend, incoming_request: @incoming_request, outgoing_request: @outgoing_request, is_own_profile: is_own_profile?)
           hr
+          .d-grid.gap-2.mb-3
+            = render ::Base::Component::Button.new(type: :link, path: wishlist_item_path(@user), text: I18n.t('users.show.wishlist'), class: 'btn-primary', icon: 'bi-heart', data: { turbo: false })
           = render Users::Component::ProfileDetails.new(user: @user)
           = render Users::Component::ProfileActions.new(user: @user, is_friend: @is_friend, friendship: @friendship, incoming_request: @incoming_request, outgoing_request: @outgoing_request, is_own_profile: is_own_profile?)
-          .mt-4
-            = link_to friends_path, class: 'btn btn-secondary' do
-              i.bi.bi-arrow-left.me-2
-              = I18n.t('users.show.back_to_friends')

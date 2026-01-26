@@ -24,4 +24,5 @@ class V1::Base < Grape::API
   mount V1::Friends
   mount V1::FriendshipRequests
   mount V1::UserSearches
+  mount V1::WishlistItems
 end

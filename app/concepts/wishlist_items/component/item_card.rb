@@ -17,6 +17,17 @@ module WishlistItems
           helpers.number_to_currency(@wishlist_item.price, unit: "$", format: "%u%n", strip_insignificant_zeros: true)
         end
       end
+      def booked?
+        @wishlist_item.booked?
+      end
+
+      def booked_by_me?
+        booked? && @wishlist_item.booked_by_user == helpers.current_user
+      end
+
+      def can_book?
+        !booked? && @wishlist_item.user != helpers.current_user
+      end
     end
   end
 end

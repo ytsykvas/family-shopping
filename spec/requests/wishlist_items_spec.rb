@@ -78,4 +78,56 @@ RSpec.describe "WishlistItems", type: :request do
       expect(response).to redirect_to(wishlist_items_path)
     end
   end
+
+  describe "GET /show" do
+    let(:other_user) { create(:user) }
+    let!(:other_wishlist_item) { create(:wishlist_item, user: other_user) }
+
+    it "returns http success for other user's wishlist" do
+      get wishlist_item_path(other_user)
+      expect(response).to have_http_status(:success)
+    end
+  end
+
+  describe "POST /book" do
+    let(:other_user) { create(:user) }
+    let!(:other_wishlist_item) { create(:wishlist_item, user: other_user) }
+
+    context "when booking other user's item" do
+      it "books the item and redirects" do
+        post book_wishlist_item_path(other_wishlist_item)
+        expect(response).to redirect_to(root_path) # Default fallback if no referrer
+        expect(other_wishlist_item.reload).to be_booked
+        expect(other_wishlist_item.booked_by_user).to eq(user)
+      end
+
+      it "creates a 'Presents' shopping list for the current user" do
+        expect {
+          post book_wishlist_item_path(other_wishlist_item)
+        }.to change(user.owned_shopping_lists, :count).by(1)
+
+        list = user.owned_shopping_lists.find_by(name: 'Presents')
+        expect(list).to be_present
+        expect(list.shopping_list_items.count).to eq(1)
+        expect(list.shopping_list_items.first.name).to include(other_wishlist_item.title)
+      end
+    end
+
+    context "when trying to book own item" do
+      it "does not book the item" do
+        post book_wishlist_item_path(wishlist_item)
+        expect(wishlist_item.reload).not_to be_booked
+        expect(response).to redirect_to(root_path)
+      end
+    end
+
+    context "when item is already booked" do
+      before { other_wishlist_item.booked! }
+
+      it "does not re-book the item" do
+        post book_wishlist_item_path(other_wishlist_item)
+        expect(response).to redirect_to(root_path)
+      end
+    end
+  end
 end

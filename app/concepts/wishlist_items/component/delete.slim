@@ -7,4 +7,4 @@
       .modal-body
           = I18n.t('wishlist_items.index.delete_confirm')
       .modal-footer
-          = helpers.button_to I18n.t('wishlist_items.index.delete'), helpers.wishlist_item_path(@wishlist_item), method: :delete, class: "btn btn-danger"
+          = helpers.button_to I18n.t('wishlist_items.index.delete'), helpers.wishlist_item_path(@wishlist_item), method: :delete, class: "btn btn-danger", data: { turbo: false }

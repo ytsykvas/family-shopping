@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe "ShoppingListInvitations", type: :request do
   let(:user) { create(:user) }
   let(:friend) { create(:user) }
-  let(:headers) { authenticated_header(user) }
+  let(:headers) { auth_headers(user) }
   let(:shopping_list) { create(:shopping_list, owner: user) }
 
   before do
@@ -26,7 +26,7 @@ RSpec.describe "ShoppingListInvitations", type: :request do
 
   describe "PUT /api/v1/shopping_list_invitations/:id" do
     let(:invitation) { create(:shopping_list_invitation, shopping_list: shopping_list, inviter: user, invitee: friend, status: :pending) }
-    let(:friend_headers) { authenticated_header(friend) }
+    let(:friend_headers) { auth_headers(friend) }
 
     it "accepts the invitation" do
       put "/api/v1/shopping_list_invitations/#{invitation.id}", headers: friend_headers

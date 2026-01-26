@@ -5,8 +5,8 @@ RSpec.describe "ShoppingListItems", type: :request do
   let(:member) { create(:user) }
   let(:other_user) { create(:user) }
   let(:shopping_list) { create(:shopping_list, owner: user) }
-  let(:headers) { authenticated_header(user) }
-  let(:member_headers) { authenticated_header(member) }
+  let(:headers) { auth_headers(user) }
+  let(:member_headers) { auth_headers(member) }
 
   before do
     create(:shopping_list_user, shopping_list: shopping_list, user: member)
@@ -40,7 +40,7 @@ RSpec.describe "ShoppingListItems", type: :request do
     end
 
     context "when not authorized" do
-      let(:unauthorized_headers) { authenticated_header(other_user) }
+      let(:unauthorized_headers) { auth_headers(other_user) }
 
       it "returns 403" do
         get "/api/v1/shopping_lists/#{shopping_list.id}/items", headers: unauthorized_headers
@@ -76,7 +76,7 @@ RSpec.describe "ShoppingListItems", type: :request do
     end
 
     context "when not authorized" do
-      let(:unauthorized_headers) { authenticated_header(other_user) }
+      let(:unauthorized_headers) { auth_headers(other_user) }
 
       it "returns 403" do
         post "/api/v1/shopping_lists/#{shopping_list.id}/items",
@@ -131,7 +131,7 @@ RSpec.describe "ShoppingListItems", type: :request do
     end
 
     context "when not authorized" do
-      let(:unauthorized_headers) { authenticated_header(other_user) }
+      let(:unauthorized_headers) { auth_headers(other_user) }
 
       it "returns 403" do
         patch "/api/v1/shopping_lists/#{shopping_list.id}/items/#{item.id}",
@@ -163,7 +163,7 @@ RSpec.describe "ShoppingListItems", type: :request do
     end
 
     context "when not authorized" do
-      let(:unauthorized_headers) { authenticated_header(other_user) }
+      let(:unauthorized_headers) { auth_headers(other_user) }
 
       it "returns 403" do
         delete "/api/v1/shopping_lists/#{shopping_list.id}/items/#{item.id}",

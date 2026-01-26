@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe "Friends", type: :request do
   let(:user) { create(:user) }
   let(:friend) { create(:user) }
-  let(:headers) { authenticated_header(user) }
+  let(:headers) { auth_headers(user) }
 
   before do
     create(:friendship, requester: user, accepter: friend, status: :accepted)

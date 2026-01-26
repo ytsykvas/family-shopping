@@ -254,7 +254,6 @@ en:
       no_lists: Create shopping lists and share them with friends and family!
       no_lists_title: No Shopping Lists Yet
       title: My Shopping Lists
-
     leave:
       button: Leave List
       confirm: Are you sure you want to leave this list?
@@ -289,10 +288,15 @@ en:
     placeholder: Search by nickname or email
   users:
     show:
-      back_to_friends: Back to Friends
       friend_status: Friend
       remove_friend: Remove Friend
+      wishlist: Wishlist
   wishlist_items:
+    book:
+      errors:
+        already_booked: This item is already booked
+        own_item: You cannot book your own item
+      success: Item booked and added to your shopping list!
     create:
       success: Wishlist item added successfully
     destroy:
@@ -315,6 +319,18 @@ en:
       i_will_gift: I will gift
       no_items: Start adding things you'd love to receive as a gift!
       no_items_title: No Wishes Yet
+      reserved: Reserved
       title: My Wishlist
+      you_will_gift: You will gift this
+    show:
+      no_items: This user has no wishes yet.
+      no_items_title: No Wishes Found
+      title: "%{name}'s Wishlist"
+    unbook:
+      cancel_button: Cancel
+      confirm: Are you sure you want to cancel this booking?
+      errors:
+        not_booked_by_you: You cannot cancel a booking you did not make
+      success: Booking cancelled
     update:
       success: Wishlist item updated successfully
