@@ -101,10 +101,11 @@ RSpec.describe "WishlistItems", type: :request do
         expect(other_wishlist_item.booked_by_user).to eq(user)
       end
 
-      it "creates a 'Presents' shopping list for the current user" do
+      it "creates a 'Presents' shopping list for the current user if needed" do
+        # 'Presents' list is created by user callback.
         expect {
           post book_wishlist_item_path(other_wishlist_item)
-        }.to change(user.owned_shopping_lists, :count).by(1)
+        }.not_to change(user.owned_shopping_lists, :count)
 
         list = user.owned_shopping_lists.find_by(name: 'Presents')
         expect(list).to be_present

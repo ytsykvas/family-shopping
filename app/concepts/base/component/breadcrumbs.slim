@@ -1,0 +1,12 @@
+.breadcrumbs-wrapper
+  - if @back_path
+    = link_to @back_path, class: "btn-back"
+      i.bi.bi-arrow-left
+  nav aria-label="breadcrumb"
+    ol.breadcrumb
+      - @items.each do |item|
+        - if item[:path]
+          li.breadcrumb-item
+            = link_to item[:name], item[:path]
+        - else
+          li.breadcrumb-item.active aria-current="page" = item[:name]

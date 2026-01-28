@@ -134,6 +134,7 @@ end
 - **Must inherit from `Base::Component::Base`**
 - **Initialize method receives data from operation**
 - **Template file must exist** at `app/concepts/feature_name/component/name.slim`
+- **Use absolute paths** (e.g. `::Base::Component::Name`) when referencing other components to avoid namespace issues
 
 ### Example: Index Component
 ```ruby

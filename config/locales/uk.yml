@@ -42,6 +42,12 @@ uk:
       email_taken: Email вже зайнято
       nickname_available: Нікнейм доступний
       nickname_taken: Нікнейм вже зайнято
+  basic:
+    cancel: Скасувати
+    delete: Видалити
+    edit: Редагувати
+    remove: Видалити
+    save: Зберегти
   datetime:
     distance_in_words:
       about_x_hours:
@@ -231,11 +237,40 @@ uk:
     friends: Друзі
     home: Головна
     recipes: Рецепти
-    settings: Налаштування
+    settings:
+      index:
+        title: Налаштування
     shopping_lists: Покупки
     sign_in: Увійти
     sign_out: Вийти
     wishlists: Бажання
+  recipes:
+    add_to_list:
+      confirm: Додати до списку
+      empty: Не вибрано жодного інгредієнта.
+      select_ingredients: 'Виберіть інгредієнти для додавання до списку:'
+      success: Інгредієнти додано до списку.
+      title: Додати до списку покупок
+    create:
+      success: Рецепт успішно створено.
+    delete:
+      confirm: Ви впевнені, що хочете видалити цей рецепт?
+      title: Видалити рецепт
+    destroy:
+      failure: Не вдалося видалити рецепт.
+      success: Рецепт успішно видалено.
+    index:
+      find: Знайти рецепт
+      new: Новий рецепт
+      no_recipes_message: Почніть створювати власні рецепти, щоб зберегти їх на майбутнє!
+      no_recipes_title: Рецептів поки немає
+      title: Рецепти
+    ingredient_placeholder: напр. Яйця 2 шт
+    ingredients: Інгредієнти
+    name: Назва рецепту
+    new:
+      add_ingredient: Додати інгредієнт
+      title: Новий рецепт
   registrations:
     form:
       already_have_account: Вже маєте обліковий запис?
@@ -244,10 +279,6 @@ uk:
       submit: Зареєструватися
       subtitle: Створіть новий обліковий запис
       title: Реєстрація
-    unlocks:
-      send_instructions: Ви отримаєте email з інструкціями щодо розблокування облікового запису протягом кількох хвилин.
-      send_paranoid_instructions: Якщо ваш обліковий запис існує, ви отримаєте email з інструкціями щодо його розблокування протягом кількох хвилин.
-      unlocked: Ваш обліковий запис успішно розблоковано. Будь ласка, увійдіть, щоб продовжити.
   sessions:
     form:
       email_label: Email або Нікнейм
@@ -257,6 +288,9 @@ uk:
       submit: Увійти
       subtitle: Увійдіть до свого облікового запису
       title: Увійти
+  settings:
+    index:
+      title: Налаштування
   shopping_list_invitations:
     accept: Прийняти
     create:

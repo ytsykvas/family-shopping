@@ -2,6 +2,8 @@ class User < ApplicationRecord
   # TODO: Refactor this model methods to use the Friendship model
   include Devise::JWT::RevocationStrategies::Denylist
 
+  after_create :create_default_shopping_lists
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :jwt_authenticatable, jwt_revocation_strategy: self
@@ -27,6 +29,7 @@ class User < ApplicationRecord
   has_many :received_shopping_list_invitations, class_name: "ShoppingListInvitation", foreign_key: :invitee_id, dependent: :destroy
 
   has_many :wishlist_items, dependent: :destroy
+  has_many :recipes, dependent: :destroy
 
   has_many :accepted_sent_friends,
            -> { where(friendships: { status: Friendship.statuses[:accepted] }) },
@@ -111,4 +114,11 @@ class User < ApplicationRecord
   #   User.joins(:sent_friendships)
   #       .where(friendships: { accepter_id: id, status: Friendship.statuses[:pending] })
   # end
+
+  private
+
+  def create_default_shopping_lists
+    owned_shopping_lists.create!(name: "Home")
+    owned_shopping_lists.create!(name: "Presents")
+  end
 end

@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe ShoppingList::Operation::Create, type: :operation do
   describe "#perform!" do
-    let(:user) { create(:user) }
+    let!(:user) { create(:user) }
     let(:params) { { shopping_list: { name: "My New List" } } }
 
     context "when user is authorized" do

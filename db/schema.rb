@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_20_143834) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_27_132020) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -54,12 +54,28 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_20_143834) do
     t.check_constraint "requester_id <> accepter_id", name: "chk_friendships_not_self"
   end
 
+  create_table "ingredients", force: :cascade do |t|
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.bigint "recipe_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipe_id"], name: "index_ingredients_on_recipe_id"
+  end
+
   create_table "jwt_denylists", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "exp"
     t.string "jti"
     t.datetime "updated_at", null: false
     t.index ["jti"], name: "index_jwt_denylists_on_jti", unique: true
+  end
+
+  create_table "recipes", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_recipes_on_user_id"
   end
 
   create_table "shopping_list_invitations", force: :cascade do |t|
@@ -140,6 +156,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_20_143834) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "friendships", "users", column: "accepter_id"
   add_foreign_key "friendships", "users", column: "requester_id"
+  add_foreign_key "ingredients", "recipes"
+  add_foreign_key "recipes", "users"
   add_foreign_key "shopping_list_invitations", "shopping_lists"
   add_foreign_key "shopping_list_invitations", "users", column: "invitee_id"
   add_foreign_key "shopping_list_invitations", "users", column: "inviter_id"

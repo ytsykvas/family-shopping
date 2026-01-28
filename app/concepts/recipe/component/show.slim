@@ -1,0 +1,25 @@
+.container
+  = render ::Base::Component::Breadcrumbs.new(items: [{ name: I18n.t('recipes.index.title', default: 'Recipes'), path: recipes_path }, { name: @recipe.name }], back_path: recipes_path)
+
+  .d-flex.justify-content-between.align-items-center.mb-4
+    h1 = @recipe.name
+    - if helpers.policy(@recipe).update?
+      = link_to I18n.t('basic.edit', default: 'Edit'), edit_recipe_path(@recipe), class: "btn btn-primary"
+
+  .card.mb-4
+    .card-header
+      h5.mb-0 = I18n.t('recipes.ingredients', default: 'Ingredients')
+    .list-group.list-group-flush
+      - @recipe.ingredients.each do |ingredient|
+        .list-group-item = ingredient.content
+  .d-flex.justify-content-between.align-items-center.mb-4
+    - if helpers.policy(@recipe).destroy?
+      button.btn.btn-danger type="button" data-bs-toggle="modal" data-bs-target="#deleteRecipeModal_#{@recipe.id}"
+        = I18n.t('basic.delete')
+    .d-flex.gap-2
+      button.btn.btn-success type="button" data-bs-toggle="modal" data-bs-target="#addToShoppingListModal"
+        = I18n.t('recipes.add_to_list.title', default: 'Add to Shopping List')
+
+  - if helpers.policy(@recipe).destroy?
+    = render Recipe::Component::Delete.new(recipe: @recipe)
+  = render Recipe::Component::AddToShoppingListModal.new(recipe: @recipe)

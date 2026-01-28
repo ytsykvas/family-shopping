@@ -388,4 +388,12 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe "default shopping lists" do
+    let(:user) { create(:user) }
+
+    it "creates 'Home' and 'Presents' shopping lists after user creation" do
+      expect(user.owned_shopping_lists.pluck(:name)).to contain_exactly("Home", "Presents")
+    end
+  end
 end

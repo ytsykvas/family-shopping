@@ -1,0 +1,7 @@
+= turbo_stream.append "pending-items-list" do
+  = render ShoppingListItem::Component::Item.new(shopping_list: @model.shopping_list, item: @model, can_manage: true)
+
+= turbo_stream.remove "pending-items-empty"
+
+= turbo_stream.replace "new-shopping-list-item-form" do
+  = render ShoppingListItem::Component::NewForm.new(shopping_list: @model.shopping_list)

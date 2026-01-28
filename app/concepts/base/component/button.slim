@@ -1,11 +1,11 @@
 - if @path
-  a href=@path *html_options
+  = tag.a href: @path, **html_options do
     - if @text
       = @text
     - else
       i.bi class="#{icon_class} fs-5"
 - else
-  button *html_options
+  = tag.button **html_options do
     - if @text
       = @text
     - else

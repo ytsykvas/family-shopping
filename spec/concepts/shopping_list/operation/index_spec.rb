@@ -9,6 +9,8 @@ RSpec.describe ShoppingList::Operation::Index, type: :operation do
     let(:params) { {} }
 
     context "when user is authorized" do
+      before { user.owned_shopping_lists.destroy_all }
+
       # Create lists where user is owner
       let!(:owned_list1) { create(:shopping_list, owner: user, created_at: 1.day.ago) }
       let!(:owned_list2) { create(:shopping_list, owner: user, created_at: 1.hour.ago) }

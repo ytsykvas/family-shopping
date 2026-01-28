@@ -1,0 +1,21 @@
+= image_tag "banners/recipes.png", class: "img-fluid w-100 rounded mb-4 border-3 border-dark view-banner", style: "border: 3px solid #000; box-shadow: 4px 4px 0 #000; object-fit: cover; height: 15rem;"
+
+.container
+  = render ::Base::Component::Header.new(title: I18n.t('recipes.index.title', default: 'Recipes')) do
+    = link_to I18n.t('recipes.index.find', default: 'Find Recipe'), recipes_path, class: "btn btn-primary"
+    = link_to I18n.t('recipes.index.new', default: 'New Recipe'), new_recipe_path, class: "btn btn-success"
+
+  - if @recipes.any?
+    .row
+      - @recipes.each do |recipe|
+        .col-md-4.mb-4
+          = render Recipe::Component::Card.new(recipe: recipe)
+    - @recipes.each do |recipe|
+      - if helpers.policy(recipe).destroy?
+        = render Recipe::Component::Delete.new(recipe: recipe)
+  - else
+    .empty-content-container
+      i.bi.bi-egg-fried.empty-icon
+      .empty-title = I18n.t("recipes.index.no_recipes_title")
+      .empty-message = I18n.t("recipes.index.no_recipes_message")
+      = link_to I18n.t('recipes.index.new', default: 'New Recipe'), new_recipe_path, class: "btn btn-primary mt-3"

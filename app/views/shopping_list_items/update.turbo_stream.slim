@@ -1,0 +1,17 @@
+- if @model.pending_status?
+  = turbo_stream.remove(dom_id(@model))
+  = turbo_stream.append "pending-items-list" do
+    = render ShoppingListItem::Component::Item.new(shopping_list: @model.shopping_list, item: @model, can_manage: true)
+- else
+  = turbo_stream.remove(dom_id(@model))
+  = turbo_stream.prepend "done-items-list" do
+    = render ShoppingListItem::Component::Item.new(shopping_list: @model.shopping_list, item: @model, can_manage: true)
+
+/ Handle potential empty state messages
+- if @model.shopping_list.shopping_list_items.pending_status.any?
+  = turbo_stream.remove "pending-items-empty"
+- else
+  = turbo_stream.after "pending-items-list" do
+    .text-center.text-muted.py-4 id="pending-items-empty"
+      i.bi.bi-basket.fs-1.mb-2.d-block
+      = I18n.t('shopping_lists.show.no_items')

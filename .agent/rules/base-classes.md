@@ -206,3 +206,35 @@ end
 - **Use `self.model =`** to set data that will be passed to component
 - **Use `authorize!` and `policy_scope`** for authorization
 - **Operations should be thin** - complex logic should be in service objects or models
+
+## Base::Component::Breadcrumbs
+
+### Location
+`app/concepts/base/component/breadcrumbs.rb`
+
+### Purpose
+Renders a navigation breadcrumb trail with an integrated back button.
+
+### Usage
+This component should be rendered directly in other templates (like `show.slim`, `new.slim`).
+
+### Parameters
+- `items:` (Required) Array of hashes, each containing:
+  - `name`: (String) The display text for the breadcrumb.
+  - `path`: (String, optional) The URL path for the breadcrumb. If omitted, the item is not clickable (usually the last item).
+- `back_path:` (Optional) String URL path. If provided, a back button will be rendered to the left of the breadcrumbs.
+
+### Important Note
+When calling this component from within another component's template (e.g., inside `Recipe::Component::New`), you **must use the absolute constant path** `::Base::Component::Breadcrumbs` to avoid `NameError`.
+
+### Example
+```slim
+.container
+  = render ::Base::Component::Breadcrumbs.new(
+      items: [
+        { name: I18n.t('recipes.index.title'), path: recipes_path },
+        { name: I18n.t('recipes.new.title') }
+      ],
+      back_path: recipes_path
+    )
+```

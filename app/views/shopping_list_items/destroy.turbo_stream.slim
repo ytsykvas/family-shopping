@@ -1,0 +1,7 @@
+= turbo_stream.remove(dom_id(@model))
+
+- if @model.shopping_list.shopping_list_items.pending_status.count == 0
+  = turbo_stream.after "pending-items-list" do
+    .text-center.text-muted.py-4 id="pending-items-empty"
+      i.bi.bi-basket.fs-1.mb-2.d-block
+      = I18n.t('shopping_lists.show.no_items')

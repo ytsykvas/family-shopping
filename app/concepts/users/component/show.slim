@@ -1,4 +1,9 @@
 .container.mt-4
+  - if is_own_profile?
+    = render ::Base::Component::Breadcrumbs.new(items: [{ name: I18n.t('settings.index.title', default: 'Settings'), path: edit_user_registration_path }, { name: @user.name }], back_path: edit_user_registration_path)
+  - else
+    = render ::Base::Component::Breadcrumbs.new(items: [{ name: I18n.t('friends.index.title', default: 'Friends'), path: friends_path }, { name: @user.name }], back_path: friends_path)
+
   .row.justify-content-center
     .col-md-8.col-lg-6
       .card

@@ -1,7 +1,8 @@
 require "rails_helper"
 
 RSpec.describe "ShoppingLists", type: :request do
-  let(:user) { create(:user) }
+  let!(:user) { create(:user) }
+  before { user.owned_shopping_lists.destroy_all }
   let(:headers) { auth_headers(user) }
 
   describe "GET /api/v1/shopping_lists" do

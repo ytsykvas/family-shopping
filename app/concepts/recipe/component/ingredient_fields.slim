@@ -1,0 +1,7 @@
+.nested-fields.mb-3.row.align-items-center data-new-record="#{@f.object.new_record?}"
+  .col
+    = @f.text_field :content, class: "form-control-custom", placeholder: I18n.t('recipes.ingredient_placeholder', default: 'e.g. Eggs 2pcs')
+    = @f.hidden_field :_destroy
+  .col-auto
+    button.btn.btn-icon-delete type="button" data-action="nested-form#remove" title=I18n.t('basic.remove')
+      i.bi.bi-trash.fs-5

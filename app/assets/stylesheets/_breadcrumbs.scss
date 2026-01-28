@@ -1,0 +1,84 @@
+@use 'variables' as *;
+@use 'sass:color';
+
+.breadcrumbs-wrapper {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 1.5rem 0.5rem 0.5rem;
+    background-color: $bg-white;
+    border-radius: 50px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+    border: 1px solid white;
+
+    .btn-back {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background-color: $bg-light-gray;
+        color: $text-black;
+        border: 1px solid transparent;
+        transition: all 0.2s ease-in-out;
+        text-decoration: none;
+        flex-shrink: 0;
+
+        &:hover {
+            background-color: $primary-green;
+            color: $text-black;
+            border-color: $primary-green;
+        }
+
+        i {
+            font-size: 1.1rem;
+        }
+    }
+
+    .breadcrumb {
+        margin-bottom: 0;
+        padding: 0;
+        --bs-breadcrumb-margin-bottom: 0;
+        --bs-breadcrumb-divider: "›";
+
+        .breadcrumb-item {
+            font-weight: 500;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+
+            &.active {
+                color: #6c757d; // Muted text for active item
+                font-weight: 600;
+            }
+
+            // Override default bootstrap divider padding/color if needed
+            +.breadcrumb-item {
+                padding-left: 0.5rem;
+
+                &::before {
+                    color: #adb5bd;
+                    font-size: 1.1rem;
+                    line-height: 1;
+                    padding-right: 0.5rem;
+                }
+            }
+
+            a {
+                color: $text-black;
+                text-decoration: none;
+                padding: 0.25rem 0.75rem;
+                border-radius: 20px;
+                transition: all 0.2s;
+
+                &:hover {
+                    background-color: rgba($primary-green, 0.15);
+                    color: color.adjust($primary-green, $lightness: -10%);
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}

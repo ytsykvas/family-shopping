@@ -9,6 +9,12 @@ RSpec.describe ShoppingListPolicy, type: :policy do
   let(:member) { create(:user) }
   let(:other_user) { create(:user) }
 
+  before do
+    owner.owned_shopping_lists.destroy_all
+    member.owned_shopping_lists.destroy_all
+    other_user.owned_shopping_lists.destroy_all
+  end
+
   describe "#index?" do
     context "when user is present" do
       it "allows access" do

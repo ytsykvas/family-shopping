@@ -15,11 +15,11 @@ header.navbar-shell
         li.nav-item
           a.nav-link class=("active" if active_link?("/wishlist_items")) href=wishlist_items_path = I18n.t('navbar.wishlists')
         li.nav-item
-          a.nav-link href="#" = I18n.t('navbar.recipes')
+          a.nav-link class=("active" if active_link?("/recipes")) href=recipes_path = I18n.t('navbar.recipes')
         li.nav-item
           a.nav-link class=("active" if active_link?("/friends")) href=friends_path = I18n.t('navbar.friends')
         li.nav-item
-          a.nav-link href="#" = I18n.t('navbar.settings')
+          a.nav-link href="#" = I18n.t('navbar.settings.index.title')
       .navbar-actions.d-none.d-lg-flex
         - if @current_user.present?
           = button_to destroy_user_session_path, method: :delete, data: { turbo: false }, class: 'navbar-action-btn navbar-action-btn-danger', form_class: 'd-inline' do
@@ -59,14 +59,14 @@ header.navbar-shell
         a.navbar-offcanvas-link href=wishlist_items_path
           span = I18n.t('navbar.wishlists')
           span.link-arrow ↗
-        a.navbar-offcanvas-link href="#"
+        a.navbar-offcanvas-link href=recipes_path
           span = I18n.t('navbar.recipes')
           span.link-arrow ↗
         = link_to friends_path, class: 'navbar-offcanvas-link' do
           span = I18n.t('navbar.friends')
           span.link-arrow ↗
         a.navbar-offcanvas-link href="#"
-          span = I18n.t('navbar.settings')
+          span = I18n.t('navbar.settings.index.title')
           span.link-arrow ↗
 
       .navbar-offcanvas-cta

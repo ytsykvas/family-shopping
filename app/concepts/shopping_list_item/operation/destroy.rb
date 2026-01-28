@@ -7,6 +7,8 @@ class ShoppingListItem::Operation::Destroy < Base::Operation::Base
 
     authorize! item, :destroy?
 
+    self.model = item
+
     if item.destroy
       self.redirect_path = shopping_list_path(shopping_list)
       notice I18n.t("shopping_list_items.destroy.success")

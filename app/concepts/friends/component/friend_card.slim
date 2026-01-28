@@ -5,7 +5,8 @@
         .d-flex.align-items-center
           i.bi.bi-person-circle.me-2 style="font-size: 1.5rem;"
           .user-name.fw-bold = friend.name
-        = render ::Base::Component::Button.new(type: :external_link, path: user_path(friend), class: 'btn-sm p-0 text-muted')
+        = link_to user_path(friend), class: "text-muted"
+          i.bi.bi-eye.fs-5
       .user-details.mb-1
         .user-nickname.text-muted.small.mb-0 = "#{I18n.t('user_searches.nickname_label')} #{friend.nickname}"
         .user-email.text-muted.small = friend.email

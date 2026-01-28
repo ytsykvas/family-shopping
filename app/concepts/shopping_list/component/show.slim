@@ -1,4 +1,4 @@
-= image_tag "banners/shopping_list_detail.png", class: "img-fluid w-100 rounded mb-4 border-3 border-dark", style: "border: 3px solid #000; box-shadow: 4px 4px 0 #000; object-fit: cover; height: 15rem;"
+= render ::Base::Component::Breadcrumbs.new(items: [{ name: I18n.t('shopping_lists.index.title', default: 'Shopping Lists'), path: shopping_lists_path }, { name: @shopping_list.name }], back_path: shopping_lists_path)
 = render Shared::TitleRow::Component::Show.new(title: @shopping_list.name, button_text: I18n.t('shopping_lists.show.back'), button_path: shopping_lists_path)
 
 .row.g-4.mb-4

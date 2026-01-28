@@ -42,6 +42,12 @@ en:
       email_taken: Email is already taken
       nickname_available: Nickname is available
       nickname_taken: Nickname is already taken
+  basic:
+    cancel: Cancel
+    delete: Delete
+    edit: Edit
+    remove: Remove
+    save: Save
   devise:
     confirmations:
       confirmed: Your email address has been successfully confirmed.
@@ -173,11 +179,40 @@ en:
     friends: Friends
     home: Home
     recipes: Recipes
-    settings: Settings
+    settings:
+      index:
+        title: Settings
     shopping_lists: Shopping Lists
     sign_in: Sign In
     sign_out: Sign Out
     wishlists: Wishes
+  recipes:
+    add_to_list:
+      confirm: Add to List
+      empty: No ingredients selected.
+      select_ingredients: 'Select ingredients to add to Home list:'
+      success: Ingredients added to Home list.
+      title: Add to Shopping List
+    create:
+      success: Recipe was successfully created.
+    delete:
+      confirm: Are you sure you want to delete this recipe?
+      title: Delete Recipe
+    destroy:
+      failure: Failed to delete recipe.
+      success: Recipe was successfully destroyed.
+    index:
+      find: Find Recipe
+      new: New Recipe
+      no_recipes_message: Start creating your own recipes to save for later!
+      no_recipes_title: No Recipes Yet
+      title: Recipes
+    ingredient_placeholder: e.g. Eggs 2pcs
+    ingredients: Ingredients
+    name: Recipe Name
+    new:
+      add_ingredient: Add Ingredient
+      title: New Recipe
   registrations:
     form:
       already_have_account: Already have an account?
@@ -186,10 +221,6 @@ en:
       submit: Sign Up
       subtitle: Create a new account
       title: Sign Up
-    unlocks:
-      send_instructions: You will receive an email with instructions for how to unlock your account in a few minutes.
-      send_paranoid_instructions: If your account exists, you will receive an email with instructions for how to unlock it in a few minutes.
-      unlocked: Your account has been unlocked successfully. Please sign in to continue.
   sessions:
     form:
       email_label: Email or Nickname
@@ -199,6 +230,9 @@ en:
       submit: Sign In
       subtitle: Sign in to your account
       title: Sign In
+  settings:
+    index:
+      title: Settings
   shopping_list_invitations:
     accept: Accept
     create:

@@ -1,0 +1,11 @@
+.modal.fade id="deleteRecipeModal_#{@recipe.id}" tabindex="-1" aria-labelledby="deleteRecipeModalLabel_#{@recipe.id}" aria-hidden="true"
+  .modal-dialog
+    .modal-content
+      .modal-header
+        h5.modal-title id="deleteRecipeModalLabel_#{@recipe.id}" = I18n.t('recipes.delete.title', default: 'Delete Recipe')
+        button.btn-close type="button" data-bs-dismiss="modal" aria-label="Close"
+      .modal-body
+        p = I18n.t('recipes.delete.confirm', default: 'Are you sure you want to delete this recipe?')
+      .modal-footer
+        button.btn.btn-secondary type="button" data-bs-dismiss="modal" = I18n.t('basic.cancel', default: 'Cancel')
+        = button_to I18n.t('basic.delete', default: 'Delete'), recipe_path(@recipe), method: :delete, class: "btn btn-danger", data: { turbo: false }

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  post "recipes/:id/add_to_shopping_list", to: "add_to_shopping_list#create", as: :add_to_shopping_list_recipe
   mount ApiRoot => "/"
   mount GrapeSwaggerRails::Engine => "/api/docs"
   devise_for :users, controllers: {
@@ -13,6 +14,7 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
 
+
   resources :friends, only: [ :index, :destroy ]
   resources :user_searches, only: [ :index ]
   resources :friendship_requests, only: [ :index, :create, :update, :destroy ]
@@ -25,6 +27,8 @@ Rails.application.routes.draw do
     post :book, on: :member
     delete :unbook, on: :member
   end
+
+  resources :recipes
 
   root "home#index"
 end

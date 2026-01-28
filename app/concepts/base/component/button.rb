@@ -46,6 +46,15 @@ class Base::Component::Button < Base::Component::Base
       opts[:type] = "button" unless @path
     end
 
+    if opts[:data]
+      # Ensure symbol keys for the data hash if it exists
+      opts[:data] = opts[:data].symbolize_keys
+
+      if opts[:data][:turbo_method]
+        opts[:data][:turbo_prefetch] = "false"
+      end
+    end
+
     opts
   end
 end

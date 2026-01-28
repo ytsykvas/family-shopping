@@ -1,0 +1,18 @@
+.card.h-100
+  .card-body
+    h5.card-title.d-flex.justify-content-between.align-items-center
+      = @recipe.name
+    .d-flex.align-items-center.gap-2
+      i.bi.bi-person-circle.fs-5
+      span.fw-bold.small = @recipe.user.name
+    
+    hr
+    .d-flex.flex-wrap.gap-1
+      - @recipe.ingredients.limit(5).each do |ingredient|
+        span.badge.bg-warning.text-dark.border = ingredient.content
+      - if @recipe.ingredients.count > 5
+        span.badge.bg-light.text-dark.border = "+#{@recipe.ingredients.count - 5}"
+    
+  .card-footer.bg-transparent.border-top-0
+    .d-flex.justify-content-end
+      = render ::Base::Component::Button.new(type: :show, path: recipe_path(@recipe))

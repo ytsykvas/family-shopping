@@ -1,0 +1,18 @@
+.modal.fade id="addToShoppingListModal" tabindex="-1" aria-labelledby="addToShoppingListModalLabel" aria-hidden="true"
+  .modal-dialog
+    .modal-content
+      = form_with url: add_to_shopping_list_recipe_path(@recipe), method: :post do |f|
+        .modal-header
+          h5.modal-title id="addToShoppingListModalLabel" = I18n.t('recipes.add_to_list.title', default: 'Add to Shopping List')
+          button.btn-close type="button" data-bs-dismiss="modal" aria-label="Close"
+        .modal-body
+          p = I18n.t('recipes.add_to_list.select_ingredients', default: 'Select ingredients to add to Home list:')
+          
+          - @recipe.ingredients.each do |ingredient|
+            .form-check.mb-2
+              = check_box_tag "ingredient_ids[]", ingredient.id, true, class: "form-check-input", id: "ingredient_#{ingredient.id}"
+              = label_tag "ingredient_#{ingredient.id}", ingredient.content, class: "form-check-label"
+              
+        .modal-footer
+          button.btn.btn-secondary type="button" data-bs-dismiss="modal" = I18n.t('basic.cancel', default: 'Cancel')
+          = f.submit I18n.t('recipes.add_to_list.confirm', default: 'Add to List'), class: "btn btn-primary"
