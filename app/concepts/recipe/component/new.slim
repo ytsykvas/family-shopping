@@ -10,6 +10,7 @@
 
         .form-group
           = f.input :name, label: I18n.t('recipes.name', default: 'Name'), input_html: { class: 'form-control-custom' }, label_html: { class: 'form-label-custom' }
+          = f.input :description, as: :text, label: I18n.t('recipes.description', default: 'Description'), input_html: { class: 'form-control-custom', rows: 4 }, label_html: { class: 'form-label-custom' }, wrapper_html: { class: 'mt-3' }
 
         h5.form-label-custom.mt-4 = I18n.t('recipes.ingredients', default: 'Ingredients')
         

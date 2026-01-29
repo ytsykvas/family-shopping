@@ -28,6 +28,7 @@ RSpec.describe "Recipes", type: :request do
       {
         recipe: {
           name: "New Recipe",
+          description: "This is a delicious new recipe",
           ingredients_attributes: [
             { content: "Milk 1L" }
           ]
@@ -35,10 +36,12 @@ RSpec.describe "Recipes", type: :request do
       }
     end
 
-    it "creates a new recipe" do
+    it "creates a new recipe with a description" do
       expect {
         post recipes_path, params: valid_params
       }.to change(Recipe, :count).by(1)
+
+      expect(Recipe.last.description).to eq("This is a delicious new recipe")
     end
 
     it "creates ingredients" do

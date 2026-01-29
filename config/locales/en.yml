@@ -45,7 +45,6 @@ en:
   basic:
     cancel: Cancel
     delete: Delete
-    edit: Edit
     remove: Remove
     save: Save
   devise:
@@ -198,6 +197,7 @@ en:
     delete:
       confirm: Are you sure you want to delete this recipe?
       title: Delete Recipe
+    description: Description
     destroy:
       failure: Failed to delete recipe.
       success: Recipe was successfully destroyed.

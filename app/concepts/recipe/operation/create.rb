@@ -21,6 +21,6 @@ class Recipe::Operation::Create < Base::Operation::Base
   private
 
   def recipe_params(params)
-    params.require(:recipe).permit(:name, ingredients_attributes: [ :id, :content, :_destroy ])
+    params.require(:recipe).permit(:name, :description, ingredients_attributes: [ :id, :content, :_destroy ])
   end
 end
