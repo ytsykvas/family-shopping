@@ -47,6 +47,7 @@ uk:
     delete: Видалити
     remove: Видалити
     save: Зберегти
+    update: Оновити
   datetime:
     distance_in_words:
       about_x_hours:
@@ -259,6 +260,9 @@ uk:
     destroy:
       failure: Не вдалося видалити рецепт.
       success: Рецепт успішно видалено.
+    edit:
+      breadcrumb: Редагування
+      title: Редагувати рецепт
     index:
       find: Знайти рецепт
       new: Новий рецепт
@@ -271,6 +275,8 @@ uk:
     new:
       add_ingredient: Додати інгредієнт
       title: Новий рецепт
+    update:
+      success: Рецепт успішно оновлено.
   registrations:
     form:
       already_have_account: Вже маєте обліковий запис?

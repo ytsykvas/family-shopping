@@ -47,6 +47,7 @@ en:
     delete: Delete
     remove: Remove
     save: Save
+    update: Update
   devise:
     confirmations:
       confirmed: Your email address has been successfully confirmed.
@@ -201,6 +202,9 @@ en:
     destroy:
       failure: Failed to delete recipe.
       success: Recipe was successfully destroyed.
+    edit:
+      breadcrumb: Edit
+      title: Edit Recipe
     index:
       find: Find Recipe
       new: New Recipe
@@ -213,6 +217,8 @@ en:
     new:
       add_ingredient: Add Ingredient
       title: New Recipe
+    update:
+      success: Recipe was successfully updated.
   registrations:
     form:
       already_have_account: Already have an account?

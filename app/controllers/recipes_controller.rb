@@ -17,6 +17,14 @@ class RecipesController < ApplicationController
     endpoint Recipe::Operation::Create, Recipe::Component::New
   end
 
+  def edit
+    endpoint Recipe::Operation::Edit, Recipe::Component::Edit
+  end
+
+  def update
+    endpoint Recipe::Operation::Update, Recipe::Component::Edit
+  end
+
   def destroy
     endpoint Recipe::Operation::Destroy
   end

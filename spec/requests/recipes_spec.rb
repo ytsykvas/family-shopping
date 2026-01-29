@@ -51,6 +51,32 @@ RSpec.describe "Recipes", type: :request do
     end
   end
 
+  describe "GET /recipes/:id/edit" do
+    it "returns http success" do
+      get edit_recipe_path(recipe)
+      expect(response).to have_http_status(:success)
+    end
+  end
+
+  describe "PATCH /recipes/:id" do
+    let(:update_params) do
+      {
+        recipe: {
+          name: "Updated Recipe",
+          description: "Updated description"
+        }
+      }
+    end
+
+    it "updates the recipe" do
+      patch recipe_path(recipe), params: update_params
+      recipe.reload
+      expect(recipe.name).to eq("Updated Recipe")
+      expect(recipe.description).to eq("Updated description")
+      expect(response).to redirect_to(recipe_path(recipe))
+    end
+  end
+
   describe "DELETE /recipes/:id" do
     it "destroys the recipe" do
       recipe_to_delete = create(:recipe, user: user)
