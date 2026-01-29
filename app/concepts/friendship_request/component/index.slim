@@ -7,13 +7,16 @@
       - @incoming_requests.each do |friendship_request|
         .col-6.col-md-4.col-lg-3.col-xl-2
           = render FriendshipRequest::Component::RequestCard.new(friendship_request: friendship_request, current_user: @current_user)
-  
+    
+    = render Shared::Pagination::Component::Show.new(collection: @incoming_requests, param_name: :incoming_page)
   - if @outgoing_requests.any?
     h4.mb-3.mt-5 = I18n.t("friendship_requests.index.outgoing_title")
     .row.g-4
       - @outgoing_requests.each do |friendship_request|
         .col-6.col-md-4.col-lg-3.col-xl-2
           = render FriendshipRequest::Component::RequestCard.new(friendship_request: friendship_request, current_user: @current_user)
+    
+    = render Shared::Pagination::Component::Show.new(collection: @outgoing_requests, param_name: :outgoing_page)
 
   - if @incoming_requests.empty? && @outgoing_requests.empty?
     .empty-content-container

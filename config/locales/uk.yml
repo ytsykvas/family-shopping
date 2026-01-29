@@ -413,6 +413,12 @@ uk:
       friend_status: Друг
       remove_friend: Видалити з друзів
       wishlist: Бажання
+  views:
+    pagination:
+      first: Перша
+      last: Остання
+      next: Наступна
+      previous: Попередня
   wishlist_items:
     book:
       errors:

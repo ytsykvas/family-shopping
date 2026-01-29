@@ -1,0 +1,80 @@
+@use 'variables' as *;
+
+.custom-pagination {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+
+  .pagination {
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+
+    .page-item {
+      .page-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.5rem; // Square shape
+        height: 2.5rem;
+        border: 2px solid $border-black;
+        border-radius: 0; // Neo-brutalism prefers sharp corners or slight rounding, assuming 0 here for strict look or small radius if desired
+        background-color: $bg-white;
+        color: $text-black;
+        font-weight: 700;
+        font-size: 1rem;
+        transition: all 0.1s ease-in-out;
+        box-shadow: 2px 2px 0 $border-black; // Hard shadow
+        margin: 0;
+
+        &:hover {
+          background-color: $primary-green; // Hover color
+          transform: translate(-1px, -1px);
+          box-shadow: 3px 3px 0 $border-black;
+          text-decoration: none;
+          color: $text-black;
+          z-index: 2;
+        }
+
+        &:active {
+          transform: translate(1px, 1px);
+          box-shadow: 1px 1px 0 $border-black;
+        }
+
+        &:focus {
+          box-shadow: 3px 3px 0 $border-black;
+          outline: none;
+        }
+      }
+
+      &.active .page-link {
+        background-color: $text-black; // Active state
+        color: $text-white;
+        border-color: $border-black;
+        box-shadow: 2px 2px 0 $border-black; // Keep shadow consistent
+        transform: none; // Reset transform for active state to feel "pressed" or solid
+        pointer-events: none; // Disable clicking active page
+      }
+
+      &.disabled .page-link {
+        background-color: $bg-light-gray;
+        color: $shadow-gray;
+        border-color: $shadow-gray;
+        box-shadow: none;
+        cursor: not-allowed;
+        transform: none;
+
+        &:hover {
+          background-color: $bg-light-gray;
+          box-shadow: none;
+          transform: none;
+        }
+      }
+
+      // Override rounded corners from previous style
+      &:first-child .page-link,
+      &:last-child .page-link {
+        border-radius: 0;
+      }
+    }
+  }
+}

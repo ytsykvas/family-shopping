@@ -10,6 +10,8 @@
       - @recipes.each do |recipe|
         .col-md-4.mb-4
           = render Recipe::Component::Card.new(recipe: recipe)
+
+    = render Shared::Pagination::Component::Show.new(collection: @recipes)
     - @recipes.each do |recipe|
       - if helpers.policy(recipe).destroy?
         = render Recipe::Component::Delete.new(recipe: recipe)

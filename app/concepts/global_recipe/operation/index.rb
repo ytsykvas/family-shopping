@@ -15,7 +15,7 @@ class GlobalRecipe::Operation::Index < Base::Operation::Base
       scope = scope.joins(:ingredients).where("ingredients.content ILIKE ?", "%#{params[:ingredient]}%").distinct
     end
 
-    scope = scope.where.not(user: current_user).order(created_at: :desc)
+    scope = scope.where.not(user: current_user).order(created_at: :desc).page(params[:page]).per(21)
 
     self.model = OpenStruct.new(global_recipes: scope, params: params)
   end

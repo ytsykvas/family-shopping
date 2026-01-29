@@ -1,0 +1,27 @@
+nav.custom-pagination aria-label="Pagination"
+  ul.pagination.justify-content-center
+    - unless @current_page == 1
+      li.page-item
+        = link_to url_for(@param_name => 1), class: 'page-link', 'aria-label': I18n.t('views.pagination.first') do
+          i.bi.bi-chevron-double-left
+
+      li.page-item
+        = link_to url_for(@param_name => @current_page - 1), class: 'page-link', 'aria-label': I18n.t('views.pagination.previous') do
+          i.bi.bi-chevron-left
+
+    - @paginator.each_page do |page|
+      - if page.display_tag?
+        li.page-item class=('active' if page.current?)
+          = link_to page, url_for(@param_name => page), rel: page.rel, class: 'page-link'
+      - elsif !page.was_truncated?
+        li.page-item.disabled
+          span.page-link &hellip;
+
+    - unless @current_page == @total_pages
+      li.page-item
+        = link_to url_for(@param_name => @current_page + 1), class: 'page-link', 'aria-label': I18n.t('views.pagination.next') do
+          i.bi.bi-chevron-right
+
+      li.page-item
+        = link_to url_for(@param_name => @total_pages), class: 'page-link', 'aria-label': I18n.t('views.pagination.last') do
+          i.bi.bi-chevron-double-right

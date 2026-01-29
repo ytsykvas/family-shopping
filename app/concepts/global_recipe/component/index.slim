@@ -8,5 +8,7 @@
       - @recipes.each do |recipe|
         .col-md-4.mb-4
           = render Recipe::Component::Card.new(recipe: recipe, path: global_recipe_path(recipe))
+    
+    = render Shared::Pagination::Component::Show.new(collection: @recipes)
   - else
     .alert.alert-warning = I18n.t('global_recipes.index.no_results', default: 'No recipes found')

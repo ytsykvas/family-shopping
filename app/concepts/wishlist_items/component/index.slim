@@ -1,13 +1,11 @@
 = helpers.image_tag "banners/wishlists.png", class: "img-fluid w-100 rounded mb-4 border-3 border-dark", style: "border: 3px solid #000; box-shadow: 4px 4px 0 #000; object-fit: cover; height: 15rem;"
-.d-flex.justify-content-between.align-items-center.mb-3
-  h1.page-title = title
+= render ::Base::Component::Header.new(title: title) do
   - if show_create_button?
-    .d-flex.gap-2
-       button.btn.btn-outline-primary type="button" data-controller="clipboard" data-clipboard-text-value="#{I18n.t('wishlist_items.index.share_text')} #{helpers.wishlist_item_url(@target_user)}" data-clipboard-copied-text-value="#{I18n.t('wishlist_items.index.share_copied')}" data-action="click->clipboard#copy"
-         i.bi.bi-share.me-2
-         = I18n.t('wishlist_items.index.share_button')
-       button.btn.btn-primary type="button" data-bs-toggle="modal" data-bs-target="#createWishlistItemModal"
-         = I18n.t('wishlist_items.index.create')
+    button.btn.btn-outline-primary type="button" data-controller="clipboard" data-clipboard-text-value="#{I18n.t('wishlist_items.index.share_text')} #{helpers.wishlist_item_url(@target_user)}" data-clipboard-copied-text-value="#{I18n.t('wishlist_items.index.share_copied')}" data-action="click->clipboard#copy"
+      i.bi.bi-share.me-2
+      = I18n.t('wishlist_items.index.share_button')
+    button.btn.btn-primary type="button" data-bs-toggle="modal" data-bs-target="#createWishlistItemModal"
+      = I18n.t('wishlist_items.index.create')
 hr
 
 - if @wishlist_items.any?
@@ -22,6 +20,8 @@ hr
     .empty-message = I18n.t("wishlist_items.index.no_items")
     - if show_create_button?
       button.btn.btn-primary.mt-3 data-bs-toggle="modal" data-bs-target="#createWishlistItemModal" = I18n.t('wishlist_items.index.create')
+
+= render Shared::Pagination::Component::Show.new(collection: @wishlist_items)
 
 - if show_create_button?
   = render WishlistItems::Component::Create.new(new_wishlist_item: @new_wishlist_item)

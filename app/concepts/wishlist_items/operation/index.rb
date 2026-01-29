@@ -10,7 +10,7 @@ module WishlistItems
 
         raise ActiveRecord::RecordNotFound unless target_user
 
-        wishlist_items = policy_scope(WishlistItem).where(user: target_user).with_attached_image.order(created_at: :desc)
+        wishlist_items = policy_scope(WishlistItem).where(user: target_user).with_attached_image.order(created_at: :desc).page(params[:page]).per(30)
 
         self.model = OpenStruct.new(
           wishlist_items: wishlist_items,

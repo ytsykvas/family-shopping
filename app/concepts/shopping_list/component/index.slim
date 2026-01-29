@@ -11,6 +11,8 @@
   .row.g-4.mb-4
     - @shopping_lists.each do |list|
       = render ShoppingList::Component::ListItem.new(shopping_list: list)
+  
+    = render Shared::Pagination::Component::Show.new(collection: @shopping_lists)
 
 - else
   .empty-content-container

@@ -355,6 +355,12 @@ en:
       friend_status: Friend
       remove_friend: Remove Friend
       wishlist: Wishlist
+  views:
+    pagination:
+      first: First
+      last: Last
+      next: Next
+      previous: Previous
   wishlist_items:
     book:
       errors:
