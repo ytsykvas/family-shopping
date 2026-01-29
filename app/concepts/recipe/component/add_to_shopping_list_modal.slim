@@ -1,7 +1,7 @@
 .modal.fade id="addToShoppingListModal" tabindex="-1" aria-labelledby="addToShoppingListModalLabel" aria-hidden="true"
   .modal-dialog
     .modal-content
-      = form_with url: add_to_shopping_list_recipe_path(@recipe), method: :post do |f|
+      = form_with url: add_to_shopping_list_recipe_path(@recipe), method: :post, data: { turbo: false } do |f|
         .modal-header
           h5.modal-title id="addToShoppingListModalLabel" = I18n.t('recipes.add_to_list.title', default: 'Add to Shopping List')
           button.btn-close type="button" data-bs-dismiss="modal" aria-label="Close"

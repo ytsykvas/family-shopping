@@ -5,7 +5,15 @@ describe GlobalRecipePolicy do
 
   let(:user) { create(:user) }
 
-  it { is_expected.to permit_action(:index) }
-  it { is_expected.to permit_action(:show) }
-  it { is_expected.to permit_action(:add) }
+  it "permits index" do
+    expect(subject.index?).to be true
+  end
+
+  it "permits show" do
+    expect(subject.show?).to be true
+  end
+
+  it "permits add" do
+    expect(subject.add?).to be true
+  end
 end

@@ -243,7 +243,6 @@ en:
     update:
       success: Recipe was successfully updated.
     copies_count: Copies count
-    original_author: Original author
   registrations:
     form:
       already_have_account: Already have an account?

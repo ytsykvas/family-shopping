@@ -11,7 +11,7 @@
         = link_to user_to_show.name, user_path(user_to_show), class: "fw-bold small text-dark text-decoration-none"
       
       - if @recipe.copies_count > 0
-        span.badge.bg-info.text-dark.ms-auto title=I18n.t('recipes.copies_count')
+        span.badge.bg-success.text-dark.ms-auto title=I18n.t('recipes.copies_count')
           i.bi.bi-copy.me-1
           = @recipe.copies_count
     
