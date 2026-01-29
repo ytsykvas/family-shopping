@@ -144,8 +144,8 @@ en:
       not_pending: This request is no longer pending
       success: Friendship request accepted
   global_recipes:
-    added: Recipe added successfully
     add_to_my_recipes: Add to My Recipes
+    added: Recipe added successfully
     back_to_my_recipes: My Recipes
     index:
       no_results: No recipes found
@@ -167,6 +167,14 @@ en:
       cta: Start Shopping Now
       headline: Shopping Simply. Together.
       subtitle: Stop double-buying milk. Keep your family in sync with the most stylish shopping list app.
+    modules:
+      recipes:
+        description: Store your favorite recipes and add ingredients to shopping list with one click.
+        title: Recipes
+      title: More than just lists
+      wishlists:
+        description: Create wishlists and share them with friends so they know exactly what to gift you.
+        title: Wishlists
     problem:
       double_buy:
         description: You and your partner both bought eggs. Now you have 24 eggs.
@@ -187,14 +195,6 @@ en:
       sync:
         description: Tick off items in real-time.
         title: Sync
-    modules:
-      recipes:
-        title: Recipes
-        description: Store your favorite recipes and add ingredients to shopping list with one click.
-      wishlists:
-        title: Wishlists
-        description: Create wishlists and share them with friends so they know exactly what to gift you.
-      title: More than just lists
   modal:
     close_aria_label: Close
   navbar:
@@ -216,6 +216,7 @@ en:
       select_ingredients: 'Select ingredients to add to Home list:'
       success: Ingredients added to Home list.
       title: Add to Shopping List
+    copies_count: Copies count
     create:
       success: Recipe was successfully created.
     delete:
@@ -242,7 +243,6 @@ en:
       title: New Recipe
     update:
       success: Recipe was successfully updated.
-    copies_count: Copies count
   registrations:
     form:
       already_have_account: Already have an account?
@@ -384,6 +384,9 @@ en:
       no_items: Start adding things you'd love to receive as a gift!
       no_items_title: No Wishes Yet
       reserved: Reserved
+      share_button: Share
+      share_copied: Copied!
+      share_text: Check out my wishlist
       title: My Wishlist
       you_will_gift: You will gift this
     show:

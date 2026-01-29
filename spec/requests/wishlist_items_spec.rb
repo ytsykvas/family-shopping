@@ -87,6 +87,15 @@ RSpec.describe "WishlistItems", type: :request do
       get wishlist_item_path(other_user)
       expect(response).to have_http_status(:success)
     end
+
+    context "when user is not signed in" do
+      before { sign_out user }
+
+      it "returns http success for guest" do
+        get wishlist_item_path(other_user)
+        expect(response).to have_http_status(:success)
+      end
+    end
   end
 
   describe "POST /book" do

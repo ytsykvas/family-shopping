@@ -6,12 +6,16 @@ module WishlistItems
       def perform!(params:, current_user:)
         authorize! WishlistItem, :index?
 
-        wishlist_items = policy_scope(WishlistItem).where(user: current_user).with_attached_image.order(created_at: :desc)
+        target_user = params[:user_id].present? ? User.find_by(id: params[:user_id]) : current_user
+
+        raise ActiveRecord::RecordNotFound unless target_user
+
+        wishlist_items = policy_scope(WishlistItem).where(user: target_user).with_attached_image.order(created_at: :desc)
 
         self.model = OpenStruct.new(
           wishlist_items: wishlist_items,
-          new_wishlist_item: current_user.wishlist_items.new,
-          target_user: current_user
+          new_wishlist_item: (current_user == target_user ? target_user.wishlist_items.new : nil),
+          target_user: target_user
         )
       end
     end

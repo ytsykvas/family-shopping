@@ -89,31 +89,31 @@ class User < ApplicationRecord
   #   end
   # end
 
-  # def friends_with?(other)
-  #   Friendship.accepted
-  #             .where(
-  #               "(requester_id = :me AND accepter_id = :other) OR (requester_id = :other AND accepter_id = :me)",
-  #               me: id, other: other.id
-  #             ).exists?
-  # end
+  def friends_with?(other)
+    Friendship.accepted
+              .where(
+                "(requester_id = :me AND accepter_id = :other) OR (requester_id = :other AND accepter_id = :me)",
+                me: id, other: other.id
+              ).exists?
+  end
 
-  # def pending_friend_request_to?(other)
-  #   Friendship.pending.exists?(requester: self, accepter: other)
-  # end
+  def pending_friend_request_to?(other)
+    Friendship.pending.exists?(requester: self, accepter: other)
+  end
 
-  # def pending_friend_request_from?(other)
-  #   Friendship.pending.exists?(requester: other, accepter: self)
-  # end
+  def pending_friend_request_from?(other)
+    Friendship.pending.exists?(requester: other, accepter: self)
+  end
 
-  # def pending_sent_requests
-  #   User.joins(:received_friendships)
-  #       .where(friendships: { requester_id: id, status: Friendship.statuses[:pending] })
-  # end
+  def pending_sent_requests
+    User.joins(:received_friendships)
+        .where(friendships: { requester_id: id, status: Friendship.statuses[:pending] })
+  end
 
-  # def pending_received_requests
-  #   User.joins(:sent_friendships)
-  #       .where(friendships: { accepter_id: id, status: Friendship.statuses[:pending] })
-  # end
+  def pending_received_requests
+    User.joins(:sent_friendships)
+        .where(friendships: { accepter_id: id, status: Friendship.statuses[:pending] })
+  end
 
   private
 

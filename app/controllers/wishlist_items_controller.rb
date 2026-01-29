@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class WishlistItemsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [ :show ]
 
   def index
     endpoint WishlistItems::Operation::Index, WishlistItems::Component::Index

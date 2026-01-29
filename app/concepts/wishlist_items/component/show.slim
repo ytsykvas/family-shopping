@@ -3,7 +3,18 @@
     = render ::Base::Component::Breadcrumbs.new(items: [{ name: I18n.t('navbar.friends', default: 'Friends'), path: friends_path }, { name: @target_user.nickname, path: user_path(@target_user) }, { name: I18n.t('users.show.wishlist', default: 'Wishlist') }], back_path: user_path(@target_user))
 
 = helpers.image_tag "banners/wishlists.png", class: "img-fluid w-100 rounded mb-4 border-3 border-dark", style: "border: 3px solid #000; box-shadow: 4px 4px 0 #000; object-fit: cover; height: 15rem;"
-= render Shared::TitleRow::Component::Show.new(title: title)
+.d-flex.justify-content-between.align-items-center.mb-3
+  h1.page-title = title
+  - if show_add_friend_button?
+    - if helpers.user_signed_in?
+      = button_to friendship_requests_path, method: :post, params: { friendship_request: { accepter_id: @target_user.id } }, class: 'btn btn-primary btn-sm', data: { turbo: false } do
+        i.bi.bi-person-plus.me-2
+        = I18n.t('user_searches.add_friend')
+    - else
+      = link_to new_user_registration_path, class: 'btn btn-primary btn-sm' do
+        i.bi.bi-person-plus.me-2
+        = I18n.t('user_searches.add_friend')
+hr
 
 - if @wishlist_items.any?
   .row.row-cols-1.row-cols-md-2.row-cols-lg-3.g-4.mb-4

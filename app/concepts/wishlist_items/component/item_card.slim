@@ -50,6 +50,11 @@
                 i.bi.bi-lock-fill.me-2
                 = I18n.t('wishlist_items.index.reserved')
             - else
-              = button_to book_wishlist_item_path(@wishlist_item), method: :post, class: 'btn btn-sm btn-success w-100', data: { turbo: false } do
-                i.bi.bi-gift.me-2
-                = I18n.t('wishlist_items.index.i_will_gift')
+              - if helpers.user_signed_in?
+                = button_to book_wishlist_item_path(@wishlist_item), method: :post, class: 'btn btn-sm btn-success w-100', data: { turbo: false } do
+                  i.bi.bi-gift.me-2
+                  = I18n.t('wishlist_items.index.i_will_gift')
+              - else
+                = link_to new_user_registration_path, class: 'btn btn-sm btn-success w-100' do
+                  i.bi.bi-gift.me-2
+                  = I18n.t('wishlist_items.index.i_will_gift')
