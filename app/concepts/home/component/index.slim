@@ -90,6 +90,26 @@
                 i.bi.bi-palette.display-1
               h3.fw-bold = I18n.t('home.features.beautiful_interface')
 
+  section.modules-section.py-5.bg-white.border-bottom.border-3.border-dark
+    .container
+      h2.display-4.fw-bold.mb-5.text-center.text-uppercase style="background: #e2e3e5; display: inline-block; padding: 10px; border: 3px solid #000; box-shadow: 4px 4px 0 #000;" = I18n.t('home.modules.title')
+      .row.g-4
+        .col-md-6
+          .card.h-100.border-3.border-dark style="box-shadow: 6px 6px 0 #000;"
+            .card-body.p-4
+              .d-flex.align-items-center.mb-3
+                i.bi.bi-book.display-4.me-3.text-danger
+                h3.fw-bold.mb-0 = I18n.t('home.modules.recipes.title')
+              p.lead.mb-0 = I18n.t('home.modules.recipes.description')
+              
+        .col-md-6
+          .card.h-100.border-3.border-dark style="box-shadow: 6px 6px 0 #000;"
+            .card-body.p-4
+              .d-flex.align-items-center.mb-3
+                i.bi.bi-gift.display-4.me-3.text-primary
+                h3.fw-bold.mb-0 = I18n.t('home.modules.wishlists.title')
+              p.lead.mb-0 = I18n.t('home.modules.wishlists.description')
+
   section.cta-section.py-5.text-center.bg-dark.text-white
     .container.py-5
        h2.display-3.fw-bold.mb-4 = I18n.t('home.hero.cta')

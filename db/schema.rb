@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_29_131521) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_29_161905) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -72,11 +72,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_29_131521) do
   end
 
   create_table "recipes", force: :cascade do |t|
+    t.integer "copies_count", default: 0
     t.datetime "created_at", null: false
     t.text "description"
     t.string "name"
+    t.bigint "original_recipe_id"
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
+    t.index ["original_recipe_id"], name: "index_recipes_on_original_recipe_id"
     t.index ["user_id"], name: "index_recipes_on_user_id"
   end
 
@@ -159,6 +162,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_29_131521) do
   add_foreign_key "friendships", "users", column: "accepter_id"
   add_foreign_key "friendships", "users", column: "requester_id"
   add_foreign_key "ingredients", "recipes"
+  add_foreign_key "recipes", "recipes", column: "original_recipe_id"
   add_foreign_key "recipes", "users"
   add_foreign_key "shopping_list_invitations", "shopping_lists"
   add_foreign_key "shopping_list_invitations", "users", column: "invitee_id"

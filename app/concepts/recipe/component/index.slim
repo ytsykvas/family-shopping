@@ -2,7 +2,7 @@
 
 .container
   = render ::Base::Component::Header.new(title: I18n.t('recipes.index.title', default: 'Recipes')) do
-    = link_to I18n.t('recipes.index.find', default: 'Find Recipe'), recipes_path, class: "btn btn-primary"
+    = link_to I18n.t('recipes.index.find', default: 'Find Recipe'), global_recipes_path, class: "btn btn-primary"
     = link_to I18n.t('recipes.index.new', default: 'New Recipe'), new_recipe_path, class: "btn btn-success"
 
   - if @recipes.any?

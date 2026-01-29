@@ -1,0 +1,23 @@
+.d-flex.justify-content-between.align-items-center.mb-3
+  h1.mb-2.mb-md-0 = I18n.t('global_recipes.index.title', default: 'Global Search')
+  button.btn.btn-primary class=(filters_visible? ? '' : 'collapsed') type="button" data-bs-toggle="collapse" data-bs-target="#searchFilters" aria-expanded=(filters_visible? ? 'true' : 'false') aria-controls="searchFilters"
+    i.bi.bi-funnel.me-2
+    = I18n.t('global_recipes.search.filter', default: 'Filter')
+
+#searchFilters.collapse.mb-4 class=(filters_visible? ? 'show' : '')
+  .card.card-body
+    form.form-custom action=global_recipes_path method="get"
+      .row.g-3
+        .col-md-6
+          .form-group
+            label.form-label-custom for="name" = I18n.t('global_recipes.search.name_label', default: 'Name')
+            input.form-control-custom type="text" name="name" id="name" placeholder=I18n.t('global_recipes.search.name_placeholder', default: 'Search by name') value=@params[:name]
+        .col-md-6
+          .form-group
+            label.form-label-custom for="ingredient" = I18n.t('global_recipes.search.ingredient_label', default: 'Ingredient')
+            input.form-control-custom type="text" name="ingredient" id="ingredient" placeholder=I18n.t('global_recipes.search.ingredient_placeholder', default: 'Search by ingredient') value=@params[:ingredient]
+      
+      .form-actions.d-flex.gap-3.mt-4.justify-content-end
+        - if @params[:name].present? || @params[:ingredient].present?
+          = link_to I18n.t('global_recipes.search.clear', default: 'Clear'), global_recipes_path, class: "btn btn-danger"
+        button.btn-submit-custom.flex-grow-0 type="submit" = I18n.t('global_recipes.search.submit', default: 'Search')

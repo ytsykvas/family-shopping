@@ -5,6 +5,9 @@ RSpec.describe Recipe, type: :model do
     it { is_expected.to belong_to(:user) }
     it { is_expected.to have_many(:ingredients).dependent(:destroy) }
     it { is_expected.to accept_nested_attributes_for(:ingredients).allow_destroy(true) }
+
+    it { is_expected.to belong_to(:original_recipe).class_name("Recipe").optional.counter_cache(:copies_count) }
+    it { is_expected.to have_many(:copies).class_name("Recipe").with_foreign_key(:original_recipe_id).dependent(:nullify) }
   end
 
   describe "validations" do

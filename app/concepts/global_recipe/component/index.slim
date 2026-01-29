@@ -1,0 +1,12 @@
+.container
+  = render ::Base::Component::Breadcrumbs.new(items: [{ name: I18n.t('global_recipes.back_to_my_recipes', default: 'My Recipes'), path: recipes_path }, { name: I18n.t('global_recipes.index.title', default: 'Global Search') }], back_path: recipes_path)
+
+  = render GlobalRecipe::Component::Filter.new(params: @params)
+
+  - if @recipes.any?
+    .row
+      - @recipes.each do |recipe|
+        .col-md-4.mb-4
+          = render Recipe::Component::Card.new(recipe: recipe, path: global_recipe_path(recipe))
+  - else
+    .alert.alert-warning = I18n.t('global_recipes.index.no_results', default: 'No recipes found')

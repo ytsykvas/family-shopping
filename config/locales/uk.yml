@@ -201,6 +201,21 @@ uk:
       not_accepter: Ви не можете прийняти цей запит
       not_pending: Цей запит більше не очікує на розгляд
       success: Запит на дружбу прийнято
+  global_recipes:
+    added: Рецепт успішно додано
+    add_to_my_recipes: Додати до моїх рецептів
+    back_to_my_recipes: Мої рецепти
+    index:
+      no_results: Рецептів не знайдено
+      title: Глобальний пошук
+    search:
+      clear: Очистити
+      filter: Фільтр
+      ingredient_label: Інгредієнт
+      ingredient_placeholder: Пошук за інгредієнтом
+      name_label: Назва
+      name_placeholder: Пошук за назвою
+      submit: Пошук
   home:
     features:
       beautiful_interface: Зручний інтерфейс
@@ -230,6 +245,14 @@ uk:
       sync:
         description: Відмічай товари в реальному часі.
         title: Синхронізувати
+    modules:
+      recipes:
+        title: Рецепти
+        description: Зберігайте улюблені рецепти та додавайте інгредієнти до списку покупок в один клік.
+      wishlists:
+        title: Списки бажань
+        description: Створюйте списки бажань та діліться ними з друзями, щоб вони знали, що вам подарувати.
+      title: Більше ніж просто списки
   modal:
     close_aria_label: Закрити
   navbar:
@@ -277,6 +300,8 @@ uk:
       title: Новий рецепт
     update:
       success: Рецепт успішно оновлено.
+    copies_count: Кількість копій
+    original_author: Автор оригіналу
   registrations:
     form:
       already_have_account: Вже маєте обліковий запис?

@@ -1,0 +1,22 @@
+.container
+  = render ::Base::Component::Breadcrumbs.new(items: [{ name: I18n.t('global_recipes.back_to_my_recipes', default: 'My Recipes'), path: recipes_path }, { name: I18n.t('global_recipes.index.title', default: 'Global Search'), path: global_recipes_path }, { name: @recipe.name }], back_path: global_recipes_path)
+
+  .text-center.mb-4
+    h1.d-block.mb-3 = @recipe.name
+    .d-inline-block
+      = button_to I18n.t('global_recipes.add_to_my_recipes', default: 'Add to My Recipes'), add_global_recipe_path(@recipe), method: :post, class: "btn btn-success", data: { turbo: false }
+
+  .row
+    - if @recipe.description.present?
+      .col-lg-8.mb-4
+        .card.h-100
+          .card-body
+            = helpers.simple_format(@recipe.description)
+    
+    div class=(@recipe.description.present? ? "col-lg-4" : "col-12")
+      .card.mb-4
+        .card-header
+          h5.mb-0 = I18n.t('recipes.ingredients', default: 'Ingredients')
+        .list-group.list-group-flush
+          - @recipe.ingredients.each do |ingredient|
+            .list-group-item = ingredient.content

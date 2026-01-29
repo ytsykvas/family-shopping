@@ -2,9 +2,18 @@
   .card-body
     h5.card-title.d-flex.justify-content-between.align-items-center
       = @recipe.name
-    .d-flex.align-items-center.gap-2
+    .d-flex.align-items-center.gap-2.flex-wrap
       i.bi.bi-person-circle.fs-5
-      span.fw-bold.small = @recipe.user.name
+      - user_to_show = @recipe.original_recipe&.user || @recipe.user
+      - if user_to_show == helpers.current_user
+        span.fw-bold.small = user_to_show.name
+      - else
+        = link_to user_to_show.name, user_path(user_to_show), class: "fw-bold small text-dark text-decoration-none"
+      
+      - if @recipe.copies_count > 0
+        span.badge.bg-info.text-dark.ms-auto title=I18n.t('recipes.copies_count')
+          i.bi.bi-copy.me-1
+          = @recipe.copies_count
     
     hr
     .d-flex.flex-wrap.gap-1
@@ -15,4 +24,4 @@
     
   .card-footer.bg-transparent.border-top-0
     .d-flex.justify-content-end
-      = render ::Base::Component::Button.new(type: :show, path: recipe_path(@recipe))
+      = render ::Base::Component::Button.new(type: :show, path: show_path)

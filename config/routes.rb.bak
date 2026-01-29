@@ -28,12 +28,7 @@ Rails.application.routes.draw do
     delete :unbook, on: :member
   end
 
-
   resources :recipes
-  resources :global_recipes, only: [ :index, :show ] do
-    post :add, on: :member
-  end
-
 
   root "home#index"
 end

@@ -143,6 +143,21 @@ en:
       not_accepter: You cannot accept this request
       not_pending: This request is no longer pending
       success: Friendship request accepted
+  global_recipes:
+    added: Recipe added successfully
+    add_to_my_recipes: Add to My Recipes
+    back_to_my_recipes: My Recipes
+    index:
+      no_results: No recipes found
+      title: Global Search
+    search:
+      clear: Clear
+      filter: Filter
+      ingredient_label: Ingredient
+      ingredient_placeholder: Search by ingredient
+      name_label: Name
+      name_placeholder: Search by name
+      submit: Search
   home:
     features:
       beautiful_interface: Beautiful Interface
@@ -172,6 +187,14 @@ en:
       sync:
         description: Tick off items in real-time.
         title: Sync
+    modules:
+      recipes:
+        title: Recipes
+        description: Store your favorite recipes and add ingredients to shopping list with one click.
+      wishlists:
+        title: Wishlists
+        description: Create wishlists and share them with friends so they know exactly what to gift you.
+      title: More than just lists
   modal:
     close_aria_label: Close
   navbar:
@@ -219,6 +242,8 @@ en:
       title: New Recipe
     update:
       success: Recipe was successfully updated.
+    copies_count: Copies count
+    original_author: Original author
   registrations:
     form:
       already_have_account: Already have an account?
