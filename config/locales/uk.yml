@@ -45,6 +45,7 @@ uk:
   basic:
     cancel: Скасувати
     delete: Видалити
+    or: АБО
     remove: Видалити
     save: Зберегти
     update: Оновити
@@ -304,6 +305,7 @@ uk:
   registrations:
     form:
       already_have_account: Вже маєте обліковий запис?
+      google_sign_up: Зареєструватися через Google
       password_hint: Мінімум 6 символів
       sign_in: Увійти
       submit: Зареєструватися
@@ -313,6 +315,7 @@ uk:
     form:
       email_label: Email або Нікнейм
       forgot_password: Забули пароль?
+      google_sign_in: Увійти через Google
       no_account: Немає облікового запису?
       sign_up: Зареєструватися
       submit: Увійти

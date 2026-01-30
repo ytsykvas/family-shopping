@@ -41,3 +41,5 @@ ignore_unused:
   - 'registrations.unlocks.*'
   - 'simple_form.*'
   - 'datetime.*'
+  - 'registrations.form.google_sign_up'
+  - 'sessions.form.google_sign_in'

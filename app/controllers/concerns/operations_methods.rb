@@ -104,15 +104,39 @@ module OperationsMethods
       end
 
       format.turbo_stream do
+        if result.success? && (action_name == "create" || action_name == "update" || action_name.include?("destroy"))
+          path = result.redirect_path || public_send("#{controller_name}_path")
+          flash[:notice] = result.message if result.message.present?
+          redirect_to path
+          return
+        end
+
         if result.failure?
           @error_message = result.error_message
           response.status = :unprocessable_entity
         end
 
+        # Only set instance variables/params if we are NOT redirecting
+        params = if result.model.is_a?(OpenStruct)
+                   result.model.to_h
+        else
+                   key = operation.to_s.split("::").first.underscore
+                   key = key.pluralize if action_name == "index"
+                   { "#{key}": result.model }
+        end
+
+        # Set instance variables for legacy view compatibility (if any)
         if result.model.is_a?(OpenStruct)
           result.model.to_h.each { |k, v| instance_variable_set("@#{k}", v) }
         else
           @model = result.model
+        end
+
+        if component
+          # Ensure index/show render as HTML so Turbo processes them as page visits/refreshes
+          opts = {}
+          opts[:content_type] = "text/html" if action_name.in?(%w[index show])
+          render component.new(**params), **opts
         end
       end
 

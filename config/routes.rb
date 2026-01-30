@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   mount GrapeSwaggerRails::Engine => "/api/docs"
   devise_for :users, controllers: {
                        sessions: "users/sessions",
-                       registrations: "users/registrations"
+                       registrations: "users/registrations",
+                       omniauth_callbacks: "users/omniauth_callbacks"
                      }
 
   get "/users", to: redirect("/users/sign_up")

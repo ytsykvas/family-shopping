@@ -6,10 +6,15 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :jwt_authenticatable, jwt_revocation_strategy: self
+         :jwt_authenticatable, :omniauthable,
+         jwt_revocation_strategy: self,
+         omniauth_providers: [ :google_oauth2 ]
+
+  before_validation :generate_nickname_if_missing
 
   validates :name, presence: true
-  validates :nickname, presence: true, uniqueness: { case_sensitive: false }
+  validates :nickname, presence: true
+  validates :nickname, uniqueness: { case_sensitive: false }, allow_blank: true
 
   has_many :sent_friendships,
            class_name: "Friendship",
@@ -115,7 +120,52 @@ class User < ApplicationRecord
         .where(friendships: { accepter_id: id, status: Friendship.statuses[:pending] })
   end
 
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0, 20]
+      user.name = auth.info.name
+
+      # Generate unique nickname
+      base_nickname = auth.info.email.split("@").first
+      nickname = base_nickname
+      counter = 1
+      while User.exists?(nickname: nickname)
+        nickname = "#{base_nickname}#{counter}"
+        counter += 1
+      end
+      user.nickname = nickname
+    end
+  end
+
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if data = session["devise.google_data"] && session["devise.google_data"]["info"]
+        user.email = data["email"] if user.email.blank?
+        user.name = data["name"] if user.name.blank?
+        # Attempt to pre-fill nickname if not present
+        if user.nickname.blank? && data["email"].present?
+          base = data["email"].split("@").first
+          user.nickname = base unless User.exists?(nickname: base)
+        end
+      end
+    end
+  end
+
   private
+
+  def generate_nickname_if_missing
+    return if nickname.present? || email.blank?
+
+    base_nickname = email.split("@").first
+    generated_nickname = base_nickname
+    counter = 1
+    while User.exists?(nickname: generated_nickname)
+      generated_nickname = "#{base_nickname}#{counter}"
+      counter += 1
+    end
+    self.nickname = generated_nickname
+  end
 
   def create_default_shopping_lists
     owned_shopping_lists.create!(name: "Home")

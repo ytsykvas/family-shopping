@@ -349,3 +349,35 @@ end
 `app/concepts/friends/component/index.slim`
 
 This creates a complete working feature!
+
+## Turbo Streams and Modals
+
+### Handling Redirects from Modals
+
+When performing a write action (create, update, destroy) from a modal (e.g., deleting a shopping list via a button in a modal), you often want the modal to close and the underlying page to refresh (or navigate to a new page).
+
+The `endpoint` method handles this automatically for `turbo_stream` requests:
+
+1.  **Request**: User clicks "Delete" (configured with `method: :delete` and `data-turbo="true"`).
+2.  **Controller**: Executes the operation.
+3.  **Success**: If the operation is successful, `endpoint` detects the write action (`create`, `update`, `destroy`).
+4.  **Response**: Instead of rendering a Turbo Stream template (e.g., `destroy.turbo_stream.erb`), it issues a standard `redirect_to path`.
+5.  **Client-Side**: Turbo Drive intercepts the redirect response and performs a "visit" to the new URL, effectively refreshing the page and closing the modal (since the new page doesn't have the modal open).
+
+### Key Requirements
+
+To ensure this works:
+
+1.  **Button Configuration**: The button/form submitting the request must use Turbo.
+    ```slim
+    = button_to "Delete", list_path(@list), method: :delete, form: { data: { turbo: true } }
+    ```
+    *Note: For `button_to`, put the data attribute on the form.*
+
+2.  **Action Name**: The controller action must be synonymous with a write operation: `create`, `update`, or `destroy`.
+
+3.  **Operation Success**: The operation must return success.
+
+### Why This Approach?
+
+Using a standard redirect is more robust than trying to manually remove the modal DOM element and update the list via streaming, especially when the navigation context changes significantly (e.g., deleting the item you are currently viewing). It ensures the client state perfectly matches the server state.
